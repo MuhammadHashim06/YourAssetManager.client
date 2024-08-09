@@ -1,0 +1,18 @@
+.alertbox{
+    display: block;
+    position: absolute;
+    background-color: rgb(192, 255, 192);
+    color: green;
+    padding: 5px;
+    animation: updown 3s linear;
+}
+@keyframes updown {
+  0%{
+    transform: translateX(-100%);
+  }
+  50%{
+    transform: translateX(0);
+  }100%{
+    transform: translateX(-100%);
+  }
+}

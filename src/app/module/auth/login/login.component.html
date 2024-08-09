@@ -1,0 +1,101 @@
+<ng-container *ngIf="issuccessfull">
+  <!-- Display success alert if the login was successful -->
+  <app-alert [alert]="alertData"></app-alert>
+</ng-container>
+
+<div *ngIf="load" id="loader">
+  <!-- Display loader when loading -->
+  <span class="loader"></span>
+</div>
+
+<div class="form">
+  <!-- Login Form -->
+  <form [formGroup]="loginuser" *ngIf="!isforget" (ngSubmit)="login($event)">
+    <div class="head">
+      <h1>Login to Account</h1>
+      <p>Please enter your email and password to continue</p>
+    </div>
+
+    <div class="fields">
+      <!-- Email Input Field -->
+      <label for="email">Email Address:</label>
+      <input 
+        type="text" 
+        id="email" 
+        name="email" 
+        placeholder="Enter your email" 
+        formControlName="email" 
+      />
+      <!-- Email Validation Error Messages -->
+      <div *ngIf="loginuser.controls['email'].errors && loginuser.controls['email'].touched">
+        <span *ngIf="loginuser.controls['email'].errors['required']" class="error">
+          {{ inputerrormessage.required }}
+        </span>
+        <span *ngIf="loginuser.controls['email'].errors['email']" class="error">
+          {{ inputerrormessage.email }}
+        </span>
+      </div>
+
+      <!-- Password Input Field -->
+      <div class="label">
+        <label for="password">Password:</label>
+        <p (click)="forget()">Forget Password?</p>
+      </div>
+      <input 
+        type="password" 
+        id="password" 
+        name="password" 
+        placeholder=" " 
+        formControlName="password"
+      />
+      <!-- Password Validation Error Messages -->
+      <div *ngIf="loginuser.controls['password'].errors && loginuser.controls['password'].touched">
+        <span *ngIf="loginuser.controls['password'].errors['required']" class="error">
+          This field is required
+        </span>
+        <span *ngIf="loginuser.controls['password'].errors['passwordComplexity']" class="error">
+          {{ inputerrormessage.password }}
+        </span>
+      </div>
+    </div>
+
+    <div class="link">
+      <!-- Submit Button for Login -->
+      <button type="submit">Sign In</button>
+      <p>Don't have an account? <a routerLink="/auth/signup">Create Account</a></p>
+    </div>
+  </form>
+
+  <!-- Forgot Password Form -->
+  <form *ngIf="isforget" (ngSubmit)="verifyemail($event)">
+    <div class="fields">
+      <!-- Email Input Field for Forgot Password -->
+      <label for="email">Email Address:</label>
+      <input 
+        type="text" 
+        id="email" 
+        name="email" 
+        placeholder="Enter your email" 
+        [(ngModel)]="email" 
+        #vemail="ngModel" 
+        required 
+        email 
+      />
+      <!-- Email Validation Error Messages for Forgot Password -->
+      <div *ngIf="vemail.errors && vemail.touched">
+        <span *ngIf="vemail.errors['required']" class="error">
+          {{ inputerrormessage.required }}
+        </span>
+        <span *ngIf="vemail.errors['email']" class="error">
+          {{ inputerrormessage.email }}
+        </span>
+      </div>
+    </div>
+
+    <div class="link">
+      <!-- Submit Button for Email Verification -->
+      <button type="submit">Verify Email</button>
+      <p>Don't have an account? <a routerLink="/auth/signup">Create Account</a></p>
+    </div>
+  </form>
+</div>

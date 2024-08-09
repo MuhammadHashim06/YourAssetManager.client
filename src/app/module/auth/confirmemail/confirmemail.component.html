@@ -1,0 +1,10 @@
+<div class="form">
+    <section>
+        <img [ngSrc]="imageurl" alt="Inbox Icon" width="60%">
+        <h1>
+            {{message?.registeration}}
+        </h1>
+        <p> {{message?.emailverification}}</p>
+        <button routerLink="/auth/login">Go to Login</button>
+    </section>
+</div>

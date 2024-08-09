@@ -1,0 +1,45 @@
+<div class="form">
+    <form [formGroup]="organization">
+        <div class="head">
+            <h1>Organization/Company</h1>
+            <p>Set up your Organization Information</p>
+        </div>
+        <div class="fields">
+            <table>
+                <tbody>
+                <tr>
+                    <td>
+                        <label for="name">Organization Name:</label>
+                        <input type="text" id="name" name="name" placeholder="Enter your Organization Name" formControlName="organizationName">
+                        <div *ngIf="organization.controls['organizationName'].errors && organization.controls['organizationName'].touched">
+                            <span *ngIf="organization.controls['organizationName'].errors['required']" class="error">
+                              {{ inputerrormessage.required }}
+                            </span>
+                        </div>
+                    </td>
+                    <td>
+                        <label for="domain">Domain</label>
+                        <input type="text" id="domain" name="domain" placeholder="Enter Your Company Domain" formControlName="organizationDomain">
+                        <div *ngIf="organization.controls['organizationDomain'].errors && organization.controls['organizationDomain'].touched">
+                            <span *ngIf="organization.controls['organizationDomain'].errors['required']" class="error">
+                              {{ inputerrormessage.required }}
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+
+            </table>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" placeholder="Enter Your Company Description" rows="8" cols="20" formControlName="description"></textarea>
+            <div *ngIf="organization.controls['description'].errors && organization.controls['description'].touched">
+                <span *ngIf="organization.controls['description'].errors['required']" class="error">
+                  {{ inputerrormessage.required }}
+                </span>
+            </div>
+        </div>
+        <div class="link">
+            <button type="button" (click)="Save($event)">Save Organization</button>
+        </div>
+    </form>
+</div>

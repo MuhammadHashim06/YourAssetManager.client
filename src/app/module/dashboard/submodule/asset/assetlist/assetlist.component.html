@@ -1,0 +1,33 @@
+
+<div class="navigation">
+    <h1>Assets</h1>
+    <div class="links">
+        <input type="search" placeholder="Search" aria-label="Search for assets">
+        <button id="showAddPageButton" routerLink="add">Add New Asset</button>
+    </div>
+</div>
+
+<!-- <h3>Total Asset Value: {{ totalValue }}</h3> -->
+<table>
+    <thead>
+        <tr>
+            <th>Asset Name</th>
+            <th>Category</th>
+            <th>Details</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let asset of assets">
+            <td>{{ asset.name }}</td>
+            <td>{{ asset.category }}</td>
+            <td>
+                <ng-container *ngIf="asset.category === 'mouse'">
+                    Serial Number: {{ asset.serialNumber }}
+                </ng-container>
+                <ng-container *ngIf="asset.category === 'laptop'">
+                    OS: {{ asset.os }}, RAM: {{ asset.ram }} GB, ROM: {{ asset.rom }} GB
+                </ng-container>
+            </td>
+        </tr>
+    </tbody>
+</table>

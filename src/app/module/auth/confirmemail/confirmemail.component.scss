@@ -1,0 +1,106 @@
+/* General form styling */
+.form {
+  background-color: rgba(72, 123, 255, 1); /* Blue background */
+  background-image: url("/Shape.png"); /* Background image */
+  background-size: cover; /* Cover the entire container */
+  background-position: center; /* Center the background image */
+  height: 100%; /* Full height */
+  display: grid; /* Center items using grid */
+  place-items: center; /* Center items horizontally and vertically */
+}
+
+/* Styling for the form section */
+.form section {
+  background-color: #ffffff; /* White background for form section */
+  max-width: 60%; /* Maximum width of 60% */
+  padding: 20px; /* Padding around the content */
+  border-radius: 8px; /* Rounded corners */
+  display: flex; /* Flexbox for layout */
+  flex-direction: column; /* Stack items vertically */
+  align-items: center; /* Center items horizontally */
+  gap: 25px; /* Space between items */
+  animation: updowm 1s ease; /* Animation for entrance effect */
+}
+
+/* Animation for form section entrance */
+@keyframes updowm {
+  0% {
+    transform: translateY(-100%); /* Start from above */
+    opacity: 0; /* Start as invisible */
+  }
+  100% {
+    transform: translateY(0%); /* End at the original position */
+    opacity: 1; /* End as fully visible */
+  }
+}
+
+/* Styling for buttons within the form section */
+.form section button {
+  background-color: rgba(72, 128, 255, 1); /* Blue background */
+  color: #ffffff; /* White text */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside the button */
+  border: none; /* Remove default border */
+  font-size: 1rem; /* Font size */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* Loader overlay styling */
+#loader {
+  background-color: rgba(255, 255, 255, 0.25); /* Semi-transparent white background */
+  position: absolute; /* Absolute positioning */
+  height: 100%; /* Full height */
+  width: 100%; /* Full width */
+  display: grid; /* Center items using grid */
+  place-items: center; /* Center items horizontally and vertically */
+}
+
+/* Loader animation */
+.loader {
+  width: 48px; /* Width of the loader */
+  height: 48px; /* Height of the loader */
+  border-radius: 50%; /* Circular shape */
+  position: relative; /* Relative positioning for pseudo-elements */
+  animation: rotate 1s linear infinite; /* Continuous rotation animation */
+}
+
+/* Styling for loader pseudo-elements */
+.loader::before,
+.loader::after {
+  content: ""; /* Empty content */
+  box-sizing: border-box; /* Include border in element's total width and height */
+  position: absolute; /* Absolute positioning */
+  inset: 0; /* Cover the entire loader */
+  border-radius: 50%; /* Circular shape */
+  border: 5px solid rgb(226, 226, 226); /* Light gray border */
+  animation: prixClipFix 2s linear infinite; /* Continuous clipping animation */
+}
+
+/* Loader pseudo-element after customization */
+.loader::after {
+  transform: rotate3d(90, 90, 0, 180deg); /* Rotate for a different visual effect */
+  border-color: rgba(90, 140, 255, 1); /* Blue border color */
+}
+
+/* Keyframes for continuous rotation animation */
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg); /* Start rotation from 0 degrees */
+  }
+  100% {
+    transform: rotate(360deg); /* End rotation at 360 degrees */
+  }
+}
+
+/* Keyframes for clipping effect animation */
+@keyframes prixClipFix {
+  0% {
+    clip-path: polygon(50% 50%, 0 0, 0 0, 0 0, 0 0, 0 0); /* Start with invisible clipping path */
+  }
+  50% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 0, 100% 0, 100% 0); /* Partial clipping path */
+  }
+  75%, 100% {
+    clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); /* Full clipping path */
+  }
+}

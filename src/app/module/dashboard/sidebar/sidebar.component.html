@@ -1,0 +1,20 @@
+<div class="Main">
+  <div class="sidebar">
+    <div class="head">
+      <h2>YAM</h2>
+      <span class="subtitle">Your Asset Manager</span>
+    </div>
+    <div class="navigation">
+      <ul>
+        <li><a  routerLink="/dashboard" routerLinkActive="active-link" ><i class="fas fa-tachometer-alt" ></i> Dashboard</a></li>
+        <li><a  routerLink="/asset" routerLinkActive="active-link" ><i class="fas fa-box"></i> Asset</a></li>
+        <li><a  routerLink="/user" routerLinkActive="active-link"><i class="fas fa-users"></i> Users</a></li>
+        <li><a  routerLink="/history" routerLinkActive="active-link" ><i class="fas fa-history"></i> History</a></li>
+        <li><a  routerLink="/setting" routerLinkActive="active-link"><i class="fas fa-cog"></i> Setting</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dashboard">
+    <router-outlet></router-outlet>
+  </div>
+</div>
