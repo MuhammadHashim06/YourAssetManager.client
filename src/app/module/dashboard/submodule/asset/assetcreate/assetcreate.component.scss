@@ -3,7 +3,6 @@
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
-    background-color: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
 }
 
@@ -33,25 +32,11 @@
 .navigation #showAddPageButton:hover {
     background-color: #0088d1;
 }
-input[type="search"] {
-    border-radius: 5px;
-    border: 1px solid #ced4da;
-    width: 150px;
-    padding: 5px 10px;
-    transition: all 0.3s ease;
-    font-size: 16px;
-}
 
-input[type="search"]:focus {
-    outline: none;
-    border-color: #00a6ff;
-    width: 200px;
-}
 .form-group input,
 .form-group select {
   width: calc(100% - 22px);
   padding: 10px;
-  border: 1px solid #ccc;
   border-radius: 5px;
 }
 
@@ -72,8 +57,10 @@ button[type="submit"] {
 
 .asset-form{
     margin-top: 3.25%;
-    background-color: #f8f9fa;
+    background-color: white;
     padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(185, 185, 185, 0.5);
 }
 
 

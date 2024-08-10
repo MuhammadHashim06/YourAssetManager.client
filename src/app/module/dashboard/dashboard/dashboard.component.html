@@ -1,3 +1,19 @@
-<div>
-<app-sidebar></app-sidebar><router-outlet/>
+<div class="Main">
+<app-sidebar></app-sidebar>
+ <div class="dashboard">
+    <div class="navbar">
+        <div class="navlink">
+        <!-- <select name="search" id="search">
+            <option value="All">All</option>
+            <option value="Asset">Asset</option>
+            <option value="User">User</option>
+            <option value="Category">Category</option>
+        </select> -->
+        <img src="menu.svg" alt="horizantal nav">
+        <input type="search" name="search" id="search" placeholder="        Search">
+    </div>
+        <div class="profile"><img src="person.svg" alt="Account Icon">{{'Organization Name'}}</div>
+    </div>
+<router-outlet/>
+</div>
 </div>

@@ -1,7 +1,76 @@
-/* You can add global styles to this file, and also import other style files */
-html, body { height: 100%; }
-body { margin: 0; font-family:Arial, Helvetica, sans-serif;background-color: rgba(245, 246, 250, 1);
-}
-*{
+// /* You can add global styles to this file, and also import other style files */
+// @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+// // <uniquifier>: Use a unique and descriptive class name
+// // <weight>: Use a value from 200 to 1000
+
+// // <uniquifier>: Use a unique and descriptive class name
+// // <weight>: Use a value from 200 to 1000
+
+// .nunito-sans-<uniquifier> {
+//     font-family: "Nunito Sans", sans-serif;
+//     font-optical-sizing: auto;
+//     font-weight: <weight>;
+//     font-style: normal;
+//     font-variation-settings:
+//       "wdth" 100,
+//       "YTLC" 500;
+//   }
+
+// html, body { height: 100%; }
+// // body { margin: 0; font-family:Arial, Helvetica, sans-serif;background-color: rgba(245, 246, 250, 1);
+// // }
+// body { margin: 0; font-family: "Nunito Sans", sans-serif;
+//     font-optical-sizing: auto;
+//     font-weight: <weight>;
+//     font-style: normal;
+//     font-variation-settings:
+//       "wdth" 100,
+//       "YTLC" 500;
+//       background-color: rgba(245, 246, 250, 1);
+// }
+// *{
+//     margin: 0;
+// }
+
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+
+html, body {
+    height: 100%;
     margin: 0;
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 400; /* Replace with your desired weight */
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100,
+        "YTLC" 500;
+    background-color: rgba(245, 246, 250, 1);
+}
+
+* {
+    margin: 0;
+}
+
+/* Example class with specific font settings */
+.nunito-sans-custom {
+    font-family: "Nunito Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700; /* Replace with your desired weight */
+    font-style: normal;
+    font-variation-settings:
+        "wdth" 100,
+        "YTLC" 500;
+}
+.outer{
+    padding: 20px;
+}
+input{
+    background-color:rgba(245, 246, 250, 1) ;
+    border: none;
+    border: 1px solid rgba(213, 213, 213, 1);
+}
+input:focus{
+background-color: rgba(241, 244, 249, 1); /* Light background color on focus */
+  outline: none; /* Remove default outline */
+  border-color: rgba(72, 128, 255, 1); /* Change border color on focus */
 }

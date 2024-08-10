@@ -39,6 +39,25 @@ export const  apiEndPoint= {
     //     deleteVendor: (id) => `http://localhost:5235/api/vendors/${id}`
     // }
 }
+export const menu=[{
+    path:'home',
+    label:'Home',
+    role:['OrganizationOwner','AssetManager']
+    
+},{
+    path:'asset',
+    label:'Asset',
+    role:['OrganizationOwner','AssetManager']
+
+},{
+    path:'categories',
+    label:'Categories',
+    role:['OrganizationOwner','AssetManager']
+},{
+    path:'user',
+    label:'User',
+    role:['OrganizationOwner','AssetManager']
+}]
 export const constant = {
     login: {
         success: {
