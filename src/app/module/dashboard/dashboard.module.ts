@@ -8,6 +8,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterOutlet } from '@angular/router';
 import { OrganizationComponent } from './organization/organization.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddcategoryComponent } from './submodule/addcategory/addcategory.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     SidebarComponent,
     BoardComponent,
     DashboardComponent,
-    OrganizationComponent
+    OrganizationComponent,
+    AddcategoryComponent
   ],
   imports: [
     CommonModule,
