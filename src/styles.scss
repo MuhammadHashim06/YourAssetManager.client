@@ -63,14 +63,34 @@ html, body {
 }
 .outer{
     padding: 20px;
+    overflow-y: auto;
+
 }
-input{
+input, select{
     background-color:rgba(245, 246, 250, 1) ;
     border: none;
     border: 1px solid rgba(213, 213, 213, 1);
+        width: calc(100% - 22px);
+        padding: 10px;
+        border-radius: 5px;
+    
 }
 input:focus{
 background-color: rgba(241, 244, 249, 1); /* Light background color on focus */
   outline: none; /* Remove default outline */
   border-color: rgba(72, 128, 255, 1); /* Change border color on focus */
 }
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+  }
+
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  .error {
+    color: red;
+    font-size: 0.8em; /* Slightly smaller font size for error messages */
+  }

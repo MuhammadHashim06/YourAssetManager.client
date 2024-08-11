@@ -1,1 +1,99 @@
-<p>addcategory works!</p>
+<h1>Add Category</h1>
+
+<div class="form">
+    <form class="category-form" [formGroup]="categoryvalue">
+        <table>
+
+            <tr>
+                <td>
+                    <label for="categoryname">Category Name:</label>
+                </td>
+                <td>
+                    <input type="text" name="categoryname" id="categoryname" formControlName="categoryName"
+                        placeholder="Enter Your Category" required>
+                    <span class="error" *ngIf="categoryvalue.controls['categoryName'].touched && categoryvalue.controls['categoryName'].invalid">{{inputerrormessages.required}}</span>
+                </td>
+                <td>
+                    <label for="description">Description</label>
+                </td>
+                <td>
+                    <input type="text" name="description" id="description"
+                        placeholder="Enter Your Description" required formControlName="description">
+                    <span class="error" *ngIf="categoryvalue.controls['description'].touched && categoryvalue.controls['description'].invalid">{{inputerrormessages.required}}</span>
+                </td>
+            </tr>
+            <tr [formGroup]="columnvalue">
+                <td>
+                    <label for="column">Column Name:</label>
+                </td>
+                <td>
+                    <input type="text" name="column" id="column" placeholder="Enter Column name" formControlName="column">
+                    <span class="error" *ngIf="columnvalue.controls['column'].touched && columnvalue.controls['column'].invalid">{{inputerrormessages.required}}</span>
+                </td>
+                <td>
+                    <label for="type">Select Type:</label>
+                </td>
+                <td>
+                    <select name="inputType" id="inputType" formControlName="inputType">
+                        <option *ngFor="let type of inputTypes" [value]="type">{{ type }}</option>
+                    </select>
+                    <span class="error" *ngIf="columnvalue.controls['inputType'].touched && columnvalue.controls['inputType'].invalid">{{inputerrormessages.required}}</span>
+                </td>
+                <td>
+                    <img src="add.svg" (click)="addcolumn()" />
+                </td>
+            </tr>
+        </table>
+        <div class="link">
+            <Button (click)="Save($event)">Save Category</Button>
+        </div>
+    </form>
+
+    <h1 style="margin-top: 10px;">New Columns</h1>
+    <form class="category-form" >
+    <div *ngIf="features.length <= 0; else columnTable" class="empty">
+        <h1>No Column Found</h1>
+    </div>
+    <ng-template #columnTable>
+        <table>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            <tr *ngFor="let f of features; let i = index">
+                <td>
+                    <label [for]="f.name">{{ f.label }}</label>
+                </td>
+                <td>
+                    <input [type]="f.type" [name]="f.name" [id]="f.name" >
+                </td>
+                <td>
+                    <label for="type">Selected Type:</label>
+                </td>
+                <td>
+                    <input type="text" [value]="f.type" disabled>
+                </td>
+                <td>
+                    <img src="remove.svg" (click)="removecolumn(i)">
+                </td>
+            </tr>
+        </table>
+    </ng-template>
+</form>
+</div>
+
+
+
+
+
+
+<!-- <label for="categoryname">Category Name:</label>
+<input type="text" name="categoryname" id="categoryname" placeholder="Enter Your Category" required>
+<label for="column">Column Name:</label>
+<input type="text" name="column" id="column" placeholder="Enter Column name">
+<label for="type">Select Type</label>
+<select name="inputType" id="inputType">
+    <option *ngFor="let type of inputTypes" [value]="type">{{ type }}</option>
+  </select> -->

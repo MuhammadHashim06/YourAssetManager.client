@@ -19,10 +19,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   // If userData is not null, clone the request and set the Authorization header
-  if (userData && userData.responceData && userData.responceData.jwtToken) {
+  if (userData && userData.responseData && userData.responseData.jwtToken) {
     const reqClone = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${userData.responceData.jwtToken}`
+        Authorization: `Bearer ${userData.responseData.jwtToken}`
       }
     });
     return next(reqClone);

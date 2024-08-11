@@ -18,6 +18,13 @@ export const  apiEndPoint= {
         organizationOwner: 'http://localhost:5235/api/dashboard/organization-owner',
         assetManager: 'http://localhost:5235/api/dashboard/asset-manager'
     },
+    category:{
+        GetAllAssetCategories:'http://localhost:5235/GetAllAssetCategories',
+        CreateAssetCategory:'http://localhost:5235/CreateAssetCategory',
+        GetAssetCategoryById:'http://localhost:5235/GetAssetCategoryById'
+
+
+    },
 
     logActions: 'http://localhost:5235/api/logs',
 
