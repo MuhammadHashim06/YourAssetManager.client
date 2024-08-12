@@ -24,6 +24,9 @@ const routes: Routes = [{
         path:'category',
         loadChildren:()=>import('./submodule/category/category.module').then(m=>m.CategoryModule)
       },{
+        path:'vendor',
+        loadChildren:()=>import('./submodule/vendor/vendor.module').then(m=>m.VendorModule)
+      },{
         path:'home',
         component:BoardComponent
       },{

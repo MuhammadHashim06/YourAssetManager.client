@@ -37,10 +37,9 @@ orgIcon:string='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-pic
       {
         this.orgIcon='person.svg'
       }
-      this.orgName=this.orgInfo.resultontOrganization.$values[0].organizationName
-      console.log(this.orgInfo.resultontOrganization.$values[0].organizationName
-      )
-    localStorage.setItem('organization',JSON.stringify(res))
+      this.orgName=this.orgInfo.organizations.$values[0].organizationName
+      console.log(this.orgInfo.organizations.$values[0].organizationName)
+    localStorage.setItem('organization',JSON.stringify(this.orgInfo))
     })
   }
 

@@ -1,0 +1,36 @@
+<h1>Add New Vendor</h1>
+<div class="container">
+  <div class="file-upload-wrapper">
+    <img [src]="imageUrl" alt="Profile Image" class="preview-image">
+    <button type="button" class="custom-upload-button" (click)="fileInput.click()">Upload Image</button>
+    <input type="file" (change)="onselect($event)" #fileInput class="file-input">
+  </div>
+<form [formGroup]="vendorinfo">
+  <table>
+    <tr>
+      <td>
+        <label for="vendorname">Vendor Name:</label>
+        <input type="text" name="vendorname" id="vendorname" placeholder="Enter Vendor Name"  formControlName="name">
+        @if (vendorinfo.controls['name'].errors &&vendorinfo.controls['name'].touched ) {
+          <span class="error">{{inputerrormessages.required}}</span>
+        }
+      </td>
+      <td>
+        <label for="vendoremail">Vendor Email:</label>
+        <input type="text" name="vendoremail" id="vendoremail" placeholder="Enter Vendor Email">
+      </td>
+    </tr>
+    <tr>
+    <td>
+      <label for="OfficeAddress">Vendor Email:</label>
+      <input type="text" name="OfficeAddress" id="OfficeAddress" placeholder="Enter Vendor Address">
+    </td>
+    <td>
+      <label for="PhoneNumber">Phone Number:</label>
+      <input type="text" name="PhoneNumber" id="PhoneNumber" placeholder="Enter Phone Number">
+    </td>
+  </tr>
+  </table>
+</form>
+  <div class="link"><button (click)="Addvendor($event)">Add Now</button></div>
+</div>

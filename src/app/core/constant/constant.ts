@@ -22,8 +22,9 @@ export const  apiEndPoint= {
         GetAllAssetCategories:'http://localhost:5235/GetAllAssetCategories',
         CreateAssetCategory:'http://localhost:5235/CreateAssetCategory',
         GetAssetCategoryById:'http://localhost:5235/GetAssetCategoryById'
-
-
+    },
+    vendor:{
+        CreateVender:'http://localhost:5235/CreateVender',
     },
 
     logActions: 'http://localhost:5235/api/logs',
