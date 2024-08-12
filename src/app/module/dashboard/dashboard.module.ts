@@ -6,8 +6,9 @@ import { BoardComponent } from './board/board.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { RouterOutlet } from '@angular/router';
 import { OrganizationComponent } from './organization/organization.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
+import { ProfileComponent } from './profile/profile.component';
 
 
 @NgModule({
@@ -16,10 +17,12 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
     BoardComponent,
     DashboardComponent,
     OrganizationComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
     DashboardRoutingModule,
+    FormsModule,
     RouterOutlet,
     ReactiveFormsModule
   ]

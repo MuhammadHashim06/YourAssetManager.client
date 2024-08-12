@@ -1,3 +1,22 @@
+<div class="orgInfo" *ngIf="isprofile">
+    <div class="profilecard">
+        <div class="profile-header">
+            <img [src]="orgIcon" alt="Organization Icon" class="profile-icon">
+            <p class="org-name">{{orgName}}</p>
+        </div>
+        <div class="profile-info">
+            <p><strong>Email:</strong> {{orgEmail}}</p>
+            <p><strong>Address:</strong> {{orgAddress}}</p>
+            <p><strong>Contact:</strong> {{orgContact}}</p>
+        </div>
+        <div class="links">
+            <button class="profile-button" routerLink="profile">Personal Profile</button>
+            <button class="profile-button">Organization - {{orgName}}</button>
+        </div>
+    </div>
+   
+</div>
+
 <div class="Main">
 <app-sidebar></app-sidebar>
  <div class="dashboard">
@@ -12,7 +31,7 @@
         <img src="menu.svg" alt="horizantal nav">
         <input type="search" name="search" id="search" placeholder="        Search">
     </div>
-        <div class="profile"><img src="person.svg" alt="Account Icon">{{'Organization Name'}}</div>
+        <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="orgIcon" alt="Account Icon">{{orgName}}</div>
     </div>
     <div class="outer">
 

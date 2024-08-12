@@ -66,16 +66,16 @@ html, body {
     overflow-y: auto;
 
 }
-input, select{
+textarea,input, select{
     background-color:rgba(245, 246, 250, 1) ;
     border: none;
     border: 1px solid rgba(213, 213, 213, 1);
-        width: calc(100% - 22px);
-        padding: 10px;
-        border-radius: 5px;
-    
+    width: calc(100% - 22px);
+    padding: 10px;
+    border-radius: 5px;
+    font-family: "Nunito Sans", sans-serif;    
 }
-input:focus{
+input:focus , textarea:focus{
 background-color: rgba(241, 244, 249, 1); /* Light background color on focus */
   outline: none; /* Remove default outline */
   border-color: rgba(72, 128, 255, 1); /* Change border color on focus */
@@ -93,4 +93,14 @@ table {
   .error {
     color: red;
     font-size: 0.8em; /* Slightly smaller font size for error messages */
+  }
+  .container{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 3.25%;
+    background-color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 1px solid rgba(185, 185, 185, 0.5);
   }

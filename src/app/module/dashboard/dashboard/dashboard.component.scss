@@ -8,6 +8,21 @@
   // }
    .outer {
     overflow-y: auto;
+  }.orgInfo{
+    display: flex;
+right: 20px;    position: absolute;
+     top: 60px;
+  }
+  .orgInfo .profilecard{
+
+    display: flex;
+    box-shadow: 0px 0px 15px -10px black;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 20px;
+
   }
   .navbar{
     padding: 10px 20px;
@@ -45,4 +60,12 @@
   .navbar .profile{
     display: flex;
     align-items: center;
+    cursor: pointer;
+    gap: 10px;
+  }
+
+  .profile-pic{
+    max-width: 40px;
+    max-width: 40px;
+    border-radius: 50px;
   }

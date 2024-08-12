@@ -13,4 +13,7 @@ export class CategoryService {
   createcategory(data:any){
    return this.http.post(this.endpoint.CreateAssetCategory,data)
   }
+  getcategory(){
+    return this.http.get(this.endpoint.GetAllAssetCategories)
+  }
 }
