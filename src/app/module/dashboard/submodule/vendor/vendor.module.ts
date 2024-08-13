@@ -5,6 +5,7 @@ import { VendorRoutingModule } from './vendor-routing.module';
 import { VendorlistComponent } from './vendorlist/vendorlist.component';
 import { AddvendorComponent } from './addvendor/addvendor.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { DataloadinComponent } from "../../../../shared/reusablecomponents/dataloadin/dataloadin.component";
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     VendorRoutingModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    DataloadinComponent
+]
 })
 export class VendorModule { }

@@ -2,3 +2,27 @@
     <h1>Vendor List</h1>
     <button routerLink="add" >Add Vendor</button>
 </div>
+
+<div class="container">
+    @if (dataload) {<table>
+        <thead>
+            <td>Vendor Name</td>
+            <td>Email</td>
+            <td>Phone Number</td>
+            <td>Address</td>
+            <td>Actions</td>
+        </thead>
+        <tbody>
+            <tr *ngFor="let v of vendors" >
+                <td>{{v.name|| '--'}} </td>
+                <td>{{v.email || '--'}}</td>
+                <td>{{v.officeAddress || '--'}}</td>
+                <td>{{v.phoneNumber || '--'}}</td>
+                <td style="display: flex; align-items: center;"><i class="fa-regular fa-pen-to-square" style="color: green;" (click)="edit(v.id)"></i><img src="delete.svg" alt="" (click)="delete(v.id)" ></td>
+            </tr>
+        </tbody>
+    </table>}
+    @else {<app-dataloadin></app-dataloadin>}
+    
+
+</div>
