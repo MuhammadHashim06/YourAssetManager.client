@@ -28,7 +28,7 @@ export class AddvendorComponent implements OnInit {
         })
       ).subscribe({
         next: (res) => {
-          this.editvender = res.responseData.vender
+          this.editvender = res.responseData
           console.log(this.editvender);
           this.vendorinfo.setValue({
             name: this.editvender.name,

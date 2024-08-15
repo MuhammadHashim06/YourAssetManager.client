@@ -7,50 +7,39 @@
   </div>
 
   <div class="form">
-    <form [formGroup]="organization">
-        <div class="fields">
-            <table>
-                <tbody>
-                <tr>
-                    <td>
-                        <label for="name">Organization Name:</label>
-                        <input type="text" id="name" name="name" placeholder="Enter your Organization Name" formControlName="organizationName">
-                        <div *ngIf="organization.controls['organizationName'].errors && organization.controls['organizationName'].touched">
-                            <span *ngIf="organization.controls['organizationName'].errors['required']" class="error">
-                              {{ inputerrormessage.required }}
-                            </span>
-                        </div>
-                    </td>
-                    <td>
-                        <label for="domain">Domain</label>
-                        <input type="text" id="domain" name="domain" placeholder="Enter Your Company Domain" formControlName="organizationDomain">
-                        <div *ngIf="organization.controls['organizationDomain'].errors && organization.controls['organizationDomain'].touched">
-                            <span *ngIf="organization.controls['organizationDomain'].errors['required']" class="error">
-                              {{ inputerrormessage.required }}
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
+    <form [formGroup]="Userdata">
+      <div class="fields">
+        <table>
+          <tr>
+            <label for="email">Email Address</label>
+          </tr>
+          <tr>
+            <input type="text" value="muhammad.hashimsid@gmail.com" disabled>
+          </tr>
+          <tr>
+            <label for="username">Username</label>
+          </tr>
+          <tr>
+            <input type="text" name="username" id="username" value="Hashim@123">
+          </tr>
+          <tr>
+            <label for="password">Password</label>
+          </tr>
+          <tr>
+            <input type="password" name="password" id="password">
+          </tr>
+        </table>
 
-            </table>
-            <label for="description">Description:</label>
-            <textarea name="description" id="description" placeholder="Enter Your Company Description" rows="8" cols="20" formControlName="description"></textarea>
-            <div *ngIf="organization.controls['description'].errors && organization.controls['description'].touched">
-                <span *ngIf="organization.controls['description'].errors['required']" class="error">
-                  {{ inputerrormessage.required }}
-                </span>
-            </div>
-        </div>
-        <div class="link">
-            <button type="button" (click)="Save($event)">Save Organization</button>
-        </div>
+      </div>
+      <div class="link">
+        <button type="button" (click)="Save($event)">Save Organization</button>
+      </div>
     </form>
-</div>
+  </div>
 </div>
 
 
-  
+
 <!-- <div class="row">
     <div class="small-12 medium-2 large-2 columns">
       <div class="circle">

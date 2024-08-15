@@ -18,8 +18,9 @@ delete(arg0: any) {
   ).subscribe(res => {
     console.log(res);
     console.log(this.vendors)
+    this.getvendor()
   })
-  this.getvendor()
+  
 
 }
 edit(arg0: any) {
@@ -34,17 +35,22 @@ edit(arg0: any) {
         return throwError(error)
       })
     ).subscribe(res => {
-      this.vendors = res.responseData.$values
-      this.dataload=true
-      console.log(res);
-      console.log(this.vendors)
+      if(res.status==404){
+        this.dataload=true
+        this.vendors=[]
+      }else{
+        this.dataload=true
+        this.vendors = res.responseData.$values
+        console.log(res);
+        console.log(this.vendors)
+      }
+      
     })
 
   }
-  vendors: any
+  vendors:Array<any>=[]
   ngOnInit(): void {
     this.getvendor()
-   
   }
 
 }

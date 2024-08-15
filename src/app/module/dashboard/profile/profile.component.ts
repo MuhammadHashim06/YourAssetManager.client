@@ -29,7 +29,7 @@ export class ProfileComponent {
   inputerrormessage=constant.inputerrormessage
   constructor(private service:OrganizationService){}
   
-  organization= new FormGroup({
+  Userdata= new FormGroup({
     organizationName: new FormControl('',Validators.required),
     organizationDomain: new FormControl('',Validators.required),
     description: new FormControl('',Validators.required)
@@ -38,8 +38,8 @@ export class ProfileComponent {
 Save($event: MouseEvent) {
   $event.preventDefault()
   
- if(this.organization.valid){
-  this.service.setOrganization(this.organization.value).pipe(
+ if(this.Userdata.valid){
+  this.service.setOrganization(this.Userdata.value).pipe(
     catchError(error=>{
 
       return throwError(error)
@@ -49,7 +49,7 @@ Save($event: MouseEvent) {
     this.router.navigateByUrl('/dashboard')
   })
  }else{
-  this.organization.markAllAsTouched()
+  this.Userdata.markAllAsTouched()
  }
 }
 
