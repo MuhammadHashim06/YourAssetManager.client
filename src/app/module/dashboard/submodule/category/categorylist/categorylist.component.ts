@@ -15,10 +15,8 @@ export class CategorylistComponent implements OnInit {
         return throwError(error)
       })
     ).subscribe(res=>{
-      console.log(res);
+      const feature = res.responseData.$values
+      console.log(feature);
     })
   }
-
-
-
 }

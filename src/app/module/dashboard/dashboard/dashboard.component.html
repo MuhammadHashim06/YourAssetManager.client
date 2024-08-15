@@ -3,16 +3,20 @@
         <div class="profile-header">
             <img [src]="orgIcon" alt="Organization Icon" class="profile-icon">
             <p class="org-name">{{orgName}}</p>
+            <p class="org-domain">{{orgDomain}}</p>
         </div>
-        <div class="profile-info">
+        <!-- <div class="profile-info">
             <p><strong>Email:</strong> {{orgEmail}}</p>
             <p><strong>Address:</strong> {{orgAddress}}</p>
             <p><strong>Contact:</strong> {{orgContact}}</p>
-        </div>
+        </div> -->
         <div class="links">
             <button class="profile-button" routerLink="profile">Personal Profile</button>
-            <button class="profile-button">Organization - {{orgName}}</button>
+            <button class="profile-button">{{orgName}} - Profile</button>
         </div>
+        <button class="logout">
+            <i class="fa-solid fa-right-from-bracket"></i> Log Out
+        </button>
     </div>
    
 </div>

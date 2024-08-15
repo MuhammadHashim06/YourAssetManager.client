@@ -29,8 +29,6 @@ export const  apiEndPoint= {
         DeleteVender: 'http://localhost:5235/DeleteVender',
         GetVenderById:'http://localhost:5235/GetVenderById',
         UpdateVender:'http://localhost:5235/UpdateVender',
-
-
     },
 
     logActions: 'http://localhost:5235/api/logs',

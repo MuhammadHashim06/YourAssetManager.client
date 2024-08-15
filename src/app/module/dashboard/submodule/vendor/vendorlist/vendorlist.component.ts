@@ -34,10 +34,9 @@ edit(arg0: any) {
         return throwError(error)
       })
     ).subscribe(res => {
-      this.vendors = res.responseData.venders.$values
+      this.vendors = res.responseData.$values
       this.dataload=true
       console.log(res);
-      
       console.log(this.vendors)
     })
 

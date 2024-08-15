@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { apiEndPoint } from '../../constant/constant';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -13,7 +14,7 @@ export class CategoryService {
   createcategory(data:any){
    return this.http.post(this.endpoint.CreateAssetCategory,data)
   }
-  getcategory(){
+  getcategory():Observable<any>{
     return this.http.get(this.endpoint.GetAllAssetCategories)
   }
 }

@@ -15,7 +15,9 @@ export class AddvendorComponent implements OnInit {
   editvender: any
 
   constructor(private service: VendorService, private router: Router, private active: ActivatedRoute) {
+    if(this.active.snapshot.queryParams['id']){
     this.id = this.active.snapshot.queryParams['id']
+    }
     console.log(this.id)
   }
   ngOnInit(): void {

@@ -12,6 +12,7 @@ export class DashboardComponent implements OnInit {
 orgEmail: any;
 orgAddress: any;
 orgContact: any;
+orgDomain:any;
 profilecard($event: MouseEvent) {
   this.isprofile=!this.isprofile
 }
@@ -32,13 +33,15 @@ orgIcon:string='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-pic
         return throwError(error)
       })
     ).subscribe(res=>{
-      this.orgInfo=res.responseData
+      this.orgInfo=res.responseData.organizations.$values[0]
       if(this.orgIcon=='')
       {
         this.orgIcon='person.svg'
       }
-      this.orgName=this.orgInfo.organizations.$values[0].organizationName
-      console.log(this.orgInfo.organizations.$values[0].organizationName)
+      this.orgName=this.orgInfo.organizationName
+      this.orgDomain=this.orgInfo.organizationDomain
+      console.log(this.orgInfo);
+      
     localStorage.setItem('organization',JSON.stringify(this.orgInfo))
     })
   }
