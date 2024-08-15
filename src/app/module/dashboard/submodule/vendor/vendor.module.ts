@@ -6,6 +6,8 @@ import { VendorlistComponent } from './vendorlist/vendorlist.component';
 import { AddvendorComponent } from './addvendor/addvendor.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { DataloadinComponent } from "../../../../shared/reusablecomponents/dataloadin/dataloadin.component";
+import { DataloadingComponent } from "../../../../shared/reusablecomponents/dataloading/dataloading.component";
+import { ResponseloadingComponent } from "../../../../shared/reusablecomponents/responseloading/responseloading.component";
 
 
 @NgModule({
@@ -17,7 +19,8 @@ import { DataloadinComponent } from "../../../../shared/reusablecomponents/datal
     CommonModule,
     VendorRoutingModule,
     ReactiveFormsModule,
-    DataloadinComponent
+    DataloadingComponent,
+    ResponseloadingComponent
 ]
 })
 export class VendorModule { }

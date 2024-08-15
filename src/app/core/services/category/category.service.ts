@@ -17,4 +17,8 @@ export class CategoryService {
   getcategory():Observable<any>{
     return this.http.get(this.endpoint.GetAllAssetCategories)
   }
+  deletecategory(id:any){
+    return this.http.delete(`${this.endpoint.DeleteAssetCategory}?AssetCatagoryId=${id}`)
+  }
 }
+

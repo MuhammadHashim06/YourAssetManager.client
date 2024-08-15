@@ -13,6 +13,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class AddvendorComponent implements OnInit {
   id = 0
   editvender: any
+  response=true
 
   constructor(private service: VendorService, private router: Router, private active: ActivatedRoute) {
     if(this.active.snapshot.queryParams['id']){
@@ -22,12 +23,15 @@ export class AddvendorComponent implements OnInit {
   }
   ngOnInit(): void {
     if (this.id !== 0) {
+      this.response=false
       this.service.getvendorbyId(this.id).pipe(
         catchError(error => {
+          this.response=true
           return throwError(error)
         })
       ).subscribe({
         next: (res) => {
+          this.response=true
           this.editvender = res.responseData
           console.log(this.editvender);
           this.vendorinfo.setValue({
@@ -36,7 +40,6 @@ export class AddvendorComponent implements OnInit {
             officeAddress: this.editvender.officeAddress,
             phoneNumber: this.editvender.phoneNumber,
           })
-
         }
       })
     }
@@ -44,9 +47,11 @@ export class AddvendorComponent implements OnInit {
 
 
   Savevendor($event: MouseEvent) {
+    
     if (this.vendorinfo.invalid) {
       this.vendorinfo.markAllAsTouched();
     } else {
+      this.response=false
       const updateddata={
         id: this.id,
         name: this.vendorinfo.controls['name'].value,
@@ -56,9 +61,11 @@ export class AddvendorComponent implements OnInit {
       }
       this.service.updatevendor(updateddata).pipe(
         catchError(error => {
+          this.response=true
           return throwError(error)
         })
       ).subscribe(res => {
+        this.response=true
         console.log(res)
         this.router.navigateByUrl('dashboard/vendor')
       })
@@ -69,13 +76,17 @@ export class AddvendorComponent implements OnInit {
   
   Addvendor($event: MouseEvent) {
     if (this.vendorinfo.invalid) {
+     
       this.vendorinfo.markAllAsTouched();
     } else {
+      this.response=false
       this.service.addvendor(this.vendorinfo.value).pipe(
         catchError(error => {
+          this.response=true
           return throwError(error)
         })
       ).subscribe(res => {
+        this.response=true
         console.log(res)
         this.router.navigateByUrl('dashboard/vendor')
       })

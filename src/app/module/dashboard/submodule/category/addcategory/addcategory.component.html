@@ -40,12 +40,12 @@
                     <span class="error" *ngIf="columnvalue.controls['inputType'].touched && columnvalue.controls['inputType'].invalid">{{inputerrormessages.required}}</span>
                 </td>
                 <td>
-                    <img src="add.svg" (click)="addcolumn()" />
+                    <img src="add.svg" (click)="addcolumn()" style="cursor: pointer;" />
                 </td>
             </tr>
         </table>
         <div class="link">
-            <Button (click)="Save($event)">Save Category</Button>
+            <Button (click)="Save($event)" style="cursor: pointer;">Save Category</Button>
         </div>
     </form>
 
@@ -76,7 +76,7 @@
                     <input type="text" [value]="f.type" disabled>
                 </td>
                 <td>
-                    <img src="remove.svg" (click)="removecolumn(i)">
+                    <img src="remove.svg" (click)="removecolumn(i)" style="cursor: pointer;">
                 </td>
             </tr>
         </table>

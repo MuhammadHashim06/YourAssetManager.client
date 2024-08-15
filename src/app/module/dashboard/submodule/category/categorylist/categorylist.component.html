@@ -1,4 +1,64 @@
 <div class="head">
     <h1>Category List</h1>
-    <button routerLink="add" >Add Category</button>
+    <button routerLink="add">Add Category</button>
+</div>
+
+<div class="container">
+    <table>
+        <thead>
+            <!-- <th>
+                Sr. #
+            </th> -->
+            <th>
+                Name
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Relevant Input Fields
+            </th>
+            <th style="text-align: center;">
+                Action
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let c of categories; let i = index">
+                <!-- <td>
+                    {{i+1}}
+                </td> -->
+                <td>
+                    {{c.categoryName}}
+                </td>
+                <td>
+                    {{c.description}}
+                </td>
+                <td>
+                    <!-- {{c.relaventInputFields.length}} -->
+                    @if (c.relaventInputFields.length>0) {
+
+                    @for (item of c.relaventInputFields; track $index) {
+                    <button style="border: none;padding: 5px 10px; margin: 2px; border-radius: 3px;">
+                        {{item.name}}
+                    </button>
+
+                    }
+                    }@else {--}
+                </td>
+                <td >
+                    <div class="action"><i class="fa-regular fa-pen-to-square" style="color: green;" (click)="edit(c.id)"></i><img src="delete.svg" alt="" (click)="delete(c.id)" ></div></td>
+            
+                <!-- <td style="display: flex; gap: 5px;">
+
+                    <div class="edit" style="color: green; background-color:rgba(0, 128, 0, 0.2); padding: 4px 10px;border-radius: 4px;" >
+                        Edit
+                    </div>
+                    <div class="delete" style="color: red; background-color: rgba(255, 0, 0, 0.2); padding: 4px 10px;border-radius: 4px;" (click)="delete(c.id)">
+                        Delete
+                    </div>
+
+                </td> -->
+            </tr>
+        </tbody>
+    </table>
 </div>

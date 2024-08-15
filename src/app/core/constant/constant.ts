@@ -21,7 +21,8 @@ export const  apiEndPoint= {
     category:{
         GetAllAssetCategories:'http://localhost:5235/GetAllAssetCategories',
         CreateAssetCategory:'http://localhost:5235/CreateAssetCategory',
-        GetAssetCategoryById:'http://localhost:5235/GetAssetCategoryById'
+        GetAssetCategoryById:'http://localhost:5235/GetAssetCategoryById',
+        DeleteAssetCategory:'http://localhost:5235/DeleteAssetCategory'
     },
     vendor:{
         CreateVender:'http://localhost:5235/CreateVender',

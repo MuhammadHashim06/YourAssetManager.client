@@ -1,3 +1,6 @@
+<!-- @if (!response) {
+  <app-responseloading  ></app-responseloading>
+} -->
 <h1>Add New Vendor</h1>
 <div class="container">
   <div class="file-upload-wrapper">
@@ -33,6 +36,6 @@
   </table>
 </form>
   <div class="link">
-    @if (id==0) {<button (click)="Addvendor($event)">Add Now</button>}
-  @else {<button (click)="Savevendor($event)">Save Changes</button>}</div>
+    @if (id==0) {<button (click)="Addvendor($event)" style="cursor: pointer; display: flex; gap: 8px; align-items: center;" >Add Now <div class="loader" *ngIf="!response"></div> </button>}
+  @else {<button (click)="Savevendor($event)" style="cursor: pointer; display: flex; gap: 8px; align-items: center;" > <div class="loader" *ngIf="!response"></div>Save Changes</button>}</div>
 </div>

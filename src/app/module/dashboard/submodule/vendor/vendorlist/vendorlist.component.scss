@@ -16,3 +16,13 @@ thead{
   background-color: rgba(241, 244, 249, 1);
   font-weight: bold;
 }
+
+.action{
+  display: flex; 
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(250, 251, 253, 1);
+  border: 0.1px solid rgba(213, 213, 213, 1);
+  border-radius: 7.5px;
+  gap: 0px;
+}
