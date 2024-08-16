@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CategoryService } from '../../../../../core/services/category/category.service';
 import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 export interface Icategories {
   id:number
@@ -17,26 +18,32 @@ export interface Icategories {
 })
 export class CategorylistComponent implements OnInit {
 
+  private router=inject(Router)
+  dataload=false
   getcategories(){
+    this.dataload=false
     this.service.getcategory().pipe(
       catchError(error => {
+        this.dataload=true
         return throwError(error)
       })
     ).subscribe(res => {
+      this.dataload=true
       this.categories = res.responseData.$values
       for (let index = 0; index < this.categories.length; index++) {
         this.categories[index].relaventInputFields=JSON.parse(this.categories[index].relaventInputFields) 
         console.log(this.categories[index].relaventInputFields);
-        
       }
     })
   }
 edit(arg0: number) {
-throw new Error('Method not implemented.');
+  this.router.navigateByUrl(`dashboard/category/add?id=${arg0}`)
 }
 delete(id:number) {
+  this.dataload=false
   this.service.deletecategory(id).pipe(
     catchError(error=>{
+      this.dataload=true
       return throwError(error)
     })
   ).subscribe(res=>{

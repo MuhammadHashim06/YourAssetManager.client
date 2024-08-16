@@ -3,7 +3,6 @@
 <div class="form">
     <form class="category-form" [formGroup]="categoryvalue">
         <table>
-
             <tr>
                 <td>
                     <label for="categoryname">Category Name:</label>
@@ -45,7 +44,9 @@
             </tr>
         </table>
         <div class="link">
-            <Button (click)="Save($event)" style="cursor: pointer;">Save Category</Button>
+            @if (id==undefined) {<Button (click)="Save($event)" style="cursor: pointer;">Save Category</Button>}
+            @else {<Button (click)="Update(id)" style="cursor: pointer;">Update Category</Button>}
+            
         </div>
     </form>
 

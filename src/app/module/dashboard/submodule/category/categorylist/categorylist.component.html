@@ -4,7 +4,9 @@
 </div>
 
 <div class="container">
-    <table>
+    @if (!dataload) {<app-dataloading></app-dataloading>}
+    @else {
+ <table>
         <thead>
             <!-- <th>
                 Sr. #
@@ -45,9 +47,12 @@
                     }
                     }@else {--}
                 </td>
-                <td >
-                    <div class="action"><i class="fa-regular fa-pen-to-square" style="color: green;" (click)="edit(c.id)"></i><img src="delete.svg" alt="" (click)="delete(c.id)" ></div></td>
-            
+                <td>
+                    <div class="action"><i class="fa-regular fa-pen-to-square" style="color: green; cursor: pointer;"
+                            (click)="edit(c.id)"></i><img src="delete.svg" alt="" (click)="delete(c.id)"
+                            style="cursor: pointer;"></div>
+                </td>
+
                 <!-- <td style="display: flex; gap: 5px;">
 
                     <div class="edit" style="color: green; background-color:rgba(0, 128, 0, 0.2); padding: 4px 10px;border-radius: 4px;" >
@@ -61,4 +66,5 @@
             </tr>
         </tbody>
     </table>
+    }
 </div>

@@ -9,6 +9,10 @@ component:CategorylistComponent
 },{
   path:'add',
   component:AddcategoryComponent
+},
+{
+  path:'add/:id',
+  component:AddcategoryComponent
 }];
 
 @NgModule({

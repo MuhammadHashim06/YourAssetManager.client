@@ -5,6 +5,7 @@ import { CategoryRoutingModule } from './category-routing.module';
 import { CategorylistComponent } from './categorylist/categorylist.component';
 import { AddcategoryComponent } from './addcategory/addcategory.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataloadingComponent } from "../../../../shared/reusablecomponents/dataloading/dataloading.component";
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     CategoryRoutingModule,
     FormsModule,
-    ReactiveFormsModule
-  ]
+    ReactiveFormsModule,
+    DataloadingComponent
+]
 })
 export class CategoryModule { }

@@ -8,7 +8,7 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  endpoint= apiEndPoint.category
+  private endpoint= apiEndPoint.category
   constructor(private http:HttpClient) { }
 
   createcategory(data:any){
@@ -19,6 +19,12 @@ export class CategoryService {
   }
   deletecategory(id:any){
     return this.http.delete(`${this.endpoint.DeleteAssetCategory}?AssetCatagoryId=${id}`)
+  }
+  getcategorybyid(id:number):Observable<any>{
+    return this.http.get(`${this.endpoint.GetAssetCategoryById}?AssetCatagoryId=${id}`)
+  }
+  updatecategory(data:any){
+    return this.http.put(`${this.endpoint.UpdateAssetCategory}?AssetCatagoryId=${data.id}`,data)
   }
 }
 

@@ -1,19 +1,53 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { constant } from '../../../../../core/constant/constant';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { CategoryService } from '../../../../../core/services/category/category.service';
 import { catchError, throwError } from 'rxjs';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-addcategory',
   templateUrl: './addcategory.component.html',
   styleUrls: ['./addcategory.component.scss'] // Fixed styleUrl -> styleUrls
 })
-export class AddcategoryComponent {
+export class AddcategoryComponent implements OnInit {
+Update(arg0: number) {
+  const data ={
+    id: this.id,
+  categoryName: this.categoryvalue.controls['categoryName'].value,
+  description: this.categoryvalue.controls['description'].value,
+  relaventInputFields: JSON.stringify(this.features)
+  }
+  this.service.updatecategory(data).subscribe(res=>{
+    console.log(res);
+    
+  })
+}
 
-  constructor(private service: CategoryService, private router: Router) {}
+  category:any
+  constructor(private service: CategoryService, private router: Router, private activeroute:ActivatedRoute) {
+    this.id=this.activeroute.snapshot.queryParams['id']
+    console.log(this.id);
+    
+  }
+  ngOnInit(): void {
+    if(this.id!=undefined){
+    this.service.getcategorybyid(this.id).subscribe(res=>{
+      this.category=res.responseData
+      console.log(this.category);
+      this.categoryvalue.setValue(
+        {
+          categoryName:this.category.categoryName,
+          description:this.category.description,
+          relaventInputFields:this.category.relaventInputFields
+        }
+      )
+      this.features=JSON.parse(this.category.relaventInputFields)
+    })
+  }
+  }
 
+  id=0
   inputerrormessages = constant.inputerrormessage;
   features: Array<any> = [];
   inputTypes = [
