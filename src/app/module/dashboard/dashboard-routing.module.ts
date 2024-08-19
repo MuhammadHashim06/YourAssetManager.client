@@ -27,6 +27,9 @@ const routes: Routes = [{
         path:'vendor',
         loadChildren:()=>import('./submodule/vendor/vendor.module').then(m=>m.VendorModule)
       },{
+        path:'type',
+        loadChildren:()=>import('./submodule/type/type.module').then(m=>m.TypeModule)
+      },{
         path:'home',
         component:BoardComponent
       },{

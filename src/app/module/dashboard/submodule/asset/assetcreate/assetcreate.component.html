@@ -1,64 +1,91 @@
-    <h1>Add Asset Details</h1>
+<h1>Add Asset Details</h1>
 <div class="container">
-    <form>
+    <form [formGroup]="AssetDTO">
         <table>
             <tr>
                 <td>
-                    <label for="assetName">Asset Name:</label>
+                    <label for="AssetName">Asset Name:</label>
                 </td>
                 <td>
-                    <input type="text" id="assetName" name="assetName"  required />
+                    <input type="text" id="AssetName" name="AssetName" formControlName="AssetName" />
                 </td>
+                <td> <label for="SerialNumber">Serial Number:</label>
+                </td>
+                <td> <input type="text" id="SerialNumber" name="SerialNumber" formControlName="SerialNumber"/></td>
                 <td>
-                    <label for="identificationnumber">Identification Number:</label>
+                    <label for="AssetIdentificationNumber">Identification Number:</label>
                 </td>
-                <td> <input type="text" id="identificationnumber" name="identificationnumber"
-                         required />
+                <td> <input type="text" id="AssetIdentificationNumber" name="AssetIdentificationNumber" formControlName="AssetIdentificationNumber" />
                 </td>
             </tr>
             <tr>
-                <td> <label for="manufacturer">Manufacturer:</label>
+                
+                <td> <label for="Manufacturer">Manufacturer:</label>
                 </td>
-                <td> <input type="text" id="manufacturer" name="manufacturer"
-                        required /></td>
+                <td> <input type="text" id="Manufacturer" name="Manufacturer" formControlName="Manufacturer"/></td>
                 <td>
-                    <label for="model">Model Name:</label>
+                    <label for="Model">Model Name:</label>
                 </td>
-                <td> <input type="text" id="model" name="model" 
-                        required />
+                <td> <input type="text" id="Model" name="Model" formControlName="Model" />
                 </td>
-            </tr>
-            <tr>
-                <td> <label for="merchantnumber">Merchant Name:</label>
-                </td>
-                <td> <input type="text" id="merchantnumber" name="merchantnumber"
-                        required /></td>
                 <td>
-                    <label for="purchasedate">Purchase Date:</label>
+                    <label for="vendor">Vendor:</label>
                 </td>
-                <td> <input type="date" id="purchasedate" name="purchasedate" 
-                        required />
-                </td>
-            </tr>
-            <tr>
-                <td> <label for="purchaseprice">Purchase Price:</label>
-                </td>
-                <td> <input type="number" id="purchaseprice" name="purchaseprice"
-                         required /></td>
-                <td>
-                    <label for="assetCategory">Category:</label>
-                </td>
-                <td> <select id="assetCategory" name="assetCategory" required>
-                        <option value="">Select Category</option>
-                        <option value="mouse">Mouse</option>
-                        <option value="laptop">Laptop</option>
-                        <option value="screen">Screen</option>
-                        <option value="keyboard">Keyboard</option>
-                        <option value="tablets">Tablets</option>
-
+                <td> <select id="VendorId" name="VendorId" (change)="setvendor($event)" >
+                        <option  value="-1" selected>Select Vendor</option>
+                        <option [value]="v.id" *ngFor="let v of vendors; let i = index">{{v.name}}</option>
                     </select>
                 </td>
             </tr>
+
+            <tr>
+                <td> <label for="purchaseprice">Purchase Price(Rs):</label>
+                </td>
+                <td> <input type="number" id="purchaseprice" name="purchaseprice" min="1" formControlName="PurchasePrice"/></td>
+                <td>
+                    <label for="purchasedate">Purchase Date:</label>
+                </td>
+                <td> <input type="date" id="purchasedate" name="purchasedate" formControlName="PurchaseDate" />
+                </td>
+                <td>
+                    <label for="assetCategory">Category:</label>
+                </td>
+                <td> <select id="assetCategory" name="assetCategory" (change)="showcolumn($event)">
+                        <option selected value="-1">Select Category</option>
+                        <option [value]="c.id" *ngFor="let c of categories; let i = index">{{c.categoryName}}</option>
+                    </select>
+                </td>
+            </tr>  
         </table>
-        </form>
-    </div>
+        <table>
+            <tr>
+                <td>
+                    <label for="Description ">Description:</label>
+                </td>
+                <td>
+                    <input type="text" id="Description " name="Description " />
+                </td>
+                <td>
+                    <button (click)="Saveasset($event)">
+                        Save Asset
+                    </button>
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+<h1>
+    Relavant Fields
+</h1>
+<div class="container">
+    <table>
+        <tr *ngFor="let f of CatagoryReleventFeildsData; let i = index">
+            <td>
+                <label [for]="f.name">{{ f.label }}</label>
+            </td>
+            <td>
+                <input [type]="f.type" [name]="f.name" [id]="f.name">
+            </td>
+        </tr>
+    </table>
+</div>

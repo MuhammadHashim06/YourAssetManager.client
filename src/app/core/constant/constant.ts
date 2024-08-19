@@ -32,6 +32,10 @@ export const  apiEndPoint= {
         GetVenderById:'http://localhost:5235/GetVendorById',
         UpdateVender:'http://localhost:5235/UpdateVendor',
     },
+    assettype:{
+        CreateAssetType:'http://localhost:5235/CreateAssetType',
+        GetAllAssetTypes:'http://localhost:5235/GetAllAssetTypes',
+    },
 
     logActions: 'http://localhost:5235/api/logs',
 
