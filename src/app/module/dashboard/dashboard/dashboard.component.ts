@@ -33,16 +33,20 @@ orgIcon:string='https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-pic
         return throwError(error)
       })
     ).subscribe(res=>{
-      this.orgInfo=res.responseData.organizations.$values[0]
-      if(this.orgIcon=='')
-      {
-        this.orgIcon='person.svg'
-      }
-      this.orgName=this.orgInfo.organizationName
-      this.orgDomain=this.orgInfo.organizationDomain
-      console.log(this.orgInfo);
       
-    localStorage.setItem('organization',JSON.stringify(this.orgInfo))
+      if(res.status==404){
+        this.router.navigateByUrl('dashboard/organization')
+      }else{
+        this.orgInfo=res.responseData.organizations
+        if(this.orgIcon=='')
+        {
+          this.orgIcon='person.svg'
+        }
+        this.orgName=this.orgInfo.organizationName
+        this.orgDomain=this.orgInfo.organizationDomain
+        localStorage.setItem('organization',JSON.stringify(this.orgInfo))
+      }  
+      
     })
   }
 

@@ -5,7 +5,12 @@
 
 <div class="container">
     @if (!dataload) {<app-dataloading></app-dataloading>}
-    @else {
+    @else if(categories.length<=0){
+
+        <div class="notfound" style="display:grid; place-items:center; padding:50px" >
+            <h1>No Category found</h1>
+        </div>
+    }@else {
  <table>
         <thead>
             <!-- <th>

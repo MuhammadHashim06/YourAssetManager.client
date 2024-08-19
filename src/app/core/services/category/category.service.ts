@@ -23,7 +23,7 @@ export class CategoryService {
   getcategorybyid(id:number):Observable<any>{
     return this.http.get(`${this.endpoint.GetAssetCategoryById}?AssetCatagoryId=${id}`)
   }
-  updatecategory(data:any){
+  updatecategory(data:any):Observable<any>{
     return this.http.put(`${this.endpoint.UpdateAssetCategory}?AssetCatagoryId=${data.id}`,data)
   }
 }

@@ -19,7 +19,6 @@ export class AddvendorComponent implements OnInit {
     if(this.active.snapshot.queryParams['id']){
     this.id = this.active.snapshot.queryParams['id']
     }
-    console.log(this.id)
   }
   ngOnInit(): void {
     if (this.id !== 0) {
@@ -27,13 +26,13 @@ export class AddvendorComponent implements OnInit {
       this.service.getvendorbyId(this.id).pipe(
         catchError(error => {
           this.response=true
+         
           return throwError(error)
         })
       ).subscribe({
         next: (res) => {
           this.response=true
           this.editvender = res.responseData
-          console.log(this.editvender);
           this.vendorinfo.setValue({
             name: this.editvender.name,
             email: this.editvender.email,
@@ -62,11 +61,15 @@ export class AddvendorComponent implements OnInit {
       this.service.updatevendor(updateddata).pipe(
         catchError(error => {
           this.response=true
+          if(error.status==400)
+            {
+              alert('No Changes Found')
+              this.router.navigateByUrl('dashboard/vendor')
+            }
           return throwError(error)
         })
       ).subscribe(res => {
         this.response=true
-        console.log(res)
         this.router.navigateByUrl('dashboard/vendor')
       })
     }
@@ -87,7 +90,6 @@ export class AddvendorComponent implements OnInit {
         })
       ).subscribe(res => {
         this.response=true
-        console.log(res)
         this.router.navigateByUrl('dashboard/vendor')
       })
     }

@@ -26,11 +26,11 @@ export const  apiEndPoint= {
         UpdateAssetCategory:'http://localhost:5235/UpdateAssetCategory'
     },
     vendor:{
-        CreateVender:'http://localhost:5235/CreateVender',
-        GetAllVenders:'http://localhost:5235/GetAllVenders',
-        DeleteVender: 'http://localhost:5235/DeleteVender',
-        GetVenderById:'http://localhost:5235/GetVenderById',
-        UpdateVender:'http://localhost:5235/UpdateVender',
+        CreateVender:'http://localhost:5235/CreateVendor',
+        GetAllVenders:'http://localhost:5235/GetAllVendors',
+        DeleteVender: 'http://localhost:5235/DeleteVendor',
+        GetVenderById:'http://localhost:5235/GetVendorById',
+        UpdateVender:'http://localhost:5235/UpdateVendor',
     },
 
     logActions: 'http://localhost:5235/api/logs',

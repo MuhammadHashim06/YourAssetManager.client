@@ -18,10 +18,10 @@ export class VendorService {
     return this.http.get<any>(this.apiendpoint.GetAllVenders)
   }
   deletevender(arg0: any) {
-    return this.http.delete(`${this.apiendpoint.DeleteVender}?venderId=${arg0}`)
+    return this.http.delete(`${this.apiendpoint.DeleteVender}?vendorId=${arg0}`)
   }
   getvendorbyId(arg0: any):Observable<any> {
-    return this.http.get(`${this.apiendpoint.GetVenderById}?venderId=${arg0}`)
+    return this.http.get(`${this.apiendpoint.GetVenderById}?vendorId=${arg0}`)
   }
   updatevendor(data:any):Observable<any>{
     return this.http.post(`${this.apiendpoint.UpdateVender}`,data)

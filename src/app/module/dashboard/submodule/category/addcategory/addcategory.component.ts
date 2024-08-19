@@ -18,8 +18,16 @@ Update(arg0: number) {
   description: this.categoryvalue.controls['description'].value,
   relaventInputFields: JSON.stringify(this.features)
   }
-  this.service.updatecategory(data).subscribe(res=>{
-    console.log(res);
+  this.service.updatecategory(data).pipe(catchError(error=>{
+    if(error.status==400){
+      alert('No changes Found')
+      this.router.navigateByUrl('/dashboard/category');
+
+          }
+    return throwError(error)
+  })).subscribe(res=>{
+    
+    this.router.navigateByUrl('/dashboard/category');
     
   })
 }
