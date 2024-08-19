@@ -35,6 +35,7 @@ export const  apiEndPoint= {
     assettype:{
         CreateAssetType:'http://localhost:5235/CreateAssetType',
         GetAllAssetTypes:'http://localhost:5235/GetAllAssetTypes',
+        DeleteAssetType:'http://localhost:5235/DeleteAssetType',
     },
 
     logActions: 'http://localhost:5235/api/logs',

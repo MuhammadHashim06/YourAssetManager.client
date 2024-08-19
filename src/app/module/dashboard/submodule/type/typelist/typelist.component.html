@@ -1,1 +1,47 @@
-<p>typelist works!</p>
+<div class="head">
+    <h1>Asset Type list</h1>
+    <button (click)="addnewfield()">Add New Asset Type</button>
+</div>
+<div class="container">
+    <form [formGroup]="assettype">
+    <table>
+        <thead>
+            <th>
+                Asset Type
+            </th>
+            <th>
+                Description
+            </th>
+            <th style="text-align: center;">
+                Action
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let t of type">
+                <td>{{t.assetTypeName|| '--'}} </td>
+                <td>{{t.description || '--'}}</td>
+                <td>
+                    <div class="action"><i class="fa-regular fa-pen-to-square" style="color: green; cursor: pointer;"
+                            (click)="edit(t.id)"></i><img src="delete.svg" alt="" (click)="delete(t.id)"
+                            style="cursor: pointer;"></div>
+                </td>
+            </tr>
+            <tr *ngIf="isadd">
+                <td>
+                    <input type="text" placeholder="Enter Asset Type Name" formControlName="assetTypeName">
+                </td>
+                <td>
+                    <input type="text" placeholder="Enter Description" formControlName="description">
+                </td>
+                <td >
+                    <div class="link" style="display: flex; justify-content:space-around;align-items: center;">
+                        <button style=" background-color: rgba(67, 121, 238, 1);  border-radius: 5px;border: none;  color: white;padding: 10px 10px;cursor: pointer;" (click)="savetype()" >Save Type</button>
+                        <p style="color: red;cursor: pointer;" (click)="cancel()">Cancel</p>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+</div>

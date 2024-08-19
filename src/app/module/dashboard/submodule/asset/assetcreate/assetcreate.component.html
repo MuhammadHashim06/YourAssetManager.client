@@ -56,8 +56,6 @@
                     </select>
                 </td>
             </tr>  
-        </table>
-        <table>
             <tr>
                 <td>
                     <label for="Description ">Description:</label>
@@ -66,13 +64,26 @@
                     <input type="text" id="Description " name="Description " />
                 </td>
                 <td>
-                    <button (click)="Saveasset($event)">
-                        Save Asset
-                    </button>
+                    <label for="assetType">Asset Type:</label>
+                </td>
+                <td>
+                    <select id="assetType" name="assetType" (change)="showcolumn($event)">
+                        <option selected value="-1">Select Asset Type</option>
+                        <option [value]="c.id" *ngFor="let c of categories; let i = index">{{c.categoryName}}</option>
+                    </select>
+                </td>
+                <td>
+                    <label for="numberofclone">Clones:</label>
+                </td>
+                <td>
+                    <input type="number" id="numberofclone" name="numberofclone" min="1" value="1" />
                 </td>
             </tr>
         </table>
     </form>
+    <button (click)="Saveasset($event)">
+        Save Asset
+    </button>
 </div>
 <h1>
     Relavant Fields
