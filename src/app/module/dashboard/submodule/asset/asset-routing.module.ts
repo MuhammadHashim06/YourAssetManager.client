@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: '', component: AssetlistComponent },
   { path: 'create', component: AssetcreateComponent },
   { path: ':id', component: AssetdetailComponent },
-  { path: ':id/edit', component: AsseteditComponent }
+  { path: 'create/:id', component: AssetcreateComponent }
 ];
 
 @NgModule({

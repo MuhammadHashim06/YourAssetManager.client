@@ -1,3 +1,277 @@
-<h1>
-    Asset Name
-</h1>
+<!-- <div class="container">
+    <h1>
+        {{ assetdetail.assetName }}
+    </h1>
+    <div class="detail">
+        <div class="description">
+
+        
+        <p>
+            {{ assetdetail.description }}
+        </p>
+        <span [class]="assetdetail.assetStatusData">
+            {{ assetdetail.assetStatusData }}
+        </span>
+        <button>update</button>
+        <button (click)="deleteasset(id)" >Delete</button>
+    </div>
+    <div class="link">
+        <button>
+            Checkout
+        </button>
+        <button>
+        Retire
+        </button>
+        <button>
+            Undermaintainance
+        </button>
+    </div>
+
+    </div>
+</div>
+
+<h2>Basic Information</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Identification Number</td>
+            <td>
+                {{ assetdetail.assetIdentificationNumber }}
+            </td>
+            <td>Serial Number</td>
+            <td>
+                {{ assetdetail.serialNumber }}
+            </td>
+        </tr>
+        <tr>
+            <td>Asset Type</td>
+            <td>
+                {{ assetdetail.assetTypeData }}
+            </td>
+            <td>Category</td>
+            <td>
+                {{ assetdetail.assetCategoryData }}
+            </td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>
+                {{ assetdetail.manufacturer }}
+            </td>
+            <td>Model</td>
+            <td>
+                {{ assetdetail.model }}
+            </td>
+        </tr>
+        <tr>
+            <td>Creatted Date</td>
+            <td>
+                {{ assetdetail.createdDate }}
+            </td>
+            <td>Updated Date</td>
+            <td>
+                {{ assetdetail.updatedDate }}
+            </td>
+        </tr>
+    </table>
+</div>
+<h2>Category Relevent Information</h2>
+
+<div class="container">
+    <table>
+        <tr>
+            <td>Category Name</td>
+            <td>sasdf</td>
+            <td>sdfsd</td>
+            <td>sfs</td>
+        </tr>
+    </table>
+</div>
+<h2>Buying Details</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Vendor Name</td>
+            <td>
+                {{ assetdetail.vendorData }}
+            </td>
+            <td>Purchase Price</td>
+            <td>
+                {{ assetdetail.purchasePrice }}
+            </td>
+        </tr>
+        <tr>
+
+
+            <td>Purchase Date</td>
+            <td>
+                {{ assetdetail.purchaseDate }}
+            </td>
+        </tr>
+    </table>
+</div> -->
+
+
+<div class="container">
+    <h1>
+        <span *ngIf="!isLoading; else loading">{{ assetdetail.assetName }}</span>
+        <ng-template #loading>
+            <div class="skeleton skeleton-title"></div>
+        </ng-template>
+    </h1>
+
+    <div class="detail">
+        <div class="description">
+            <p *ngIf="!isLoading; else loading">
+                {{ assetdetail.description }}
+            </p>
+            <ng-template #loading>
+                <div class="skeleton skeleton-text"></div>
+            </ng-template>
+
+            <span *ngIf="!isLoading; else loading" [class]="assetdetail.assetStatusData">
+                {{ assetdetail.assetStatusData }}
+            </span>
+            <ng-template #loading>
+                <div class="skeleton skeleton-status"></div>
+            </ng-template>
+            
+            <button *ngIf="!isLoading" (click)="updateasset(id)">Update</button>
+            <button *ngIf="!isLoading" (click)="deleteasset(id)">Delete</button>
+        </div>
+
+        <div class="link">
+            <button *ngIf="!isLoading">Checkout</button>
+            <button *ngIf="!isLoading">Retire</button>
+            <button *ngIf="!isLoading">Under Maintenance</button>
+        </div>
+    </div>
+</div>
+
+<h2>Basic Information</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Identification Number</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.assetIdentificationNumber }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>Serial Number</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.serialNumber }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td>Asset Type</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.assetTypeData }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>Category</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.assetCategoryData }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td>Manufacturer</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.manufacturer }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>Model</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.model }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td>Created Date</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.createdDate }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>Updated Date</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.updatedDate }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<h2>Category Relevant Information</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Category Name</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">sasdf</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>
+                <span *ngIf="!isLoading; else loading">sdfsd</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>
+                <span *ngIf="!isLoading; else loading">sfs</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+    </table>
+</div>
+
+<h2>Buying Details</h2>
+<div class="container">
+    <table>
+        <tr>
+            <td>Vendor Name</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.vendorData }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+            <td>Purchase Price</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.purchasePrice }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+        <tr>
+            <td>Purchase Date</td>
+            <td>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.purchaseDate }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-text"></div>
+                </ng-template>
+            </td>
+        </tr>
+    </table>
+</div>

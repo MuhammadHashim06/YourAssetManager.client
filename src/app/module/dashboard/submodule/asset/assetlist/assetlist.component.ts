@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { AssetService } from '../../../../../core/services/asset/asset.service';
 import { catchError, subscribeOn, throwError } from 'rxjs';
 import { CategoryService } from '../../../../../core/services/category/category.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-assetlist',
@@ -9,6 +10,12 @@ import { CategoryService } from '../../../../../core/services/category/category.
   styleUrl: './assetlist.component.scss'
 })
 export class AssetlistComponent implements OnInit {
+assetdetail(event :any) {
+
+  this.router.navigateByUrl(`dashboard/asset/${event}`)
+
+
+}
 resetfilter($event: MouseEvent) {
   this.filter=[]
   this.filterasset()
@@ -57,6 +64,7 @@ filterasset(){
   isshowfilter=true
   setfiltervalue:any 
   filteredasset:Array<any>=[]
+  private router=inject(Router)
 
   status=['Assigned','Retired','UnderMaintenance','Returned','Available']
   constructor(private assetservice: AssetService,private categoryservice:CategoryService) { }

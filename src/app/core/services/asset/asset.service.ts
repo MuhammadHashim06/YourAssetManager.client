@@ -16,4 +16,13 @@ private apiendpoint=apiEndPoint.asset
   addasset(data:any){
     return this.http.post(this.apiendpoint.CreateAsset,data)
   }
+  getassetbyid(id:any):Observable<any>{
+    return this.http.get(`${this.apiendpoint.GetAssetById}?assetId=${id}`)
+  }
+  deleteasset(id:any){
+    return this.http.delete(`${this.apiendpoint.DeleteAsset}?assetId=${id}`)
+  }
+  updateasset(data:any){
+this.http.put(this.apiendpoint.UpdateAsset,data)
+}
 }

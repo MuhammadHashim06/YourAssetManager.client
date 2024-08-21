@@ -1,145 +1,263 @@
-
-
 <h1>Add Asset Details</h1>
 <div class="container">
-    <form [formGroup]="AssetDTO">
-        <table>
-            <tr>
-                <td>
-                    <label for="assetName">Asset Name: <span class="error">*</span></label>
-                </td>
-                <td>
-                    <input type="text" id="assetName" name="assetName" formControlName="assetName" />
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['assetName'].touched && AssetDTO.controls['assetName'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-                <td> <label for="serialNumber">Serial Number: <span class="error">*</span></label>
-                </td>
-                <td> <input type="text" id="serialNumber" name="serialNumber" formControlName="serialNumber" />
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['serialNumber'].touched && AssetDTO.controls['serialNumber'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-
-            <tr>
-                <td>
-                    <label for="AssetIdentificationNumber">Identification Number:</label>
-                </td>
-                <td> <input type="text" id="AssetIdentificationNumber" name="AssetIdentificationNumber"
-                        formControlName="assetIdentificationNumber" />
-                </td>
-
-
-                <td> <label for="Manufacturer">Manufacturer:</label>
-                </td>
-                <td> <input type="text" id="Manufacturer" name="Manufacturer" formControlName="manufacturer" /></td>
-            </tr>
-            <tr>
-                <td>
-                    <label for="Model">Model Name:</label>
-                </td>
-                <td> <input type="text" id="Model" name="Model" formControlName="model" />
-                </td>
-                <td>
-                    <label for="Description">Description:</label>
-                </td>
-                <td>
-                    <input type="text" id="Description" name="Description" formControlName="description" />
-                </td>
-
-            </tr>
-
-            <tr>
-                <td> <label for="purchasePrice">Purchase Price(Rs): <span class="error">*</span></label>
-                </td>
-                <td> <input type="number" id="purchasePrice" name="purchasePrice" min="1"
-                        formControlName="purchasePrice" /><span class="error"
-                        *ngIf="AssetDTO.controls['purchasePrice'].touched && AssetDTO.controls['purchasePrice'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-
-
-                <td>
-                    <label for="purchaseDate">Purchase Date: <span class="error">*</span></label>
-                </td>
-                <td> <input type="date" id="purchaseDate" name="purchaseDate" formControlName="purchaseDate" />
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['purchaseDate'].touched && AssetDTO.controls['purchaseDate'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-            <tr>
-
-
-                <td>
-                    <label for="assetCategory">Category: <span class="error">*</span></label>
-                </td>
-                <td>
-                    <div class="addcolumn"><select id="assetCategory" name="assetCategory"
-                            (change)="showcolumn($event)">
-                            <option selected value="-1">Select Category</option>
-                            <option [value]="c.id" *ngFor="let c of categories; let i = index">{{c.categoryName}}
-                            </option>
-                        </select>
-                        <!-- <i class="fa-solid fa-plus"></i> -->
-                    </div>
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['assetCategoryData'].touched && AssetDTO.controls['assetCategoryData'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-                <td>
-                    <label for="vendor">Vendor: <span class="error">*</span></label>
-                </td>
-                <td>
-                    <div class="addcolumn"><select id="vendorData" name="vendorData" (change)="setvendor($event)">
-                            <option value="-1" selected>Select Vendor</option>
-                            <option [value]="v.id" *ngFor="let v of vendors; let i = index">{{v.name}}</option>
-                        </select>
-                        <!-- <i class="fa-solid fa-plus"></i> -->
-                    </div>
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['vendorData'].touched && AssetDTO.controls['vendorData'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-
-            </tr>
-            <tr>
-                <td>
-                    <label for="assetType">Asset Type: <span class="error">*</span></label>
-                </td>
-                <td>
-                    <div class="addcolumn"> <select id="assetType" name="assetType" (change)="setAssettype($event)">
-                            <option selected value="-1">Select Asset Type</option>
-                            <option [value]="t.id" *ngFor="let t of assettype; let i = index">{{t.assetTypeName}}
-                            </option>
-                        </select>
-                        <!-- <i class="fa-solid fa-plus"></i> -->
-                    </div>
-                    <span class="error"
-                        *ngIf="AssetDTO.controls['assetTypeData'].touched && AssetDTO.controls['assetTypeData'].invalid">{{inputerrormessage.required}}</span>
-                </td>
-                <td>
-                    <label for="numberofclone">Clones:</label>
-                </td>
-                <td>
-                    <input type="number" id="numberofclone" name="numberofclone" min="1" value="1" />
-                </td>
-            </tr>
-        </table>
-    </form>
-    <div class="link">
-        <button type="submit" (click)="Saveasset($event)">
-            Save Asset
-        </button>
-    </div>
-
-</div>
-<h1 style="margin-top:15px ;">
-    Relavant Fields
-</h1>
-<div class="container">
+  <form [formGroup]="AssetDTO">
     <table>
-        <tr *ngFor="let f of catagoryReleventFeildsData; let i = index">
-            <td>
-                <label [for]="f.name">{{ f.label }}</label>
-            </td>
-            <td>
-                <input [type]="f.type" [name]="f.name" [id]="f.name" [(ngModel)]="f.value">
-            </td>
-        </tr>
+      <tr>
+        <td>
+          <label for="assetName"
+            >Asset Name: <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <input
+            type="text"
+            id="assetName"
+            name="assetName"
+            formControlName="assetName"
+          />
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['assetName'].touched &&
+              AssetDTO.controls['assetName'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+        <td>
+          <label for="serialNumber"
+            >Serial Number: <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <input
+            type="text"
+            id="serialNumber"
+            name="serialNumber"
+            formControlName="serialNumber"
+          />
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['serialNumber'].touched &&
+              AssetDTO.controls['serialNumber'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="AssetIdentificationNumber">Identification Number:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="AssetIdentificationNumber"
+            name="AssetIdentificationNumber"
+            formControlName="assetIdentificationNumber"
+          />
+        </td>
+
+        <td><label for="Manufacturer">Manufacturer:</label></td>
+        <td>
+          <input
+            type="text"
+            id="Manufacturer"
+            name="Manufacturer"
+            formControlName="manufacturer"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="Model">Model Name:</label>
+        </td>
+        <td>
+          <input type="text" id="Model" name="Model" formControlName="model" />
+        </td>
+        <td>
+          <label for="Description">Description:</label>
+        </td>
+        <td>
+          <input
+            type="text"
+            id="Description"
+            name="Description"
+            formControlName="description"
+          />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="purchasePrice"
+            >Purchase Price(Rs): <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <input
+            type="number"
+            id="purchasePrice"
+            name="purchasePrice"
+            min="1"
+            formControlName="purchasePrice"
+          /><span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['purchasePrice'].touched &&
+              AssetDTO.controls['purchasePrice'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+
+        <td>
+          <label for="purchaseDate"
+            >Purchase Date: <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <input
+            type="date"
+            id="purchaseDate"
+            name="purchaseDate"
+            formControlName="purchaseDate"
+          />
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['purchaseDate'].touched &&
+              AssetDTO.controls['purchaseDate'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <label for="assetCategory"
+            >Category: <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <div class="addcolumn">
+            <select
+              id="assetCategory"
+              name="assetCategory"
+              (change)="showcolumn($event)"
+            >
+              <option selected value="-1">Select Category</option>
+              <option
+                [value]="c.id"
+                *ngFor="let c of categories; let i = index"
+              >
+                {{ c.categoryName }}
+              </option>
+            </select>
+            <!-- <i class="fa-solid fa-plus"></i> -->
+          </div>
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['assetCategoryData'].touched &&
+              AssetDTO.controls['assetCategoryData'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+        <td>
+          <label for="vendor">Vendor: <span class="error">*</span></label>
+        </td>
+        <td>
+          <div class="addcolumn">
+            <select
+              id="vendorData"
+              name="vendorData"
+              (change)="setvendor($event)"
+            >
+              <option value="-1" selected>Select Vendor</option>
+              <option [value]="v.id" *ngFor="let v of vendors; let i = index">
+                {{ v.name }}
+              </option>
+            </select>
+            <!-- <i class="fa-solid fa-plus"></i> -->
+          </div>
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['vendorData'].touched &&
+              AssetDTO.controls['vendorData'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="assetType"
+            >Asset Type: <span class="error">*</span></label
+          >
+        </td>
+        <td>
+          <div class="addcolumn">
+            <select
+              id="assetType"
+              name="assetType"
+              (change)="setAssettype($event)"
+            >
+              <option selected value="-1">Select Asset Type</option>
+              <option [value]="t.id" *ngFor="let t of assettype; let i = index">
+                {{ t.assetTypeName }}
+              </option>
+            </select>
+            <!-- <i class="fa-solid fa-plus"></i> -->
+          </div>
+          <span
+            class="error"
+            *ngIf="
+              AssetDTO.controls['assetTypeData'].touched &&
+              AssetDTO.controls['assetTypeData'].invalid
+            "
+            >{{ inputerrormessage.required }}</span
+          >
+        </td>
+        <td>
+          <label for="numberofclone">Clones:</label>
+        </td>
+        <td>
+          <input
+            type="number"
+            id="numberofclone"
+            name="numberofclone"
+            min="1"
+            value="1"
+          />
+        </td>
+      </tr>
     </table>
+  </form>
+  <div class="link">
+    <button type="submit" (click)="Saveasset($event)">Save Asset</button>
+  </div>
+</div>
+<h1 style="margin-top: 15px">Relavant Fields</h1>
+<div class="container">
+  <table>
+    <tr *ngFor="let f of catagoryReleventFeildsData; let i = index">
+      <td>
+        <label [for]="f.name">{{ f.label }}</label>
+      </td>
+      <td>
+        <input
+          [type]="f.type"
+          [name]="f.name"
+          [id]="f.name"
+          [(ngModel)]="f.value"
+        />
+      </td>
+    </tr>
+  </table>
 </div>

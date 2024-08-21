@@ -72,7 +72,7 @@
             </th>
         </thead>
         <tbody>
-            <tr *ngFor="let a of filteredasset">
+            <tr *ngFor="let a of filteredasset" (click)="assetdetail(a.id)">
                 <td>
                     {{a.id}}
                 </td>
