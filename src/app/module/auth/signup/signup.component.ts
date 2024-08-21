@@ -10,12 +10,23 @@ import { catchError, throwError } from 'rxjs';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
+Next($event: MouseEvent) {
+}
+setrole($event: MouseEvent) {
+  if(this.role=='user'){
+    this.role='organizationOwner'
+  }else if(this.role=='organizationOwner'){
+    this.role='user'
+  }
+}
   // Error messages and state variables
   inputerrormessages = constant.inputerrormessage;
   load = false;
   isemailregister = false;
   accountsuccessmessage = constant.register.success.accountsuccess;
   verificationmessage = constant.register.success.verificationmessage;
+
+  role='organizationOwner'
 
   // Form group initialization
   registeruser = new FormGroup({

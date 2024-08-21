@@ -9,6 +9,20 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './typelist.component.scss'
 })
 export class TypelistComponent implements OnInit {
+updatetype() {
+  const data={
+id:this.id,
+assetTypeName:this.assettype.controls['assetTypeName'].value,
+description:this.assettype.controls['description'].value
+
+  }
+  this.service.updateAssetType(data).pipe().subscribe(data => {
+    console.log(data);
+    this.getassettype()
+    
+  })
+}
+  id=0
 savetype() {
   this.isadd=false
   this.service.addassettype(this.assettype.value).pipe().subscribe(res=>{
@@ -58,8 +72,15 @@ delete(arg0: any) {
     this.getassettype()
   })
 }
-edit(arg0: any) {
-throw new Error('Method not implemented.');
+edit(index: any) {
+  this.id=index
+  this.isadd=true
+  let asset= this.type.find((t: { id: any; }) => t.id==index);
+  this.assettype.setValue({
+    assetTypeName:asset.assetTypeName,
+    description:asset.description
+  })
+  
 }
 dataload: any;
 type: any;

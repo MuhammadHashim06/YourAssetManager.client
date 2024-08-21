@@ -3,14 +3,16 @@
   <span class="loader"></span>
 </div>
 
+
+
 <div class="form">
   <!-- Form for user registration -->
+  @if (role=='user') {
   <form [formGroup]="registeruser" *ngIf="!isemailregister; else emailsent">
 
     <!-- Form header -->
     <div class="head">
       <h1>Create an Account</h1>
-      <p>Create an account to continue</p>
     </div>
 
     <!-- Form fields -->
@@ -53,7 +55,8 @@
     <!-- Form submission and navigation links -->
     <div class="link">
       <button (click)="verify($event)">Sign Up</button>
-      <p>Already have an account? <a routerLink="/auth/login">Login</a></p>
+      <button (click)="setrole($event)" class="registerorg">Register your Organization</button>
+      <p> Already have an account? <a routerLink="/auth/login">Login</a></p>
     </div>
   </form>
 
@@ -68,4 +71,71 @@
       </a>
     </section>
   </ng-template>
+}
+@else if (role=='organizationOwner') {
+  <form [formGroup]="registeruser" *ngIf="!isemailregister; else emailsent">
+
+    <!-- Form header -->
+    <div class="head">
+      <h1>Create your Organization</h1>
+    </div>
+
+    <!-- Form fields -->
+    <div class="fields">
+      <!-- Email Address Input -->
+      <label for="email">Email Address:</label>
+      <input type="text" id="email" name="email" placeholder="Enter your email" formControlName="email">
+      <!-- Email validation errors -->
+      <ng-container *ngIf="registeruser.controls['email'].errors && registeruser.controls['email'].touched">
+        <ng-container *ngIf="registeruser.controls['email'].errors['required']">
+          <span class="error"> {{inputerrormessages.required}} </span>
+        </ng-container>
+        <ng-container *ngIf="registeruser.controls['email'].errors['email']">
+          <span class="error"> {{inputerrormessages.email}} </span>
+        </ng-container>
+      </ng-container>
+
+      <!-- Username Input -->
+      <label for="username">Username</label>
+      <input type="text" id="userName" name="userName" placeholder="userName" formControlName="userName">
+      <!-- Username validation errors -->
+      <ng-container *ngIf="registeruser.controls['userName'].errors?.['required'] && registeruser.controls['userName'].touched">
+        <span class="error"> {{inputerrormessages.required}} </span>
+      </ng-container>
+
+      <!-- Password Input -->
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" placeholder=" " formControlName="password">
+      <!-- Password validation errors -->
+      <ng-container *ngIf="registeruser.controls['password'].errors && registeruser.controls['password'].touched">
+        <ng-container *ngIf="registeruser.controls['password'].errors['required']">
+          <span class="error">This field is required</span>
+        </ng-container>
+        <ng-container *ngIf="registeruser.controls['password'].errors['passwordComplexity']">
+          <span class="error"> {{inputerrormessages.password}} </span>
+        </ng-container>
+      </ng-container>
+    </div>
+
+    <!-- Form submission and navigation links -->
+    <div class="link">
+     <a routerLink="/auth/createorganization"> <button >Next</button></a>
+      <button (click)="setrole($event)" class="registerorg">Create your Account</button>
+      <p> Already have an account? <a routerLink="/auth/login">Login</a></p>
+    </div>
+  </form>
+
+  <!-- Template for email sent confirmation -->
+  <ng-template #emailsent>
+    <section>
+      <img src="mail.png" alt="Inbox Icon" width="60%">
+      <h1>{{verificationmessage}}</h1>
+      <p>{{accountsuccessmessage}}</p>
+      <a href="https://mail.google.com/mail/u/0/?tab=rm&ogbl#inbox" target="_blank">
+        <button>Open Gmail</button>
+      </a>
+    </section>
+  </ng-template>
+}
 </div>
+

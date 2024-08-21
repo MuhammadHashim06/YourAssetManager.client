@@ -9,6 +9,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
 import { AlertComponent } from "../../shared/reusablecomponents/alert/alert.component";
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { CreateorganizationComponent } from './createorganization/createorganization.component';
 
 
 @NgModule({
@@ -16,7 +17,8 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     SignupComponent,
     LoginComponent,
     ConfirmemailComponent,
-    ResetpasswordComponent
+    ResetpasswordComponent,
+    CreateorganizationComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +27,7 @@ import { ResetpasswordComponent } from './resetpassword/resetpassword.component'
     ReactiveFormsModule,
     NgOptimizedImage,
     AlertComponent,
-    FormsModule
+    FormsModule,
 ]
 })
 export class AuthModule { }

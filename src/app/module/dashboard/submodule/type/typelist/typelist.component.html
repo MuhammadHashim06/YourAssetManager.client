@@ -35,10 +35,14 @@
                 </td>
                 <td >
                     <div class="link" style="display: flex; justify-content:space-around;align-items: center;">
-                        <button style=" background-color: rgba(67, 121, 238, 1);  border-radius: 5px;border: none;  color: white;padding: 10px 10px;cursor: pointer;" (click)="savetype()" >Save Type</button>
+                        @if (id<=0) {
+                            <button (click)="savetype()" >Save Type</button>
+                        }@else {
+                            <button (click)="updatetype()" >Update Type</button>
+                        }
+                        
                         <p style="color: red;cursor: pointer;" (click)="cancel()">Cancel</p>
                     </div>
-
                 </td>
             </tr>
         </tbody>

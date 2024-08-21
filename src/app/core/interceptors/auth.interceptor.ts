@@ -3,7 +3,7 @@ import { HttpInterceptorFn } from '@angular/common/http';
 export const authInterceptor: HttpInterceptorFn = (req, next) => {
 
   // Get userData from localStorage
-  const userDataString = localStorage.getItem('userData');
+  const userDataString = sessionStorage.getItem('userData');
   let userData;
 
   // Check if userDataString is not null or empty before parsing
@@ -19,10 +19,10 @@ export const authInterceptor: HttpInterceptorFn = (req, next) => {
   }
 
   // If userData is not null, clone the request and set the Authorization header
-  if (userData && userData.responseData && userData.responseData.jwtToken) {
+  if (userData && userData.jwtToken) {
     const reqClone = req.clone({
       setHeaders: {
-        Authorization: `Bearer ${userData.responseData.jwtToken}`
+        Authorization: `Bearer ${userData.jwtToken}`
       }
     });
     return next(reqClone);

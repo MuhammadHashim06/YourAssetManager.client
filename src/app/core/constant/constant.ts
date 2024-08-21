@@ -1,63 +1,77 @@
-export const  apiEndPoint= {
+export const apiEndPoint = {
     authentication: {
-        isAlive: 'http://localhost:5235/IsAlive',
-        signUp: 'http://localhost:5235/SignUp',
-        confirmEmail: 'http://localhost:5235/ConfirmEmail',
-        signIn: 'http://localhost:5235/SignIn',
-        emailverifyforgetpassword: 'http://localhost:5235/ForgetPassword',
-        setresetpassword: 'http://localhost:5235/ResetPassword'
+      isAlive:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/IsAlive",
+      signUp:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/SignUp",
+      confirmEmail:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/ConfirmEmail",
+      signIn:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/SignIn",
+      emailverifyforgetpassword:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/ForgetPassword",
+      setresetpassword:
+        "http://localhost:5235/YourAssetManager.Server/Authentication/ResetPassword",
     },
     organizationManagement: {
-        getOrganizationsInfo: 'http://localhost:5235/GetOrganizationsInfo',
-        createOrganization: 'http://localhost:5235/CreateOrganization',
-        updateOrganization: 'http://localhost:5235/UpdateOrganization',
-        organizationOwnerDetails: 'http://localhost:5235/OrganizationOwnerDetails',
-        deleteOrganization: 'http://localhost:5235/DeleteOrganization'
+      getOrganizationsInfo:
+        "http://localhost:5235/YourAssetManager.Server/OrganizationManagement/GetOrganizationsInfo",
+      createOrganization:
+        "http://localhost:5235/YourAssetManager.Server/OrganizationManagement/CreateOrganization",
+      updateOrganization:
+        "http://localhost:5235/YourAssetManager.Server/OrganizationManagement/UpdateOrganization",
+      organizationOwnerDetails:
+        "http://localhost:5235/YourAssetManager.Server/OrganizationManagement/OrganizationOwnerDetails",
+      deleteOrganization:
+        "http://localhost:5235/YourAssetManager.Server/OrganizationManagement/DeleteOrganization",
     },
-    dashboard: {
-        organizationOwner: 'http://localhost:5235/api/dashboard/organization-owner',
-        assetManager: 'http://localhost:5235/api/dashboard/asset-manager'
+    category: {
+      GetAllAssetCategories:
+        "http://localhost:5235/YourAssetManager.Server/AssetCatagoryManagement/GetAllAssetCategories",
+      CreateAssetCategory:
+        "http://localhost:5235/YourAssetManager.Server/AssetCatagoryManagement/CreateAssetCategory",
+      GetAssetCategoryById:
+        "http://localhost:5235/YourAssetManager.Server/AssetCatagoryManagement/GetAssetCategoryById",
+      DeleteAssetCategory:
+        "http://localhost:5235/YourAssetManager.Server/AssetCatagoryManagement/DeleteAssetCategory",
+      UpdateAssetCategory:
+        "http://localhost:5235/YourAssetManager.Server/AssetCatagoryManagement/UpdateAssetCategory",
     },
-    category:{
-        GetAllAssetCategories:'http://localhost:5235/GetAllAssetCategories',
-        CreateAssetCategory:'http://localhost:5235/CreateAssetCategory',
-        GetAssetCategoryById:'http://localhost:5235/GetAssetCategoryById',
-        DeleteAssetCategory:'http://localhost:5235/DeleteAssetCategory',
-        UpdateAssetCategory:'http://localhost:5235/UpdateAssetCategory'
+    vendor: {
+      CreateVender:
+        "http://localhost:5235/YourAssetManager.Server/VendorManagement/CreateVendor",
+      GetAllVenders:
+        "http://localhost:5235/YourAssetManager.Server/VendorManagement/GetAllVendors",
+      DeleteVender:
+        "http://localhost:5235/YourAssetManager.Server/VendorManagement/DeleteVendor",
+      GetVenderById:
+        "http://localhost:5235/YourAssetManager.Server/VendorManagement/GetVendorById",
+      UpdateVender:
+        "http://localhost:5235/YourAssetManager.Server/VendorManagement/UpdateVendor",
     },
-    vendor:{
-        CreateVender:'http://localhost:5235/CreateVendor',
-        GetAllVenders:'http://localhost:5235/GetAllVendors',
-        DeleteVender: 'http://localhost:5235/DeleteVendor',
-        GetVenderById:'http://localhost:5235/GetVendorById',
-        UpdateVender:'http://localhost:5235/UpdateVendor',
+    assettype: {
+      CreateAssetType:
+        "http://localhost:5235/YourAssetManager.Server/AssetTypeManagement/CreateAssetType",
+      GetAllAssetTypes:
+        "http://localhost:5235/YourAssetManager.Server/AssetTypeManagement/GetAllAssetTypes",
+      DeleteAssetType:
+        "http://localhost:5235/YourAssetManager.Server/AssetTypeManagement/DeleteAssetType",
+      UpdateAssetType:
+        "http://localhost:5235/YourAssetManager.Server/AssetTypeManagement/UpdateAssetType",
     },
-    assettype:{
-        CreateAssetType:'http://localhost:5235/CreateAssetType',
-        GetAllAssetTypes:'http://localhost:5235/GetAllAssetTypes',
-        DeleteAssetType:'http://localhost:5235/DeleteAssetType',
+    asset: {
+      CreateAsset:
+        "http://localhost:5235/YourAssetManager.Server/AssetManagement/CreateAsset",
+      GetAllAssets:
+        "http://localhost:5235/YourAssetManager.Server/AssetManagement/GetAllAssets",
+      DeleteAsset:
+        "http://localhost:5235/YourAssetManager.Server/AssetManagement/DeleteAsset",
+      UpdateAsset:
+        "http://localhost:5235/YourAssetManager.Server/AssetManagement/UpdateAsset",
+      GetAssetById:
+        "http://localhost:5235/YourAssetManager.Server/AssetManagement/GetAssetById",
     },
-
-    logActions: 'http://localhost:5235/api/logs',
-
-    
-
-    profileManagement: {
-        getProfile: 'http://localhost:5235/api/profile',
-        updateProfile: 'http://localhost:5235/api/profile'
-    },
-
-    searchFunctionality: {
-        searchAssets: 'http://localhost:5235/api/assets/search'
-    },
-
-    // vendorManagement: {
-    //     getVendors: 'http://localhost:5235/api/vendors',
-    //     createVendor: 'http://localhost:5235/api/vendors',
-    //     updateVendor: (id) => `http://localhost:5235/api/vendors/${id}`,
-    //     deleteVendor: (id) => `http://localhost:5235/api/vendors/${id}`
-    // }
-}
+  };
 export const menu=[{
     path:'home',
     label:'Home',

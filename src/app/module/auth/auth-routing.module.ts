@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
 import { ConfirmemailComponent } from './confirmemail/confirmemail.component';
 import { ResetpasswordComponent } from './resetpassword/resetpassword.component';
+import { CreateorganizationComponent } from './createorganization/createorganization.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,9 @@ const routes: Routes = [
   },{
     path:'resetpassword',
     component:ResetpasswordComponent
+  },{
+    path:'createorganization',
+    component:CreateorganizationComponent
   }
 ];
 

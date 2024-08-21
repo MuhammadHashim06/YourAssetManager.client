@@ -1,58 +1,22 @@
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px;
-    border-bottom: 1px solid #e9ecef;
-}
-
-.navigation h1 {
-    margin: 0;
-    font-size: 24px;
-    color: #333;
-}
-
-.navigation .links {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.navigation #showAddPageButton {
-    background-color: #00a6ff;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    padding: 5px 15px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    font-size: 16px;
-}
-
-.navigation #showAddPageButton:hover {
-    background-color: #0088d1;
-}
-
 .form-group input,
 .form-group select {
   width: calc(100% - 22px);
   padding: 10px;
   border-radius: 5px;
 }
-
+.link{
+  display: flex;
+  justify-content: right;
+}
 button[type="submit"] {
-    width: 100%;
+    // width: 100%;
     padding: 10px;
-    background-color: #00a6ff;
+    background-color:rgb(72, 128, 255);
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
-  }
-  
-  button[type="submit"]:hover {
-    background-color: #0088d1;
   }
 
 .asset-form{
@@ -63,7 +27,14 @@ button[type="submit"] {
     border: 1px solid rgba(185, 185, 185, 0.5);
 }
 
-
+.addcolumn{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.addcolumn i{
+  color: rgb(72, 128, 255);
+}
   table {
     width: 100%;
     border-collapse: collapse;

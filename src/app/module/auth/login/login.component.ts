@@ -63,10 +63,7 @@ export class LoginComponent {
       })
     ).subscribe(
       res => {
-        console.log(res);
-
-        localStorage.setItem('userData',JSON.stringify(res))
-
+        sessionStorage.setItem('userData',JSON.stringify(res))
         this.load = false;
         alert('Check Your Email');
       },
@@ -82,9 +79,9 @@ export class LoginComponent {
    */
   login($event: MouseEvent): void {
     $event.preventDefault();
-    this.load = true;
 
     if (this.loginuser.valid) {
+      this.load = true;
       this.loginservice.login(this.loginuser.value).pipe(
         catchError(error => {
           this.handleError(error);
@@ -93,8 +90,8 @@ export class LoginComponent {
       ).subscribe(
         res => {
           this.load = false;
-          localStorage.setItem('userData',JSON.stringify(res))
-          this.router.navigateByUrl('/dashboard'); // Corrected '/dasboard' to '/dashboard'
+          sessionStorage.setItem('userData',JSON.stringify(res.responseData))
+          this.router.navigateByUrl('/dashboard'); 
         },
         error => {
           this.load = false;

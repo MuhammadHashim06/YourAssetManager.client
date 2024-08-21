@@ -7,6 +7,9 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class AssettypeService {
+  updateAssetType(value: any) {
+    return this.http.put(`${this.endpoint.UpdateAssetType}`,value)
+  }
   deleteassettype(arg0: any) {
    return this.http.delete(`${this.endpoint.DeleteAssetType}?assetTypeId=${arg0}`)
   }

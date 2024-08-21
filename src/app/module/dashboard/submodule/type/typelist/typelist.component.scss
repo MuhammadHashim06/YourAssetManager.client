@@ -1,28 +1,36 @@
-.head{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .head button{
-    background-color: rgba(67, 121, 238, 1);
-    border-radius: 5px;
-  border: none;  
+.head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.head button {
+  background-color: rgba(67, 121, 238, 1);
+  border-radius: 5px;
+  border: none;
   color: white;
   padding: 15px 15px;
   font-size: 1em;
   cursor: pointer;
-  }
-  thead{
-    background-color: rgba(241, 244, 249, 1);
-    font-weight: bold;
-  }
-  
-  .action{
-    display: flex; 
-    align-items: center;
-    justify-content: space-around;
-    background-color: rgba(250, 251, 253, 1);
-    border: 0.1px solid rgba(213, 213, 213, 1);
-    border-radius: 7.5px;
-    gap: 0px;
-  }
+}
+thead {
+  background-color: rgba(241, 244, 249, 1);
+  font-weight: bold;
+}
+
+.action {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: rgba(250, 251, 253, 1);
+  border: 0.1px solid rgba(213, 213, 213, 1);
+  border-radius: 7.5px;
+  gap: 0px;
+}
+.link button {
+  background-color: rgba(67, 121, 238, 1);
+  border-radius: 5px;
+  border: none;
+  color: white;
+  padding: 10px 10px;
+  cursor: pointer;
+}

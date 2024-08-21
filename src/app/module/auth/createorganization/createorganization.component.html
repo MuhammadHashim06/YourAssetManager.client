@@ -1,0 +1,84 @@
+<div class="form">
+    <form [formGroup]="organization">
+        <div class="head">
+            <h1>Organization/Company</h1>
+            <p>Set up your Organization Information</p>
+        </div>
+        <div class="fields">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>
+                            <label for="name">Organization Name:</label>
+                            <input type="text" id="name" name="name" placeholder="Enter your Organization Name"
+                                formControlName="organizationName">
+                            <div
+                                *ngIf="organization.controls['organizationName'].errors && organization.controls['organizationName'].touched">
+                                <span *ngIf="organization.controls['organizationName'].errors['required']"
+                                    class="error">
+                                    {{ inputerrormessage.required }}
+                                </span>
+                            </div>
+                        </td>
+                        <td>
+                            <!-- <label for="domain">Domain</label>
+                        <div class="chip-container">
+                            <div class="chip-list">
+                                <div class="chip" *ngFor="let domain of domains; let i = index">
+                                    {{ domain }}
+                                    <span class="remove-chip" (click)="removeChip(i)">&times;</span>
+                                </div>
+                            </div>
+                            <input
+                                type="text"
+                                class="chip-input"
+                                placeholder="@organization.com"
+                                [(ngModel)]="domainInput"
+                                [ngModelOptions]="{standalone: true}"
+                                (keypress)="addChip($event)"
+                            />
+                    </div> -->
+                            <label for="domain">Domain</label>
+                            <input type="text"  placeholder="@organization.com"
+                                [(ngModel)]="domainInput" [ngModelOptions]="{standalone: true}"
+                                (keypress)="addChip($event)" />
+                            <div
+                                *ngIf="organization.controls['organizationDomain'].errors && organization.controls['organizationDomain'].touched">
+                                <span *ngIf="organization.controls['organizationDomain'].errors['required']"
+                                    class="error">
+                                    {{ inputerrormessage.required }}
+                                </span>
+                            </div>
+                        </td>
+
+                    </tr>
+                    <tr>
+                            
+                    </tr>
+
+                </tbody>
+                
+            </table>
+            <div class="chip-list">
+                <div class="chip" *ngFor="let domain of domains; let i = index">
+                    {{ domain }}
+                    <span class="remove-chip" (click)="removeChip(i)">&times;</span>
+                </div>
+            </div>
+            <label for="description">Description:</label>
+            <textarea name="description" id="description" placeholder="Enter Your Company Description" rows="4"
+                cols="20" formControlName="description"></textarea>
+            <div *ngIf="organization.controls['description'].errors && organization.controls['description'].touched">
+                <span *ngIf="organization.controls['description'].errors['required']" class="error">
+                    {{ inputerrormessage.required }}
+                </span>
+            </div>
+        </div>
+        <div class="link">
+            <button type="button" (click)="Save($event)">Register Organization</button>
+        </div>
+    </form>
+</div>
+
+<!-- <div class="chip-container">
+</div> -->

@@ -1,5 +1,97 @@
 <div class="head">
     <h1>Assets list</h1>
-        <button  routerLink="create">Add New Asset</button>
+    <button routerLink="create">Add New Asset</button>
 </div>
 
+<div class="container">
+
+
+
+
+    <div class="filter">
+        <table>
+            <thead>
+                <th>
+                    <img src="filter.svg" />
+                </th>
+                <th>
+                    filter BY
+                </th>
+                <th (click)="setfilter('Category')" style="cursor: pointer;">
+                    Category
+                </th>
+                <th (click)="setfilter('Status')" style="cursor: pointer;">
+                    Asset Status
+                </th>
+                <th (click)="resetfilter($event)" style="cursor: pointer;">
+                    <div class="resetfilter">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <p>Reset Filter</p>
+                    </div>
+                </th>
+            </thead>
+        </table>
+    </div>
+
+    <div class="categoryfilter" *ngIf="isshowfilter">
+        @if(this.setfiltervalue=='Status'){
+        <button *ngFor="let s of status" (click)="toogle(s)">
+            {{s}}
+        </button>
+        }@else if (this.setfiltervalue=='Category') {
+        <button *ngFor="let c of categories" (click)="toogle(c.categoryName)">
+            {{c.categoryName}}
+        </button>
+        }
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class="list">
+        <thead>
+            <th>
+                Asset ID
+            </th>
+            <th>
+                Asset Name
+            </th>
+            <th>
+                Category
+            </th>
+            <th style="text-align: center;">
+                Status
+            </th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let a of filteredasset">
+                <td>
+                    {{a.id}}
+                </td>
+                <td>
+                    {{a.assetName}}
+                </td>
+                <td>
+                    {{a.assetCategoryData}}
+                </td>
+                <td style="display: flex; justify-content: center;">
+                    @switch (a.assetStatusData) {
+                    @case ('Assigned') { <div class="Assigned">{{a.assetStatusData}}</div> }
+                    @case ('Retired') { <div class="Retired">{{a.assetStatusData}}</div> }
+                    @case ('UnderMaintenance') { <div class="UnderMaintenance">{{a.assetStatusData}}</div> }
+                    @case ('Returned') { <div class="Returned">{{a.assetStatusData}}</div> }
+                    @default { <div class="Available">{{a.assetStatusData}}</div> }
+                    }
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

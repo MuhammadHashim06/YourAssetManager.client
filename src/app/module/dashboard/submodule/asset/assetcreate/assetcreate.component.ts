@@ -1,9 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { CategoryService } from '../../../../../core/services/category/category.service';
 import { VendorService } from '../../../../../core/services/vendor/vendor.service';
 import { AssetService } from '../../../../../core/services/asset/asset.service';
 import { catchError, throwError } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AssettypeService } from '../../../../../core/services/assettype/assettype.service';
+import { Router } from '@angular/router';
+import { constant } from '../../../../../core/constant/constant';
 
 @Component({
   selector: 'app-assetcreate',
@@ -11,72 +14,102 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './assetcreate.component.scss'
 })
 export class AssetcreateComponent implements OnInit {
+  inputerrormessage=constant.inputerrormessage
+setAssettype($event: any) {
+  let index=$event.target.value
+  if(index>0){
+  this.AssetDTO.controls['assetTypeData'].setValue(index)
+}else{
+  this.AssetDTO.controls['assetTypeData'].setValue('')
+}
+}
 
-   AssetDTO = new FormGroup({
-    AssetName: new FormControl('',Validators.required),
-    Description: new FormControl(''),
-    PurchaseDate: new FormControl(''),
-    PurchasePrice: new FormControl(''),
-    SerialNumber: new FormControl(''),
-    AssetIdentificationNumber: new FormControl(''),
-    Manufacturer: new FormControl(''),
-    Model: new FormControl(''),
-    CatagoryReleventFeildsData: new FormControl(''),
-    AssetStatusId: new FormControl(''),
-    OrganizationId: new FormControl(''),
-    AssetCategoryId: new FormControl(''),
-    AssetTypeId: new FormControl(''),
-    VendorId: new FormControl(''),
-   })
+   AssetDTO = new FormGroup(
+    {
+      assetName:new FormControl('',Validators.required),
+      description:new FormControl(''),
+      purchaseDate:new FormControl('',Validators.required),
+      purchasePrice:new FormControl('',Validators.required),
+      serialNumber:new FormControl('',Validators.required),
+      assetIdentificationNumber:new FormControl(''),
+      manufacturer:new FormControl(''),
+      model:new FormControl(''),
+      catagoryReleventFeildsData:new FormControl(''),
+      organizationData:new FormControl('0'),
+      assetStatusData:new FormControl('0'),
+      assetCategoryData:new FormControl('',Validators.required),
+      assetTypeData:new FormControl('',Validators.required),
+      vendorData:new FormControl('',Validators.required)})
  
 
 setvendor($event: any) {
   const index=$event.target.value
   if(index>0){
-    this.AssetDTO.controls['AssetCategoryId'].setValue($event.target.value)
+    this.AssetDTO.controls['vendorData'].setValue($event.target.value)
   }else
   {
-    this.AssetDTO.controls['AssetCategoryId'].setValue('')
-
+    this.AssetDTO.controls['vendorData'].setValue('')
   }
   
 }
+route=inject(Router)
   Saveasset($event: MouseEvent) {
     $event.preventDefault()
+    // console.log(this.AssetDTO.value);
+    this.AssetDTO.controls['catagoryReleventFeildsData'].setValue(JSON.stringify(this.AssetDTO.controls['catagoryReleventFeildsData'].value))
+
+    if(this.AssetDTO.valid){
+      console.log(this.AssetDTO.value);
+      this.assetservice.addasset(this.AssetDTO.value).pipe(
+        catchError(error=>{
+          console.error(error);
+          return throwError(error)
+        })
+      ).subscribe(res=>{
+        // console.log(res);
+        
+        this.route.navigateByUrl('dashboard/asset')
+      })
+    }else{
+      this.AssetDTO.markAllAsTouched()
+    }
+    
   }
   showcolumn($event: any) {
     const index = $event.target.value
-    console.log(index);
+    // console.log(index);
 
     if (index > 0) {
-      console.log(this.categories)
-      this.AssetDTO.controls['AssetCategoryId'].setValue(index)
+      // console.log("Categories",this.categories)
+      this.AssetDTO.controls['assetCategoryData'].setValue(index)
       let category
-      category=this.categories.find(c=>c.id=index)
-      this.CatagoryReleventFeildsData = JSON.parse(category.relaventInputFields)
-      console.log(this.CatagoryReleventFeildsData);
+      category=this.categories.find(c=>c.id==index)
+      this.catagoryReleventFeildsData = JSON.parse(category.relaventInputFields)
+      this.AssetDTO.controls['catagoryReleventFeildsData'].setValue(this.catagoryReleventFeildsData)
+      // console.log("Relevent Field",this.catagoryReleventFeildsData);
     } else {
-      this.CatagoryReleventFeildsData = []
-      this.AssetDTO.controls['AssetCategoryId'].setValue('')
+      this.catagoryReleventFeildsData = []
+      this.AssetDTO.controls['assetCategoryData'].setValue('')
     }
   }
-  CatagoryReleventFeildsData: any
+  catagoryReleventFeildsData: any
   categories: Array<any> = [];
   vendors: Array<any> = [];
-  constructor(private categoryservice: CategoryService, private vendorservice: VendorService, private assetservice: AssetService) { }
+  assettype:Array<any> = [];
+  constructor(private categoryservice: CategoryService, private vendorservice: VendorService, private assetservice: AssetService,private assettypeservice:AssettypeService) { }
   ngOnInit(): void {
     this.categoryservice.getcategory().pipe(
       catchError(error => {
         return throwError(error)
       })
     ).subscribe(res => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status == 404) {
         this.categories.push({ id: 0, categoryName: 'No Category Found' })
       } else {
         this.categories = res.responseData.$values;
-        console.log(this.categories);
+        // console.log(this.categories);
       }
     })
 
@@ -85,13 +118,27 @@ setvendor($event: any) {
         return throwError(error)
       })
     ).subscribe(res => {
-      console.log(res);
+      // console.log(res);
 
       if (res.status == 404) {
         this.vendors.push({ id: 0, name: 'No Vendor Found' })
       } else {
         this.vendors = res.responseData.$values;
-        console.log(this.vendors);
+        // console.log(this.vendors);
+      }
+    })
+    this.assettypeservice.getallassettype().pipe(
+      catchError(error => {
+        return throwError(error)
+      })
+    ).subscribe(res => {
+      // console.log(res);
+
+      if (res.status == 404) {
+        this.assettype.push({ id: 0, name: 'No Asset Type Found' })
+      } else {
+        this.assettype = res.responseData.$values;
+        // console.log(this.assettype);
       }
     })
   }
