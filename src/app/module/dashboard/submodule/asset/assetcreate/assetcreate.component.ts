@@ -140,6 +140,7 @@ export class AssetcreateComponent implements OnInit {
           vendorData: updateasset.vendorData,
         });
         this.catagoryReleventFeildsData= JSON.parse(updateasset.catagoryReleventFeildsData)
+        console.log(updateasset)
         console.log(this.AssetDTO.value);
 
       })

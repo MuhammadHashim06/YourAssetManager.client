@@ -8,7 +8,7 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent {
   userData=sessionStorage.getItem('userData')
   closeProfile($event: MouseEvent) {
     $event.stopPropagation();
@@ -30,12 +30,15 @@ export class DashboardComponent implements OnInit {
 
   router = inject(Router)
   isprofile = false;
-  constructor(private organization: OrganizationService) { }
+  constructor(private organization: OrganizationService) { 
+    this.getorganization()
+  }
   orgInfo: any
   orgName: string = ''
   orgIcon: string = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
-  ngOnInit(): void {
+ 
 
+  getorganization(){
     this.organization.getOrganization().pipe(
       catchError(error => {
         console.error(error)

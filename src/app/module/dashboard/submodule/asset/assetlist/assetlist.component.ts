@@ -10,6 +10,13 @@ import { Router } from '@angular/router';
   styleUrl: './assetlist.component.scss'
 })
 export class AssetlistComponent implements OnInit {
+stophide($event: MouseEvent) {
+  $event.stopPropagation()
+throw new Error('Method not implemented.');
+}
+hidefilter($event: MouseEvent) {
+  this.isshowfilter=false
+}
 assetdetail(event :any) {
 
   this.router.navigateByUrl(`dashboard/asset/${event}`)
@@ -17,11 +24,14 @@ assetdetail(event :any) {
 
 }
 resetfilter($event: MouseEvent) {
+  // $event.preventDefault()
   this.filter=[]
   this.filterasset()
 }
 
-setfilter(arg0: string) {
+setfilter(arg0: string , event:any) {
+  event.stopPropagation()
+  this.isshowfilter=true
   this.setfiltervalue=arg0
 }
 toogle($event:any) {
@@ -61,8 +71,8 @@ filterasset(){
   assetList: Array<any> = [];
   categories:Array<any>=[];
   filter:Array<any>=[]
-  isshowfilter=true
-  setfiltervalue:any 
+  isshowfilter=false
+  setfiltervalue:any ='Status'
   filteredasset:Array<any>=[]
   private router=inject(Router)
 

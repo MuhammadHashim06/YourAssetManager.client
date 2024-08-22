@@ -1,14 +1,8 @@
-<div class="head">
+<div class="head" (click)="hidefilter($event)">
     <h1>Assets list</h1>
     <button routerLink="create">Add New Asset</button>
 </div>
-
-<div class="container">
-
-
-
-
-    <div class="filter">
+    <div class="filter"  (click)="hidefilter($event)">
         <table>
             <thead>
                 <th>
@@ -17,10 +11,10 @@
                 <th>
                     filter BY
                 </th>
-                <th (click)="setfilter('Category')" style="cursor: pointer;">
+                <th (click)="setfilter('Category',$event)" style="cursor: pointer;">
                     Category
                 </th>
-                <th (click)="setfilter('Status')" style="cursor: pointer;">
+                <th (click)="setfilter('Status',$event)" style="cursor: pointer;">
                     Asset Status
                 </th>
                 <th (click)="resetfilter($event)" style="cursor: pointer;">
@@ -32,17 +26,43 @@
             </thead>
         </table>
     </div>
+    <div class="container" (click)="hidefilter($event)">
+    <div class="filtervalues" *ngIf="isshowfilter" (click)="stophide($event)">
 
-    <div class="categoryfilter" *ngIf="isshowfilter">
+        <div class="values">
+
         @if(this.setfiltervalue=='Status'){
-        <button *ngFor="let s of status" (click)="toogle(s)">
+           @for (s of status; track $index) {
+            @if (filter.includes(s)) {
+                <button (click)="toogle(s)" class="selected" >
+                    {{s}}
+                </button>
+            }@else {
+        <button class="unselected" (click)="toogle(s)" >
             {{s}}
         </button>
+    }
+    }
         }@else if (this.setfiltervalue=='Category') {
-        <button *ngFor="let c of categories" (click)="toogle(c.categoryName)">
-            {{c.categoryName}}
-        </button>
+
+            @for (c of categories; track $index) {
+
+                @if (filter.includes(c.categoryName)) {
+                    <button (click)="toogle(c.categoryName)" class="selected" >
+                        {{c.categoryName}}
+                    </button>
+                }@else {
+            <button class="unselected" (click)="toogle(c.categoryName)" >
+                {{c.categoryName}}
+            </button>
         }
+        <!-- <button  *ngFor="let c of categories" (click)="toogle(c.categoryName)" appToggleStyle>
+            {{c.categoryName}}
+        </button> -->
+        }
+    }
+    </div>
+
     </div>
 
 

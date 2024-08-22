@@ -1,7 +1,8 @@
 .Main {
   display: grid;
+  position:static;
   grid-template-columns: 15% 85%;
-  height: 100vh;
+  height: 100%;
 }
 .outer {
   overflow-y: auto;

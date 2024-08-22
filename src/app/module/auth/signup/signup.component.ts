@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 import { AuthService } from '../../../core/services/auth/auth.service';
 import { constant } from '../../../core/constant/constant';
 import { catchError, throwError } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
@@ -10,13 +11,17 @@ import { catchError, throwError } from 'rxjs';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
-Next($event: MouseEvent) {
+NextStep($event: MouseEvent) {
+
+sessionStorage.setItem('ownerdata',JSON.stringify(this.registeruser.value))
+this.router.navigateByUrl('/auth/createorganization')
 }
+
 setrole($event: MouseEvent) {
-  if(this.role=='user'){
-    this.role='organizationOwner'
-  }else if(this.role=='organizationOwner'){
-    this.role='user'
+  if(this.role=='EMPLOYEE'){
+    this.role='ORGANIZATIONOWNER'
+  }else if(this.role=='ORGANIZATIONOWNER'){
+    this.role='EMPLOYEE'
   }
 }
   // Error messages and state variables
@@ -25,14 +30,16 @@ setrole($event: MouseEvent) {
   isemailregister = false;
   accountsuccessmessage = constant.register.success.accountsuccess;
   verificationmessage = constant.register.success.verificationmessage;
+  private router = inject(Router)
 
-  role='organizationOwner'
+  role='EMPLOYEE'
 
   // Form group initialization
   registeruser = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
     userName: new FormControl('', Validators.required),
-    password: new FormControl('', [Validators.required, this.passwordValidator])
+    password: new FormControl('', [Validators.required, this.passwordValidator]),
+    requiredRole:new FormControl('')
   });
 
   constructor(private registerservice: AuthService) {}
@@ -66,7 +73,7 @@ setrole($event: MouseEvent) {
     $event.preventDefault();
     if (this.registeruser.valid) {
       this.load = true;
-      
+      this.registeruser.controls.requiredRole.setValue(this.role)
       // Perform signup using AuthService
       this.registerservice.signup(this.registeruser.value).pipe(
         catchError(error => {

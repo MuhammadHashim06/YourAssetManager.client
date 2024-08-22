@@ -7,7 +7,7 @@
 
 <div class="form">
   <!-- Form for user registration -->
-  @if (role=='user') {
+  @if (role=='EMPLOYEE') {
   <form [formGroup]="registeruser" *ngIf="!isemailregister; else emailsent">
 
     <!-- Form header -->
@@ -72,7 +72,7 @@
     </section>
   </ng-template>
 }
-@else if (role=='organizationOwner') {
+@else if (role=='ORGANIZATIONOWNER') {
   <form [formGroup]="registeruser" *ngIf="!isemailregister; else emailsent">
 
     <!-- Form header -->
@@ -119,8 +119,8 @@
 
     <!-- Form submission and navigation links -->
     <div class="link">
-     <a routerLink="/auth/createorganization"> <button >Next</button></a>
-      <button (click)="setrole($event)" class="registerorg">Create your Account</button>
+     <button (click)="verify($event)" >Next</button>
+      <button (click)="setrole($event)" class="registerorg">Create Employer Account</button>
       <p> Already have an account? <a routerLink="/auth/login">Login</a></p>
     </div>
   </form>

@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { OrganizationService } from '../../../core/services/organization/organization.service';
 import { Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -10,11 +10,17 @@ import { constant } from '../../../core/constant/constant';
   templateUrl: './createorganization.component.html',
   styleUrls: ['./createorganization.component.scss']
 })
-export class CreateorganizationComponent {
+export class CreateorganizationComponent implements OnInit {
   router = inject(Router);
   inputerrormessage = constant.inputerrormessage;
-
+  ownerData:any
   constructor(private service: OrganizationService) {}
+  ngOnInit(): void {
+  this.ownerData  = sessionStorage.getItem('ownerdata')
+  if(this.ownerData!=undefined){
+    this.ownerData = JSON.parse(this.ownerData)
+  }
+  }
 
   // Explicitly define the type of the FormArray
   organization = new FormGroup({
