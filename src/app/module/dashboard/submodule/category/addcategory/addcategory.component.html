@@ -17,8 +17,8 @@
                 </td>
                 <td>
                     <input type="text" name="description" id="description"
-                        placeholder="Enter Your Description" required formControlName="description">
-                    <span class="error" *ngIf="categoryvalue.controls['description'].touched && categoryvalue.controls['description'].invalid">{{inputerrormessages.required}}</span>
+                        placeholder="Enter Your Description"  formControlName="description">
+                    <!-- <span class="error" *ngIf="categoryvalue.controls['description'].touched && categoryvalue.controls['description'].invalid">{{inputerrormessages.required}}</span> -->
                 </td>
             </tr>
             <tr [formGroup]="columnvalue">

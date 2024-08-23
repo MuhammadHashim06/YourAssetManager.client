@@ -72,9 +72,9 @@ Update(arg0: number) {
   ];
 
   categoryvalue = new FormGroup({
-    categoryName: new FormControl('', Validators.required),
-    description: new FormControl('', Validators.required),
-    relaventInputFields: new FormControl('',)
+    categoryName: new FormControl('', [Validators.required]),
+    description: new FormControl(''),
+    relaventInputFields: new FormControl('')
   });
 
   columnvalue = new FormGroup({
@@ -111,7 +111,8 @@ Update(arg0: number) {
   }
 
   saveCategory() { 
-    console.log('I am Callled')// Moved saveCategory out of Save method
+    console.log(this.categoryvalue.valid);
+    
     if (this.categoryvalue.valid) {
       console.log(this.features);
 

@@ -25,7 +25,7 @@ export class OrganizationComponent {
   // Explicitly define the type of the FormArray
   organization = new FormGroup({
     organizationName: new FormControl<string>('', Validators.required),
-    organizationDomain: new FormArray<FormControl<string>>([], Validators.required),
+    OrganizationDomains: new FormArray<FormControl<string>>([], Validators.required),
     description: new FormControl<string>('', Validators.required)
   });
 
@@ -35,7 +35,7 @@ export class OrganizationComponent {
   addChip(event: KeyboardEvent): void {
     if (event.key === 'Enter' && this.domainInput.trim()) {
       const domainControl = new FormControl<string>(this.domainInput.trim(), Validators.required);
-      (this.organization.controls['organizationDomain'] as FormArray).push(domainControl);
+      (this.organization.controls['OrganizationDomains'] as FormArray).push(domainControl);
       this.domains.push(this.domainInput.trim());
       this.domainInput = '';
     }
@@ -43,7 +43,7 @@ export class OrganizationComponent {
 
   removeChip(index: number): void {
     this.domains.splice(index, 1);
-    (this.organization.controls['organizationDomain'] as FormArray).removeAt(index);
+    (this.organization.controls['OrganizationDomains'] as FormArray).removeAt(index);
   }
 
   Save($event: MouseEvent) {

@@ -9,6 +9,8 @@ import { OrganizationComponent } from './organization/organization.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ProfileComponent } from './profile/profile.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts'; 
+// import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -24,7 +26,9 @@ import { ProfileComponent } from './profile/profile.component';
     DashboardRoutingModule,
     FormsModule,
     RouterOutlet,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxChartsModule,
+    // NgChartsModule
   ]
 })
 export class DashboardModule { }
