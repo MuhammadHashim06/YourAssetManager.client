@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
+import { BoardService } from '../../../core/services/board/board.service';
 
 @Component({
   selector: 'app-board',
@@ -7,7 +8,6 @@ import { Color, ScaleType } from '@swimlane/ngx-charts';
   styleUrl: './board.component.scss'
 })
 export class BoardComponent {
-
 
 
 
@@ -47,56 +47,58 @@ export class BoardComponent {
 
 
 
-
-
-
-
-
-
-
-
-  view: [number,number] = [700, 400]; // Size of the chart
+  view: [number, number] = [600, 300]; // Size of the chart
 
   // Chart data
   assetCategoryData: any[] = [];
-  assetValueData: any[] = [];
+  assetstatus: any[] = [];
 
   // Chart color scheme
-  colorScheme : Color   = {
-    domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA'],
+  colorScheme: Color = {
+    domain: ['rgba(0, 182, 155, 1)', 'rgba(98, 38, 239, 1)', 'rgba(239, 56, 38, 1)', 'rgba(255, 167, 86, 1)'],
     name: 'coolScheme', // Optional
     selectable: true,   // Optional
-    group:ScaleType.Ordinal
-    
+    group: ScaleType.Ordinal
+
   };
 
-  constructor() {}
+  constructor(private boardservice: BoardService) { }
+
+  stats: any
 
   ngOnInit(): void {
-    this.loadAssetCategoryData();
+
+    this.boardservice.getallstats().pipe().subscribe(res => {
+      this.stats = res.responseData
+      this.loadAssetCategoryData();
     this.loadAssetValueData();
+    })
+    
   }
 
   loadAssetCategoryData() {
     // Sample data; replace with real data
-    this.assetCategoryData = [
-      { "name": "Laptops", "value": 10 },
-      { "name": "Mouse", "value": 15 },
-      { "name": "Screen", "value": 5 },
-      { "name": "Keyboard", "value": 8 },
-      { "name": "Tablets", "value": 3 }
-    ];
+    // this.assetCategoryData = [
+    //   { "name": "Laptops", "value": 10 },
+    //   { "name": "Mouse", "value": 15 },
+    //   { "name": "Screen", "value": 5 },
+    //   { "name": "Keyboard", "value": 8 },
+    //   { "name": "Tablets", "value": 3 }
+    // ];
+
+    this.assetCategoryData=this.stats.assetCountByCatagory.$values
   }
 
   loadAssetValueData() {
     // Sample data; replace with real data
-    this.assetValueData = [
-      { "name": "Laptops", "value": 10000 },
-      { "name": "Mouse", "value": 1500 },
-      { "name": "Screen", "value": 2000 },
-      { "name": "Keyboard", "value": 800 },
-      { "name": "Tablets", "value": 3000 }
-    ];
+    // this.assetstatus = [
+    //   { "name": "Laptops", "value": 10000 },
+    //   { "name": "Mouse", "value": 1500 },
+    //   { "name": "Screen", "value": 2000 },
+    //   { "name": "Keyboard", "value": 800 },
+    //   { "name": "Tablets", "value": 3000 }
+    // ];
+    this.assetstatus=this.stats.assetCountByStatus.$values
   }
 
 }

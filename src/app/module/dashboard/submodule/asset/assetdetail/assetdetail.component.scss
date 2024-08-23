@@ -1,5 +1,4 @@
 .Assigned{
-    width: 45%;
     text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
@@ -7,7 +6,6 @@
     background-color: rgba(255, 167, 86, 0.2);
   }
   .Retired{
-    width: 45%;
   text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
@@ -15,7 +13,6 @@
     background-color: rgba(239, 56, 38, 0.2);
   }
   .UnderMaintenance{
-    width: 45%;
     text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
@@ -26,12 +23,51 @@
     
   }
   .Available{
-    width: 45%;
     text-align: center;
     padding: 5px 10px;
     border-radius: 5px;
     color: rgba(0, 182, 155, 1);
   background-color: rgba(0, 182, 155, 0.2);
+  }
+  .link {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .link button,.action button {
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    background-color: rgba(72, 128, 255, 0.2);
+    color: rgba(72, 128, 255, 1);
+  }
+  .link button:nth-child(2),  .action button:nth-child(1){
+    border: none;
+    background-color: rgba(72, 128, 255, 1);
+    color: white;
+  }
+  .head{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .action{
+    display: flex;
+    gap: 10px;
+
+  }.action button:last-child{
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    font-size: 0.9em;
+    background-color: rgba(255, 0, 0, 0.2);
+    color: red;
+  }
+  .description{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
   tr td:nth-child(odd){
     font-weight: bold;

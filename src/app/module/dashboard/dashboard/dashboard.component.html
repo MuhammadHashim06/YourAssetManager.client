@@ -15,32 +15,33 @@
             <button class="profile-button">{{orgName}} - Profile</button>
         </div>
         <button class="logout" (click)="logout($event)">
-            <i class="fa-solid fa-right-from-bracket" ></i> Log Out
+            <i class="fa-solid fa-right-from-bracket"></i> Log Out
         </button>
     </div>
-   
+
 </div>
 
-<div class="Main" (click)="closeProfile($event)" >
-<app-sidebar></app-sidebar>
- <div class="dashboard">
-    <div class="navbar">
-        <div class="navlink">
-        <!-- <select name="search" id="search">
+<div class="Main" (click)="closeProfile($event)">
+    <app-sidebar></app-sidebar>
+    <div class="dashboard">
+        <div class="navbar">
+            <div class="navlink">
+                <!-- <select name="search" id="search">
             <option value="All">All</option>
             <option value="Asset">Asset</option>
             <option value="User">User</option>
             <option value="Category">Category</option>
         </select> -->
-        <img src="menu.svg" alt="horizantal nav">
-        <input type="search" name="search" id="search" placeholder="        Search">
-    </div>
-        <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="orgIcon" alt="Account Icon">{{orgName}}</div>
-    </div>
-    <div class="outer">
+                <img src="menu.svg" alt="horizantal nav">
+                <input type="search" name="search" id="search" placeholder="        Search">
+            </div>
+            <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="orgIcon"
+                    alt="Account Icon">{{orgName}}</div>
+        </div>
+        <div class="outer">
 
-<router-outlet/>
-</div>
+            <router-outlet />
+        </div>
 
-</div>
+    </div>
 </div>

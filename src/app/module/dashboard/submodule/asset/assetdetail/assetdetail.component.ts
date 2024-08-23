@@ -8,35 +8,67 @@ import { AssetService } from '../../../../../core/services/asset/asset.service';
   styleUrl: './assetdetail.component.scss',
 })
 export class AssetdetailComponent implements OnInit {
-updateasset(arg0: any) {
-  this.router.navigateByUrl(`dashboard/asset/create/${arg0}`)
-}
+  sanitizer: any;
+  updateasset(arg0: any) {
+    this.router.navigateByUrl(`dashboard/asset/create/${arg0}`)
+  }
   isLoading = true;
-  router=inject(Router)
-deleteasset(arg0: any) {
-  this.assetservice.deleteasset(arg0).pipe().subscribe(res=>{
-    console.log(res);
-    this.router.navigateByUrl('dashboard/asset')
-  })
-  
-}
+  relevatcategoriesinput: Array<any> = []
+  router = inject(Router)
+  deleteasset(arg0: any) {
+    this.assetservice.deleteasset(arg0).pipe().subscribe(res => {
+      console.log(res);
+      this.updateassetdata()
+      this.router.navigateByUrl('dashboard/asset')
+    })
+
+  }
+  updateassetdata() {
+    this.assetservice.updategetdata().subscribe(data => {
+      console.log(data);
+
+    })
+  }
   id: any;
   assetdetail: any;
   constructor(
     private activedroute: ActivatedRoute,
-    private assetservice: AssetService
-  ) {
+    private assetservice: AssetService  ) {
+   
     this.id = this.activedroute.snapshot.params['id'];
     console.log(this.id);
-  }
-  ngOnInit(): void {
     this.assetservice
       .getassetbyid(this.id)
       .pipe()
       .subscribe((res) => {
-        this.isLoading=false
+        this.isLoading = false
         this.assetdetail = res.responseData;
-        console.log(this.assetdetail);
+        // console.log(this.assetdetail.catagoryReleventFeildsData);
+        this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData)
+        if(typeof(this.relevatcategoriesinput)=='string'){
+          this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData)
+          console.log(this.relevatcategoriesinput)
+        }
+        // console.log(this.relevatcategoriesinput)
       });
+  }
+
+ 
+
+  ngOnInit(): void {
+    // this.assetservice
+    //   .getassetbyid(this.id)
+    //   .pipe()
+    //   .subscribe((res) => {
+    //     this.isLoading = false
+    //     this.assetdetail = res.responseData;
+    //     // console.log(this.assetdetail.catagoryReleventFeildsData);
+    //     this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData)
+    //     if(typeof(this.relevatcategoriesinput)=='string'){
+    //       this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData)
+    //       console.log(this.relevatcategoriesinput)
+    //     }
+    //     // console.log(this.relevatcategoriesinput)
+    //   });
   }
 }

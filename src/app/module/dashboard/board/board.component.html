@@ -1,8 +1,5 @@
     <h1>Dashboard</h1>
-    <!-- <div class="links">
-        <input type="search" placeholder="Search" aria-label="Search for assets">
-        <button id="showAddPageButton" routerLink="add">Add New User</button>
-    </div> -->
+
 
 <div class="dashboard-container">
     <div class="chart-container">
@@ -24,7 +21,7 @@
       <ngx-charts-pie-chart
         [view]="view"
         [scheme]="colorScheme"
-        [results]="assetValueData"
+        [results]="assetstatus"
         [legend]="true"
         [doughnut]="true"
         [labels]="true"
@@ -45,4 +42,3 @@
       [plugins]="chartPlugins">
     </canvas> -->
   </div>
-  

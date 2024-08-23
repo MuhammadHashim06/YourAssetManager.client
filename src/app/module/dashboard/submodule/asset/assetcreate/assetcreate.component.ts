@@ -113,6 +113,7 @@ export class AssetcreateComponent implements OnInit
           })
         )
         .subscribe((res) => {
+          this.updateassetdata()
           // console.log(res);
 
           this.route.navigateByUrl('dashboard/asset');
@@ -256,6 +257,7 @@ export class AssetcreateComponent implements OnInit
         this.catagoryReleventFeildsData = JSON.parse(
           updateasset.catagoryReleventFeildsData
         );
+        
         console.log(updateasset);
         this.AssetDTO.controls['assetIdentificationNumber'].setValue(
           this.AssetDTO.controls['assetIdentificationNumber'].value === 'N/A'
@@ -393,7 +395,7 @@ export class AssetcreateComponent implements OnInit
         )
         .subscribe((res) => {
           // console.log(res);
-
+this.updateassetdata()
           this.route.navigateByUrl('dashboard/asset');
         });
     } else {
@@ -401,7 +403,14 @@ export class AssetcreateComponent implements OnInit
     }
 
    }
+   updateassetdata(){
+    this.assetservice.updategetdata().subscribe(data=>{
+      console.log(data);
+      
+      })
+   }
 }
+
 
 
 // // assetCategoryData: this.categories.find(

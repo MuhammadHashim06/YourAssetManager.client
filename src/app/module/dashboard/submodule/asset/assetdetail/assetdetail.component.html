@@ -1,151 +1,62 @@
-<!-- <div class="container">
-    <h1>
-        {{ assetdetail.assetName }}
-    </h1>
-    <div class="detail">
-        <div class="description">
-
-        
-        <p>
-            {{ assetdetail.description }}
-        </p>
-        <span [class]="assetdetail.assetStatusData">
-            {{ assetdetail.assetStatusData }}
-        </span>
-        <button>update</button>
-        <button (click)="deleteasset(id)" >Delete</button>
-    </div>
-    <div class="link">
-        <button>
-            Checkout
-        </button>
-        <button>
-        Retire
-        </button>
-        <button>
-            Undermaintainance
-        </button>
-    </div>
-
-    </div>
-</div>
-
-<h2>Basic Information</h2>
 <div class="container">
-    <table>
-        <tr>
-            <td>Identification Number</td>
-            <td>
-                {{ assetdetail.assetIdentificationNumber }}
-            </td>
-            <td>Serial Number</td>
-            <td>
-                {{ assetdetail.serialNumber }}
-            </td>
-        </tr>
-        <tr>
-            <td>Asset Type</td>
-            <td>
-                {{ assetdetail.assetTypeData }}
-            </td>
-            <td>Category</td>
-            <td>
-                {{ assetdetail.assetCategoryData }}
-            </td>
-        </tr>
-        <tr>
-            <td>Manufacturer</td>
-            <td>
-                {{ assetdetail.manufacturer }}
-            </td>
-            <td>Model</td>
-            <td>
-                {{ assetdetail.model }}
-            </td>
-        </tr>
-        <tr>
-            <td>Creatted Date</td>
-            <td>
-                {{ assetdetail.createdDate }}
-            </td>
-            <td>Updated Date</td>
-            <td>
-                {{ assetdetail.updatedDate }}
-            </td>
-        </tr>
-    </table>
-</div>
-<h2>Category Relevent Information</h2>
+    <div class="head">
+        <div class="left">
+            <h1>
+                <span *ngIf="!isLoading; else loading">{{ assetdetail.assetName }}</span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-title"></div>
+                </ng-template>
+            </h1>
 
-<div class="container">
-    <table>
-        <tr>
-            <td>Category Name</td>
-            <td>sasdf</td>
-            <td>sdfsd</td>
-            <td>sfs</td>
-        </tr>
-    </table>
-</div>
-<h2>Buying Details</h2>
-<div class="container">
-    <table>
-        <tr>
-            <td>Vendor Name</td>
-            <td>
-                {{ assetdetail.vendorData }}
-            </td>
-            <td>Purchase Price</td>
-            <td>
-                {{ assetdetail.purchasePrice }}
-            </td>
-        </tr>
-        <tr>
+            <div class="detail">
+                <div class="description">
+                    <p *ngIf="!isLoading; else loading">
+                        {{ assetdetail.description }}
+                    </p>
+                    <ng-template #loading>
+                        <div class="skeleton skeleton-text"></div>
+                    </ng-template>
+
+                    
+                    <div class="action">
+                      
+                        <button *ngIf="!isLoading" (click)="updateasset(id)">Update</button>
+                        <button *ngIf="!isLoading" (click)="deleteasset(id)">Delete</button>
+                    </div>
+
+                </div>
 
 
-            <td>Purchase Date</td>
-            <td>
-                {{ assetdetail.purchaseDate }}
-            </td>
-        </tr>
-    </table>
-</div> -->
-
-
-<div class="container">
-    <h1>
-        <span *ngIf="!isLoading; else loading">{{ assetdetail.assetName }}</span>
-        <ng-template #loading>
-            <div class="skeleton skeleton-title"></div>
-        </ng-template>
-    </h1>
-
-    <div class="detail">
-        <div class="description">
-            <p *ngIf="!isLoading; else loading">
-                {{ assetdetail.description }}
-            </p>
-            <ng-template #loading>
-                <div class="skeleton skeleton-text"></div>
-            </ng-template>
-
-            <span *ngIf="!isLoading; else loading" [class]="assetdetail.assetStatusData">
-                {{ assetdetail.assetStatusData }}
-            </span>
-            <ng-template #loading>
-                <div class="skeleton skeleton-status"></div>
-            </ng-template>
-            
-            <button *ngIf="!isLoading" (click)="updateasset(id)">Update</button>
-            <button *ngIf="!isLoading" (click)="deleteasset(id)">Delete</button>
+            </div>
         </div>
-
-        <div class="link">
-            <button *ngIf="!isLoading">Checkout</button>
-            <button *ngIf="!isLoading">Retire</button>
-            <button *ngIf="!isLoading">Under Maintenance</button>
+        <div class="right">
+            <div class="link">
+                <span *ngIf="!isLoading; else loading" [class]="assetdetail.assetStatusData">
+                    {{ assetdetail.assetStatusData }}
+                </span>
+                <ng-template #loading>
+                    <div class="skeleton skeleton-status"></div>
+                </ng-template>
+                @if(assetdetail.assetStatusData!=undefined){
+                @switch (assetdetail.assetStatusData) {
+                @case ('Available') {
+                <button *ngIf="!isLoading">Check out</button>
+                <button *ngIf="!isLoading">Retire</button>
+                <button *ngIf="!isLoading">Under Maintenance</button>
+                }
+                @case ('Assigned') {
+                <button *ngIf="!isLoading">Check in</button>
+                }@case ('UnderMaintenance') {
+                <button *ngIf="!isLoading">Available</button>
+                }
+                }
+                }
+            </div>
         </div>
     </div>
+
+
+
 </div>
 
 <h2>Basic Information</h2>
@@ -221,29 +132,43 @@
 <h2>Category Relevant Information</h2>
 <div class="container">
     <table>
+        @for (item of relevatcategoriesinput; track $index) {
+
         <tr>
-            <td>Category Name</td>
-            <td>
-                <span *ngIf="!isLoading; else loading">sasdf</span>
-                <ng-template #loading>
-                    <div class="skeleton skeleton-text"></div>
-                </ng-template>
-            </td>
-            <td>
-                <span *ngIf="!isLoading; else loading">sdfsd</span>
-                <ng-template #loading>
-                    <div class="skeleton skeleton-text"></div>
-                </ng-template>
-            </td>
-            <td>
-                <span *ngIf="!isLoading; else loading">sfs</span>
-                <ng-template #loading>
-                    <div class="skeleton skeleton-text"></div>
-                </ng-template>
-            </td>
+            <td>{{item.name}}</td>
+            <td>{{item.value}}</td>
+            <!-- @if ($index%2==0) {
+    <ng-container [innerHTML]="leftcolumn"></ng-container>
+}@else{
+    {{rightcolumn}}
+} -->
         </tr>
+
+        }
+        <!-- <tr *ngFor="let r of relevatcategoriesinput; let i = index;">
+      <td>{{ r.name }}</td>
+      <td>
+        <span *ngIf="!isLoading; else loading">{{ r.value }}</span>
+        <ng-template #loading>
+          <div class="skeleton skeleton-text"></div>
+        </ng-template>
+      </td>
+      <td *ngIf="i % 2 === 1">
+        <span *ngIf="!isLoading; else loading">{{ r.name }}</span>
+        <ng-template #loading>
+          <div class="skeleton skeleton-text"></div>
+        </ng-template>
+      </td>
+      <td *ngIf="i % 2 === 1">
+        <span *ngIf="!isLoading; else loading">{{ r.value }}</span>
+        <ng-template #loading>
+          <div class="skeleton skeleton-text"></div>
+        </ng-template>
+      </td>
+    </tr> -->
     </table>
 </div>
+
 
 <h2>Buying Details</h2>
 <div class="container">

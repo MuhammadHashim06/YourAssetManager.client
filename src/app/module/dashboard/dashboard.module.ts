@@ -10,7 +10,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts'; 
-// import { NgChartsModule } from 'ng2-charts';
 
 
 @NgModule({
@@ -28,7 +27,6 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     RouterOutlet,
     ReactiveFormsModule,
     NgxChartsModule,
-    // NgChartsModule
   ]
 })
 export class DashboardModule { }

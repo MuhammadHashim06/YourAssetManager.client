@@ -92,13 +92,13 @@
               @if (AssetDTO.controls.assetCategoryData.value == c.id) {
               <option [value]="c.id" selected>{{c.categoryName}}</option>
               }@else if(AssetDTO.controls.assetCategoryData.value=='') {
-              <option selected value="-1">Select Asset Type</option>
+              <option selected value="-1">Select Asset Category</option>
               }@else {
               <option [value]="c.id">
                 {{ c.categoryName }}
               </option>}
               }}@else {
-              <option selected value="-1">Select Asset Type</option>
+              <option selected value="-1">Select Asset Category</option>
               <option [value]="c.id" *ngFor="let c of categories; ">{{c.categoryName}}</option>
               }
 
@@ -123,14 +123,14 @@
               @if (AssetDTO.controls.vendorData.value == v.id) {
               <option [value]="v.id" selected>{{v.name}}</option>
               }@else if(AssetDTO.controls.vendorData.value=='') {
-              <option selected value="-1">Select Asset Type</option>
+              <option selected value="-1">Select Asset Vendor</option>
               }@else {
               <option [value]="v.id">
                 {{ v.name }}
               </option>}
               }
               }@else {
-              <option selected value="-1">Select Asset Type</option>
+              <option selected value="-1">Select Asset Vendor</option>
               <option [value]="v.id" *ngFor="let v of vendors; ">{{v.name}}</option>
               }
             </select>
