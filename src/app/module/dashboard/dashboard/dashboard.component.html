@@ -5,14 +5,9 @@
             <p class="org-name">{{orgName}}</p>
             <p class="org-domain">{{orgDomain}}</p>
         </div>
-        <!-- <div class="profile-info">
-            <p><strong>Email:</strong> {{orgEmail}}</p>
-            <p><strong>Address:</strong> {{orgAddress}}</p>
-            <p><strong>Contact:</strong> {{orgContact}}</p>
-        </div> -->
         <div class="links">
             <button class="profile-button" routerLink="profile">Personal Profile</button>
-            <button class="profile-button">{{orgName}} - Profile</button>
+            <button class="profile-button" routerLink="updateorganization" >{{orgName}} - Profile</button>
         </div>
         <button class="logout" (click)="logout($event)">
             <i class="fa-solid fa-right-from-bracket"></i> Log Out
@@ -36,7 +31,7 @@
                 <input type="search" name="search" id="search" placeholder="        Search">
             </div>
             <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="orgIcon"
-                    alt="Account Icon">{{orgName}}</div>
+                    alt="Account Icon">{{userData.userName}}</div>
         </div>
         <div class="outer">
 

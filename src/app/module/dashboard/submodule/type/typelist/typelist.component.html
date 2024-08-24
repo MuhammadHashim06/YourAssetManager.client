@@ -29,6 +29,7 @@
             <tr *ngIf="isadd">
                 <td>
                     <input type="text" placeholder="Enter Asset Type Name" formControlName="assetTypeName">
+                    <span class="error" *ngIf="assettype.controls.assetTypeName.touched && assettype.controls.assetTypeName.invalid ">{{inputerrormessages.required}}</span>
                 </td>
                 <td>
                     <input type="text" placeholder="Enter Description" formControlName="description">

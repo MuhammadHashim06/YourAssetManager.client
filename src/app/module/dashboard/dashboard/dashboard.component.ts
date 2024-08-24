@@ -8,8 +8,8 @@ import { catchError, throwError } from 'rxjs';
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss'
 })
-export class DashboardComponent {
-  userData=sessionStorage.getItem('userData')
+export class DashboardComponent  {
+  userData :any
   closeProfile($event: MouseEvent) {
     $event.stopPropagation();
     this.isprofile = false
@@ -20,8 +20,7 @@ export class DashboardComponent {
     this.router.navigate(['auth/login']);
   }
   orgEmail: any;
-  orgAddress: any;
-  orgContact: any;
+
   orgDomain: any;
   profilecard($event: MouseEvent) {
     $event.stopPropagation()
@@ -30,25 +29,30 @@ export class DashboardComponent {
 
   router = inject(Router)
   isprofile = false;
-  constructor(private organization: OrganizationService) { 
+  constructor(private organization: OrganizationService) {
+
+    this.userData=sessionStorage.getItem('userData')
+    if(this.userData!=undefined){
+      this.userData=JSON.parse(this.userData)
+    }
     this.getorganization()
   }
   orgInfo: any
   orgName: string = ''
   orgIcon: string = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
- 
 
-  getorganization(){
+
+  getorganization() {
     this.organization.getOrganization().pipe(
       catchError(error => {
         console.error(error)
-        if(error.status==404){
+        if (error.status == 404) {
           this.router.navigateByUrl('dashboard/organization')
         }
         return throwError(error)
       })
     ).subscribe(res => {
-console.log(res);
+      console.log(res);
 
       if (res.status == 404) {
         this.router.navigateByUrl('dashboard/organization')

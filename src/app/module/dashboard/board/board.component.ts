@@ -40,22 +40,45 @@ export class BoardComponent {
   ];
 
   // Define the chart legend
-  public chartLegend: boolean = true;
+  public chartLegend: boolean = false;
 
   // Define the chart type
   public chartPlugins: any[] = [];
 
 
 
-  view: [number, number] = [600, 300]; // Size of the chart
-
+  view: [number, number] = [400, 300]; // Size of the chart
+  numberCardData:Array<any>=[]
   // Chart data
+  loadstats(){
+    this.loadAssetCategoryData();
+    this.loadAssetValueData();
+   this.numberCardData = [
+      {
+        "name": "Total Assets",
+        "value": this.stats.assetCount
+      },
+      {
+        "name": "Categories",
+        "value": this.stats.catagoryCount
+      },
+      {
+        "name": "Vendors",
+        "value": this.stats.vendorCount
+      },
+      {
+        "name": "Asset Types",
+        "value": this.stats.assetTypeCount
+      }
+    ];
+  }
   assetCategoryData: any[] = [];
   assetstatus: any[] = [];
+ 
 
   // Chart color scheme
   colorScheme: Color = {
-    domain: ['rgba(0, 182, 155, 1)', 'rgba(98, 38, 239, 1)', 'rgba(239, 56, 38, 1)', 'rgba(255, 167, 86, 1)'],
+    domain: ['rgba(0, 182, 155, 0.75)', 'rgba(98, 38, 239, 0.75)', 'rgba(239, 56, 38, 0.75)', 'rgba(255, 167, 86, 0.75)'],
     name: 'coolScheme', // Optional
     selectable: true,   // Optional
     group: ScaleType.Ordinal
@@ -70,8 +93,7 @@ export class BoardComponent {
 
     this.boardservice.getallstats().pipe().subscribe(res => {
       this.stats = res.responseData
-      this.loadAssetCategoryData();
-    this.loadAssetValueData();
+      this.loadstats()
     })
     
   }

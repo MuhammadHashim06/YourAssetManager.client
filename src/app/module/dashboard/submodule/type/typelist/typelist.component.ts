@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AssettypeService } from '../../../../../core/services/assettype/assettype.service';
 import { catchError, throwError } from 'rxjs';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { constant } from '../../../../../core/constant/constant';
 
 @Component({
   selector: 'app-typelist',
@@ -9,6 +10,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
   styleUrl: './typelist.component.scss'
 })
 export class TypelistComponent implements OnInit {
+  inputerrormessages = constant.inputerrormessage
 updatetype() {
   const data={
 id:this.id,
@@ -24,6 +26,7 @@ description:this.assettype.controls['description'].value
 }
   id=0
 savetype() {
+  if(this.assettype.valid){
   this.isadd=false
   this.service.addassettype(this.assettype.value).pipe().subscribe(res=>{
     console.log(res);
@@ -32,8 +35,12 @@ savetype() {
       description: ''
     })
     this.getassettype()
-
   })
+}else
+{
+  this.assettype.markAllAsTouched()
+}
+
 }
 
   assettype = new FormGroup({

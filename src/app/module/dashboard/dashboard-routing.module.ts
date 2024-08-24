@@ -4,6 +4,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { OrganizationComponent } from './organization/organization.component';
 import { BoardComponent } from './board/board.component';
 import { ProfileComponent } from './profile/profile.component';
+import { UpdateorganizationComponent } from './updateorganization/updateorganization.component';
 
 const routes: Routes = [{
     path: '',
@@ -35,6 +36,9 @@ const routes: Routes = [{
       },{
         path:'profile',
         component:ProfileComponent
+      },{
+        path:'updateorganization',
+        component:UpdateorganizationComponent
       }
     ]
   }, {
