@@ -16,6 +16,6 @@ export class ProfileService {
       formData.append('ProfilePicture', image, image.name);
     }
     
-    return this.http.post(`${this.apiendpoint.UpdateUserProfile}?UserName=${userName}`,formData)
+    return this.http.put(`${this.apiendpoint.UpdateUserProfile}?UserName=${userName}`,formData)
   }
 }

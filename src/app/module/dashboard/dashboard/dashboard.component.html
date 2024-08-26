@@ -1,9 +1,11 @@
-<div class="orgInfo" *ngIf="isprofile">
+<div class="orgInfo" *ngIf="isProfileVisible">
     <div class="profilecard">
         <div class="profile-header">
-            <img [src]="ProfileIcon" alt="Organization Icon" class="profile-icon">
-            <p class="org-name">{{orgName}}</p>
-            <p class="org-domain">{{orgDomain}}</p>
+            <img [src]="currentuser.imagePath ||  ProfileIcon" alt="Organization Icon" class="profile-icon">
+            <!-- <p class="org-name">{{orgName}}</p> -->
+            <p class="user-name">{{currentuser.userName}}</p>
+
+            <!-- <p class="org-domain">{{orgDomain}}</p> -->
         </div>
         <div class="links">
             <button class="profile-button" routerLink="profile">Personal Profile</button>
@@ -30,8 +32,8 @@
                 <img src="menu.svg" alt="horizantal nav">
                 <input type="search" name="search" id="search" placeholder="        Search">
             </div>
-            <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="ProfileIcon"
-                    alt="Account Icon">{{userData.userName}}</div>
+            <div class="profile" (click)="toggleProfileCard($event)"><img class="profile-pic" [src]="currentuser.imagePath ||  ProfileIcon"
+                    alt="Account Icon">{{currentuser.userName}}</div>
         </div>
         <div class="outer">
 

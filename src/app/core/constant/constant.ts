@@ -72,75 +72,82 @@ export const apiEndPoint = {
       "http://localhost:5235/YourAssetManager.Server/AssetManagement/GetAssetById",
   },
   dashboard: {
-    GetDashBoardStatiticsData: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetDashBoardStatiticsData'
+    GetDashBoardStatiticsData: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetDashBoardStatiticsData',
+    GetAllPendingAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllPendingAssetRequests',
+    GetAllAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllAssetRequests'
   },
-  user:{
+  user: {
     AssignAssetManager: 'http://localhost:5235/YourAssetManager.Server/UserManagement/AssignAssetManager',
-    DismissAssetManage:'http://localhost:5235/YourAssetManager.Server/UserManagement/DismissAssetManager',
-    DeactivateAccount:'http://localhost:5235/YourAssetManager.Server/UserManagement/DeactivateAccount',
-    ActivateAccount:'http://localhost:5235/YourAssetManager.Server/UserManagement/ActivateAccount',
-    GetAllUser:'http://localhost:5235/YourAssetManager.Server/UserManagement/GetAllUser',
-    GetUserById:'http://localhost:5235/YourAssetManager.Server/UserManagement/GetUserById'
-  },profile:{
+    DismissAssetManage: 'http://localhost:5235/YourAssetManager.Server/UserManagement/DismissAssetManager',
+    DeactivateAccount: 'http://localhost:5235/YourAssetManager.Server/UserManagement/DeactivateAccount',
+    ActivateAccount: 'http://localhost:5235/YourAssetManager.Server/UserManagement/ActivateAccount',
+    GetAllUser: 'http://localhost:5235/YourAssetManager.Server/UserManagement/GetAllUser',
+    GetUserById: 'http://localhost:5235/YourAssetManager.Server/UserManagement/GetUserById',
+    GetMyData: 'http://localhost:5235/YourAssetManager.Server/UserManagement/GetMyData'
+  }, profile: {
     UpdateUserProfile:
-   'http://localhost:5235/YourAssetManager.Server/UserManagement/UpdateUserProfile'
+      'http://localhost:5235/YourAssetManager.Server/UserManagement/UpdateUserProfile'
+  },
+  request: {
+    sentrequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/RequestAsset',
+    DeclineAssetRequest:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/DeclineAssetRequest',
   }
 };
 export const menu = [{
   path: 'home',
   label: 'Home',
-  icon:'fas fa-tachometer-alt',
+  icon: 'fas fa-tachometer-alt',
   role: ['OrganizationOwner', 'AssetManager']
 }, {
   path: 'user',
   label: 'User',
-  icon:'fas fa-users',
+  icon: 'fas fa-users',
   role: ['OrganizationOwner', 'AssetManager']
 }, {
   path: 'asset',
   label: 'Asset',
-  icon:'fas fa-basket-shopping',
+  icon: 'fas fa-basket-shopping',
   role: ['OrganizationOwner', 'AssetManager']
 
 }, {
   path: 'categories',
   label: 'Categories',
-  icon:'fas fa-box',
+  icon: 'fas fa-box',
   role: ['OrganizationOwner', 'AssetManager']
-},{
+}, {
   path: 'type',
   label: 'Type',
-  icon:'fa-solid fa-table-list',
+  icon: 'fa-solid fa-table-list',
   role: ['OrganizationOwner', 'AssetManager']
-},{
+}, {
   path: 'vendor',
   label: 'Vendor',
-  icon:'fas fa-truck',
+  icon: 'fas fa-truck',
   role: ['OrganizationOwner', 'AssetManager']
 },
+// {
+//   path: 'history',
+//   label: 'History',
+//   icon:'fas fa-history',
+//   role: ['OrganizationOwner', 'AssetManager']
+// },
 {
-  path: 'history',
-  label: 'History',
-  icon:'fas fa-history',
-  role: ['OrganizationOwner', 'AssetManager']
-},
-{
-  path: 'assetrequest',
+  path: 'requests/assetrequests',
   label: 'Request',
-  icon:'fa-solid fa-bell',
+  icon: 'fa-solid fa-bell',
   role: ['OrganizationOwner', 'AssetManager']
 },
 {
-  path: 'request',
+  path: 'requests/yourrequests',
   label: 'Your Requests',
-  icon:'fa-solid fa-code-pull-request',
-  role: ['OrganizationOwner', 'AssetManager','Employee']
+  icon: 'fa-solid fa-code-pull-request',
+  role: ['OrganizationOwner', 'AssetManager', 'Employee']
 },
 {
   path: 'profile',
   label: 'Profile',
-  icon:'fas fa-user',
-  role: ['OrganizationOwner', 'AssetManager','Employee']
+  icon: 'fas fa-user',
+  role: ['OrganizationOwner', 'AssetManager', 'Employee']
 }
 ]
 export const constant = {
@@ -195,7 +202,7 @@ export const constant = {
     },
   }
 }
-export const ProfileIcon  = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+export const ProfileIcon = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
 export const response = {
   code: 404,
   message: 'Page Not Found',

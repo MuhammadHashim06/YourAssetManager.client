@@ -1,0 +1,52 @@
+<div class="requestdetail" *ngIf="ismodel" (click)="togglemodel()">
+    <div class="innerbody" (click)="stoppropagation($event)">
+        <h1>
+            Asset detail
+        </h1>
+        <table class="assetdetail">
+            <tr>
+                <td>
+                    Request By
+                </td>
+                <td>
+                    {{selectedrequest.requesterUserName}}
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Description
+                </td>
+                <td>
+                    {{selectedrequest.requestDescription}}
+                </td>
+            </tr>
+        </table>
+        <div class="links" *ngIf="selectedrequest.requestStatus=='PENDING'"><button class="approve"
+                >Approve</button>
+            <button class="decline" (click)="declinerequest(selectedrequest.requestId)">Decline</button>
+        </div>
+        
+    </div>
+
+</div>
+
+<h1>All Request</h1>
+
+<div class="container">
+    <table>
+        <thead>
+            <th>ID</th>
+            <th>Request by</th>
+            <th>Description</th>
+            <th>Status</th>
+        </thead>
+        <tbody>
+            <tr *ngFor="let r of allrequest" (click)="getbyid(r.requestId)">
+                <td>{{ r.requestId }}</td>
+                <td>{{ r.requesterUserName }}</td>
+                <td>{{ r.requestDescription }}</td>
+                <td [class]="r.requestStatus">{{ r.requestStatus }}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

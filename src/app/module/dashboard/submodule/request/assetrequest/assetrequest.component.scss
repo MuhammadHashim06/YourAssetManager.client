@@ -1,0 +1,77 @@
+thead {
+  background-color: rgb(241, 244, 249);
+}
+table tbody tr:hover {
+  cursor: pointer;
+  background-color: rgb(250, 250, 250);
+}
+.PENDING {
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgba(186, 41, 255, 1);
+  background-color: rgba(186, 41, 255, 0.2);
+}
+.DECLINED {
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgba(239, 56, 38, 1);
+  background-color: rgba(239, 56, 38, 0.2);
+}
+.APPROVED {
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgba(0, 182, 155, 1);
+  background-color: rgba(0, 182, 155, 0.2);
+}
+.CANCELED {
+  text-align: center;
+  padding: 5px 10px;
+  border-radius: 5px;
+  color: rgba(255, 167, 86, 1);
+  background-color: rgba(255, 167, 86, 0.2);
+}
+.requestdetail {
+  background-color: rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  display: grid;
+  place-items: center;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+.innerbody {
+  background-color: white;
+  padding: 5%;
+  border-radius: 10px;
+  animation: updown 0.5s ease;
+}
+@keyframes updown {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+.links{
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+}
+.links button {
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
+.links .approve {
+  background-color: green;
+  color: white;
+}
+.links .decline {
+  background-color: red;
+  color: white;
+}

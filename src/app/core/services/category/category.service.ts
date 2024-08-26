@@ -56,11 +56,11 @@ export class CategoryService {
     );
   }
 
-  updatecategorydata(): Observable<any> {
-    const cacheKey = 'category';
-    return this.http.get(this.endpoint.GetAllAssetCategories).pipe(
-      tap(data => this.cache.set(cacheKey, data)),
-      shareReplay(1)
-    );
-  }
+  // updatecategorydata(): Observable<any> {
+  //   const cacheKey = 'category';
+  //   return this.http.get(this.endpoint.GetAllAssetCategories).pipe(
+  //     tap(data => this.cache.set(cacheKey, data)),
+  //     shareReplay(1)
+  //   );
+  // }
 }

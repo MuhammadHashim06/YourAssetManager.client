@@ -31,6 +31,8 @@ export class UserService {
   }
   dismissasassetmanager(id:any){
     return this.http.post(this.apiendpoint.DismissAssetManage,id)
-
+  }
+  getmydata():Observable<any>{
+    return this.http.get(`${this.apiendpoint.GetMyData}`)
   }  
 }

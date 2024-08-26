@@ -13,4 +13,10 @@ export class BoardService {
   getallstats():Observable<any>{
     return this.http.get(this.apiendpoint.GetDashBoardStatiticsData);
   }
+  getallrequests():Observable<any>{
+return this.http.get(this.apiendpoint.GetAllAssetRequests)
+  }
+  getpendingrequests():Observable<any>{
+    return this.http.get(this.apiendpoint.GetAllPendingAssetRequests)
+  }
 }

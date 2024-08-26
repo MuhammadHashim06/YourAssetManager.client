@@ -34,9 +34,9 @@ export class AuthService {
   }
 
   verifyemail(email:{}):Observable<Iregisterresponse>{
-    return this.http.post<Iregisterresponse>(`${this.registerapi.emailverifyforgetpassword}`,email,)
+    return this.http.post<Iregisterresponse>(`${this.registerapi.emailverifyforgetpassword}`,email)
   }
   resetemail(password:{}):Observable<Iregisterresponse>{
-    return this.http.post<Iregisterresponse>(`${this.registerapi.setresetpassword}`,password,)
+    return this.http.post<Iregisterresponse>(`${this.registerapi.setresetpassword}`,password)
   }
 }

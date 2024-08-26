@@ -1,0 +1,29 @@
+<div class="head">
+    <h1>
+        Assets Request
+    </h1>
+    <button>
+        Create Request
+    </button>
+</div>
+<div class="container">
+    <h2 style="text-align: center;">Request Detail</h2>
+    <form action="">
+        <table>
+
+            <tr>
+                <td>
+                    <label for="">Description</label>
+                    <textarea name="AssetRequestDescription" id="AssetRequestDescription"
+                        placeholder="Input your request details..." [(ngModel)]="requestDescription"></textarea>
+                </td>
+            </tr>
+        </table>
+        <div class="SendRequestbuttonDiv">
+            <button (click)="sendrequest($event)" >
+                <i class="fa-solid fa-paper-plane"></i>
+                Send
+            </button>
+        </div>
+    </form>
+</div>

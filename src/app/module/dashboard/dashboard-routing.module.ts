@@ -22,7 +22,7 @@ const routes: Routes = [{
         loadChildren: () => import('./submodule/user/user.module').then(m => m.UserModule)
       },
       {
-        path:'category',
+        path:'categories',
         loadChildren:()=>import('./submodule/category/category.module').then(m=>m.CategoryModule)
       },{
         path:'vendor',
@@ -39,6 +39,9 @@ const routes: Routes = [{
       },{
         path:'updateorganization',
         component:UpdateorganizationComponent
+      },{
+        path:'requests',
+        loadChildren:()=>import('./submodule/request/request.module').then(m=>m.RequestModule)
       }
     ]
   }, {

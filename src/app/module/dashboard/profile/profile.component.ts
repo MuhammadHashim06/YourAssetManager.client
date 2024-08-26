@@ -10,6 +10,18 @@ import { ProfileService } from '../../../core/services/profile/profile.service';
   styleUrl: './profile.component.scss'
 })
 export class ProfileComponent implements OnInit {
+
+  LogData: any
+  imageUrl: string = 'Image.svg'
+  selectedImage: any;
+  router = inject(Router);
+  inputerrormessage = constant.inputerrormessage
+
+  Userdata = new FormGroup({
+    email: new FormControl('', Validators.required),
+    userName: new FormControl('', Validators.required),
+  })
+
   onselect(event: any) {
     if (event.target.files) {
       console.log(event.target.files);
@@ -22,19 +34,12 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  imageUrl: string = 'Image.svg'
-  selectedImage: any;
-
-  router = inject(Router);
-  inputerrormessage = constant.inputerrormessage
   constructor(private profileservice: ProfileService) { }
   ngOnInit(): void {
-    const userDatastring = sessionStorage.getItem('userData')
-    if (userDatastring != null || userDatastring != undefined) {
-
-
-      this.LogData = JSON.parse(userDatastring)
-      console.log(this.LogData);
+    const currentuserstring = sessionStorage.getItem('currentuser')
+    if (currentuserstring != null || currentuserstring != undefined) {
+      this.LogData = JSON.parse(currentuserstring)
+      console.log('Current User',this.LogData);
       this.Userdata.setValue({
         email: this.LogData.email,
         userName: this.LogData.userName,
@@ -44,25 +49,14 @@ export class ProfileComponent implements OnInit {
       }
     }
   }
-  LogData: any
-  Userdata = new FormGroup({
-    email: new FormControl('', Validators.required),
-    userName: new FormControl('', Validators.required),
-  })
-
   Save($event: MouseEvent) {
     $event.preventDefault()
-
     let userName = '';
     if (this.Userdata.controls.userName.value != this.LogData.userName) {
       userName = this.Userdata.controls.userName.value || ''
     }
     this.profileservice.updateprofile(userName, this.selectedImage).pipe().subscribe(res => {
       console.log(res);
-
     })
-
-
   }
-
 }
