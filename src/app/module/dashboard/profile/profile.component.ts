@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
     if (this.Userdata.controls.userName.value != this.LogData.userName) {
       userName = this.Userdata.controls.userName.value || ''
     }
-    this.profileservice.updateprofile(userName,this.selectedImage).pipe().subscribe(res=>{
+    this.profileservice.updateprofile(userName, this.selectedImage).pipe().subscribe(res => {
       console.log(res);
 
     })

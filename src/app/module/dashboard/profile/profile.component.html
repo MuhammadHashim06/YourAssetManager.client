@@ -12,6 +12,7 @@
       </button>
       <input
         type="file"
+        name="file"
         (change)="onselect($event)"
         #fileInput
         class="file-input"
@@ -26,6 +27,7 @@
             </td>
             <td>
               <input
+              name="email"
                 type="text"
                 [value]="this.Userdata.controls['email'].value"
                 disabled

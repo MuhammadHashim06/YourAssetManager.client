@@ -12,7 +12,10 @@ export class ProfileService {
 
   updateprofile(userName :string , image:File){
     const formData = new FormData();
-    formData.append('ProfilePicture', image, image.name);
+    if(image!=undefined){
+      formData.append('ProfilePicture', image, image.name);
+    }
+    
     return this.http.post(`${this.apiendpoint.UpdateUserProfile}?UserName=${userName}`,formData)
   }
 }
