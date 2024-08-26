@@ -1,12 +1,21 @@
 <h1>Personal Imformation</h1>
 <div class="container">
-  
-
   <div class="form">
     <div class="file-upload-wrapper">
-      <img [src]="imageUrl" alt="Profile Image" class="preview-image">
-      <button type="button" class="custom-upload-button" (click)="fileInput.click()">Upload Image</button>
-      <input type="file" (change)="onselect($event)" #fileInput class="file-input">
+      <img [src]="imageUrl" alt="Profile Image" class="preview-image" />
+      <button
+        type="button"
+        class="custom-upload-button"
+        (click)="fileInput.click()"
+      >
+        Upload Image
+      </button>
+      <input
+        type="file"
+        (change)="onselect($event)"
+        #fileInput
+        class="file-input"
+      />
     </div>
     <form [formGroup]="Userdata">
       <div class="fields">
@@ -16,9 +25,11 @@
               <label for="email">Email Address</label>
             </td>
             <td>
-
-
-              <input type="text" [value]="this.Userdata.controls['email'].value" disabled>
+              <input
+                type="text"
+                [value]="this.Userdata.controls['email'].value"
+                disabled
+              />
             </td>
           </tr>
           <tr>
@@ -26,26 +37,30 @@
               <label for="username">Username</label>
             </td>
             <td>
-
-
-              <input type="text" name="username" id="username" value="" formControlName="userName">
+              <input
+                type="text"
+                name="username"
+                id="username"
+                value=""
+                formControlName="userName"
+              />
             </td>
           </tr>
           <tr>
             <td>
-
-
               <label for="password">Password</label>
             </td>
             <td>
-
-
-              <input type="password" name="password" id="password" placeholder="  " disabled>
-
+              <input
+                type="password"
+                name="password"
+                id="password"
+                placeholder="  "
+                disabled
+              />
             </td>
           </tr>
         </table>
-
       </div>
     </form>
     <div class="link">
@@ -53,8 +68,6 @@
     </div>
   </div>
 </div>
-
-
 
 <!-- <div class="row">
     <div class="small-12 medium-2 large-2 columns">

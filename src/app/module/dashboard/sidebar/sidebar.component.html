@@ -6,7 +6,11 @@
   </div>
   <div class="navigation">
     <ul>
-      <li routerLinkActive="active-li"><a routerLink="/dashboard/home" routerLinkActive="active-link"><i
+      @for (m of menu; track $index) {
+      <li routerLinkActive="active-li"><a [routerLink]="m.path" routerLinkActive="active-link"><i
+        [class]="m.icon"></i> {{m.label}}</a></li>
+      }
+      <!-- <li routerLinkActive="active-li"><a routerLink="/dashboard/home" routerLinkActive="active-link"><i
             class="fas fa-tachometer-alt"></i> Dashboard</a></li>
       <li routerLinkActive="active-li"><a routerLink="user" routerLinkActive="active-link"><i class="fas fa-users"></i>
           Users</a></li>
@@ -22,12 +26,22 @@
       <li routerLinkActive="active-li"><a routerLink="vendor" routerLinkActive="active-link"><i
             class="fas fa-truck"></i>
           Vendor</a></li>
-      <li routerLinkActive="active-li"><a routerLink="history" routerLinkActive="active-link"><i
-            class="fas fa-history"></i> History</a></li>
 
       <li routerLinkActive="active-li"><a routerLink="profile" routerLinkActive="active-link"><i
             class="fas fa-user"></i>
-          Profile</a></li>
+          Profile</a></li> -->
     </ul>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+<!-- 
+<li routerLinkActive="active-li"><a routerLink="history" routerLinkActive="active-link"><i
+  class="fas fa-history"></i> History</a></li> -->

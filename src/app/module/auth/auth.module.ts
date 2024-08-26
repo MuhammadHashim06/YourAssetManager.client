@@ -30,4 +30,10 @@ import { CreateorganizationComponent } from './createorganization/createorganiza
     FormsModule,
 ]
 })
-export class AuthModule { }
+export class AuthModule {
+
+  constructor(){
+    sessionStorage.clear()
+  }
+
+ }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { menu } from '../../../core/constant/constant';
 
 @Component({
   selector: 'app-sidebar',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrl: './sidebar.component.scss'
 })
 export class SidebarComponent {
+
+
+  menu= menu
+  constructor(){
+
+  }
 
 }

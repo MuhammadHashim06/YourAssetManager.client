@@ -1,6 +1,8 @@
 .profilepic img{
+    object-fit: cover;
     width: 180px;
     border-radius: 90px;
+    aspect-ratio: 1/1;
 }
 form{
     display: flex;

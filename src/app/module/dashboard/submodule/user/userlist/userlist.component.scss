@@ -20,8 +20,11 @@
   box-shadow: 6px 6px 54px 34px rgba(0, 0, 0, 0.03);
   cursor: pointer;
   .ptofilepic img {
+    aspect-ratio: 1;
     border-radius: 50%;
     max-width: 100px;
+    object-fit: cover;
+
   }
   .details {
     display: flex;

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../../../core/services/user/user.service';
 import { Router } from '@angular/router';
+import { ProfileIcon } from '../../../../../core/constant/constant';
 
 @Component({
   selector: 'app-userlist',
@@ -12,6 +13,7 @@ showdetail(id: any) {
   this.router.navigateByUrl(`dashboard/user/${id}`)
 }
 
+imagepath = ProfileIcon
   allusers: Array<any> = []
   constructor(private userservice: UserService,private router:Router) { }
   ngOnInit(): void {

@@ -39,7 +39,7 @@ export class DashboardComponent  {
   }
   orgInfo: any
   orgName: string = ''
-  orgIcon: string = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
+  ProfileIcon: string = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png'
 
 
   getorganization() {
@@ -58,8 +58,8 @@ export class DashboardComponent  {
         this.router.navigateByUrl('dashboard/organization')
       } else {
         this.orgInfo = res.responseData.organizations
-        if (this.orgIcon == '') {
-          this.orgIcon = 'person.svg'
+        if (this.ProfileIcon == '') {
+          this.ProfileIcon = 'person.svg'
         }
         this.orgName = this.orgInfo.organizationName
         this.orgDomain = this.orgInfo.organizationDomain

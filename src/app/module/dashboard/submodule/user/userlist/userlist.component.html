@@ -4,7 +4,7 @@
 
 <div class="employeelist">
     <div class="emaployeecard"  *ngFor="let u of allusers" (click)="showdetail(u.id)" >
-        <div class="ptofilepic"><img src="https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png" alt="addphoto.svg"></div>
+        <div class="ptofilepic"><img [src]="u.imagePath || imagepath" alt="addphoto.svg"></div>
             <div class="details">
                 <h2>{{u.userName}}</h2>
                 <span class="roles">{{u.roles.$values[0]}}</span>

@@ -1,7 +1,7 @@
 <div class="orgInfo" *ngIf="isprofile">
     <div class="profilecard">
         <div class="profile-header">
-            <img [src]="orgIcon" alt="Organization Icon" class="profile-icon">
+            <img [src]="ProfileIcon" alt="Organization Icon" class="profile-icon">
             <p class="org-name">{{orgName}}</p>
             <p class="org-domain">{{orgDomain}}</p>
         </div>
@@ -30,7 +30,7 @@
                 <img src="menu.svg" alt="horizantal nav">
                 <input type="search" name="search" id="search" placeholder="        Search">
             </div>
-            <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="orgIcon"
+            <div class="profile" (click)="profilecard($event)"><img class="profile-pic" [src]="ProfileIcon"
                     alt="Account Icon">{{userData.userName}}</div>
         </div>
         <div class="outer">
