@@ -1,1 +1,63 @@
-<p>userdetail works!</p>
+<h1>User Detail</h1>
+
+<div class="container">
+  <div class="profilepic">
+    <img [src]="profilephoto" alt="" />
+  </div>
+  <form action="">
+    <table>
+        <tr>
+            <td><label for="name">Status:</label></td>
+            <td>
+                  @if(Activestatus){
+                    <button class="activate" >
+                      Activated
+                    </button>}@else {
+                        <button class="deactivate" >
+                            Deactivated
+                        </button>
+                    }
+            </td>
+        </tr>
+      <tr>
+        <td>
+          <label for="name">User Name:</label>
+        </td>
+        <td>
+          <input type="text" [value]="userdetail.userName" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="email">Email Address:</label>
+        </td>
+        <td>
+          <input type="text" [value]="userdetail.email" disabled />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="role">User Role</label>
+        </td>
+        <td>
+          <input type="text" [value]="assignedrole" disabled />
+          @if (assignedrole=='Employee' && Activestatus ) {<button class="roleaction" (click)="Setrole($event)">
+            Assign As Asset Manger</button
+          >}@else if(Activestatus) {
+          <button class="roleaction" (click)="Setrole($event)">Dismiss from Asset Manger</button>
+          }
+        </td>
+      </tr>
+    </table>
+  </form>
+  <div class="links">
+    @if(Activestatus){
+    <button class="deactivate" (click)="ChangeActiveStatus()">
+      Deactivate Account
+    </button>}@else {
+        <button class="activate" (click)="ChangeActiveStatus()">
+            Activate Account
+        </button>
+    }
+  </div>
+</div>

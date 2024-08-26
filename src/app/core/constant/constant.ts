@@ -73,6 +73,14 @@ export const apiEndPoint = {
   },
   dashboard: {
     GetDashBoardStatiticsData: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetDashBoardStatiticsData'
+  },
+  user:{
+    AssignAssetManager: 'http://localhost:5235/YourAssetManager.Server/UserManagement/AssignAssetManager',
+    DismissAssetManage:'http://localhost:5235/YourAssetManager.Server/UserManagement/DismissAssetManager',
+    DeactivateAccount:'http://localhost:5235/YourAssetManager.Server/UserManagement/DeactivateAccount',
+    ActivateAccount:'http://localhost:5235/YourAssetManager.Server/UserManagement/ActivateAccount',
+    GetAllUser:'http://localhost:5235/YourAssetManager.Server/UserManagement/GetAllUser',
+    GetUserById:'http://localhost:5235/YourAssetManager.Server/UserManagement/GetUserById'
   }
 };
 export const menu = [{

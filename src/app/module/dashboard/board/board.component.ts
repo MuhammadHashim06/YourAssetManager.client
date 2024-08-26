@@ -47,7 +47,7 @@ export class BoardComponent {
 
 
 
-  view: [number, number] = [400, 300]; // Size of the chart
+  view: [number, number] = [500, 300]; // Size of the chart
   numberCardData:Array<any>=[]
   // Chart data
   loadstats(){

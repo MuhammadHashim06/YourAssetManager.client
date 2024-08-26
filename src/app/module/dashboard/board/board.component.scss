@@ -4,13 +4,16 @@
 }
 .dashboard-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     gap: 20px;
-    background-color: white;
+    // background-color: white;
     padding: 10px 10px;
     border-radius: 5px;
-    border: 1px solid rgba(185, 185, 185, 0.5);
+    // border: 1px solid rgba(185, 185, 185, 0.5);
 }
 .statscards{
     border-radius: 100px;
+}
+.chart-container{
+    background-color: white;
 }

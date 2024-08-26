@@ -1,0 +1,65 @@
+.profilepic img{
+    width: 180px;
+    border-radius: 90px;
+}
+form{
+    display: flex;
+    justify-content: center;
+}
+form table{
+ width: 60%;   
+}
+.profilepic{
+    display: grid;
+    place-items: center;
+}
+.links .deactivate{
+    background-color:red;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+
+}
+.links{
+    display: flex;
+    justify-content: right;
+    // width: 60%;
+}
+.links .activate{
+  
+    background-color:green;
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-size: 1em;
+    border-radius: 5px;
+}
+
+.roleaction{
+    padding: 5px 10px;
+    font-size: 1em;
+    border: none;
+    border-radius: 5px;
+    background-color: rgba(72, 128, 255, 1);
+    color: white;
+}
+
+
+.deactivate{
+    color:red;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.activate{
+  
+    color:green;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
