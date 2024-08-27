@@ -17,4 +17,7 @@ private apiendpoint=apiEndPoint.organizationManagement
   setOrganization(data:any):Observable<any>{
     return this.http.post(this.apiendpoint.createOrganization,data)
   }
+  updateorganziation(data:any){
+    return this.http.put(this.apiendpoint.updateOrganization, data)
+  }
 }

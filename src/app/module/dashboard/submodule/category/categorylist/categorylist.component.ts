@@ -44,7 +44,7 @@ export class CategorylistComponent implements OnInit {
     })
   }
   edit(arg0: number) {
-    this.router.navigateByUrl(`dashboard/category/add?id=${arg0}`)
+    this.router.navigateByUrl(`dashboard/categories/add?id=${arg0}`)
   }
   delete(id: number) {
     this.dataload = false

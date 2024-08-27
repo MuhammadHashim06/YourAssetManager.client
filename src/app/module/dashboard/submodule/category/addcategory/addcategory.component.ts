@@ -21,13 +21,13 @@ Update(arg0: number) {
   this.service.updatecategory(data).pipe(catchError(error=>{
     if(error.status==400){
       alert('No changes Found')
-      this.router.navigateByUrl('/dashboard/category');
+      this.router.navigateByUrl('/dashboard/categories');
 
           }
     return throwError(error)
   })).subscribe(res=>{
     
-    this.router.navigateByUrl('/dashboard/category');
+    this.router.navigateByUrl('/dashboard/categories');
     
   })
 }
@@ -129,7 +129,7 @@ Update(arg0: number) {
       ).subscribe({
         next: (response: any) => {
           console.log('Category created successfully:', response);
-          this.router.navigateByUrl('/dashboard/category');
+          this.router.navigateByUrl('/dashboard/categories');
         },
         error: (error) => {
           console.error('Failed to create category:', error);

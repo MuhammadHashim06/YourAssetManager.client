@@ -74,7 +74,8 @@ export const apiEndPoint = {
   dashboard: {
     GetDashBoardStatiticsData: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetDashBoardStatiticsData',
     GetAllPendingAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllPendingAssetRequests',
-    GetAllAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllAssetRequests'
+    GetAllAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllAssetRequests',
+    search : 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/search'
   },
   user: {
     AssignAssetManager: 'http://localhost:5235/YourAssetManager.Server/UserManagement/AssignAssetManager',

@@ -1,46 +1,117 @@
+<div class="searchmodel" *ngIf="isSearch" (click)="toggleSearch($event)">
+    <div class="search" (click)="stoppropagation($event)">
+        <div class="searchdetail">
+            <input type="text" placeholder="Enter any keyword to search" (input)="search($event)" /><select
+                name="search" id="search" (change)="settable($event)">
+                <option value="Assets,Categories,Users,AssetTypes" selected>All</option>
+                <option value="Assets">Assets</option>
+                <option value="Categories">Categories</option>
+                <option value="Users">Users</option>
+                <option value="Vendors">Vendors</option>
+                <option value="AssetTypes">AssetTypes</option>
+            </select>
+        </div>
+        <div class="searchresult">
+            <div>
+                @if(searchresult=={}){ @if (query=='' ) {
+                <h2>Enter Keyword to search</h2>
+                }@else {
+                <h2>Nothing Matched</h2>
+                } }@else {
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>
+                            ID
+                        </th>
+                        <th>
+                            Name
+                        </th>
+                    </tr>
+                    @if (users.length>0) {
+                        <tr *ngFor="let u of users">
+                            <td>Users</td>
+                            <td>{{u.id}}</td>
+                            <td>{{u.userName}}</td>
+                        </tr>
+                        }
+                    @if (assets.length>0) {
+                    <tr *ngFor="let a of assets">
+                        <td>Assets</td>
+                        <td>{{a.assetId}}</td>
+                        <td>{{a.assetName}}</td>
+                    </tr>
+                    }
+                    @if (categories.length>0) {
+                    <tr *ngFor="let c of categories">
+                        <td>Categories</td>
+                        <td>{{c.id}}</td>
+                        <td>{{c.categoryName}}</td>
+                    </tr>
+                    }
+                    @if (assettypes.length>0) {
+                    <tr *ngFor="let a of assettypes">
+                        <td>Assets</td>
+                        <td>{{a.assetId}}</td>
+                        <td>{{a.categoryName}}</td>
+                    </tr>
+                    }
+                    @if (vendors.length>0) {
+                        <tr *ngFor="let v of vendors">
+                            <td>Vendors/td>
+                            <td>{{v.id}}</td>
+                            <td>{{v.name}}</td>
+                        </tr>
+                        }
+                  
+                </table>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="orgInfo" *ngIf="isProfileVisible">
     <div class="profilecard">
         <div class="profile-header">
-            <img [src]="currentuser.imagePath ||  ProfileIcon" alt="Organization Icon" class="profile-icon">
+            <img [src]="currentuser.imagePath || ProfileIcon" alt="Organization Icon" class="profile-icon" />
             <!-- <p class="org-name">{{orgName}}</p> -->
-            <p class="user-name">{{currentuser.userName}}</p>
+            <p class="user-name">{{ currentuser.userName }}</p>
 
             <!-- <p class="org-domain">{{orgDomain}}</p> -->
         </div>
         <div class="links">
-            <button class="profile-button" routerLink="profile">Personal Profile</button>
-            <button class="profile-button" routerLink="updateorganization" [disabled]="this.role=='Employee' || this.role==undefined" >{{orgName}} - Profile</button>
+            <button class="profile-button" routerLink="profile">
+                Personal Profile
+            </button>
+            <button class="profile-button" routerLink="updateorganization"
+                [disabled]="this.role == 'Employee' || this.role == undefined">
+                {{ orgName }} - Profile
+            </button>
         </div>
         <button class="logout" (click)="logout($event)">
             <i class="fa-solid fa-right-from-bracket"></i> Log Out
         </button>
     </div>
-
 </div>
 
 <div class="Main" (click)="closeProfile($event)">
     <!-- <app-sidebar [role]="role" ></app-sidebar> -->
-     <app-sidebar></app-sidebar>
+    <app-sidebar></app-sidebar>
     <div class="dashboard">
         <div class="navbar">
             <div class="navlink">
-                
-                <img src="menu.svg" alt="horizantal nav">
-                <input type="search" name="search" id="search" placeholder="        Search">
-                <select name="search" id="search">
-                    <option value="All">All</option>
-                    <option value="Asset">Asset</option>
-                    <option value="User">User</option>
-                    <option value="Category">Category</option>
-                </select>
+                <img src="menu.svg" alt="horizantal nav" />
+                <input type="search" (click)="toggleSearch($event)" name="search" id="search"
+                    placeholder="        Search" />
             </div>
-            <div class="profile" (click)="toggleProfileCard($event)"><img class="profile-pic" [src]="currentuser.imagePath ||  ProfileIcon"
-                    alt="Account Icon">{{currentuser.userName}}</div>
+            <div class="profile" (click)="toggleProfileCard($event)">
+                <img class="profile-pic" [src]="currentuser.imagePath || ProfileIcon" alt="Account Icon" />{{
+                currentuser.userName }}
+            </div>
         </div>
         <div class="outer">
-
             <router-outlet />
         </div>
-
     </div>
 </div>
