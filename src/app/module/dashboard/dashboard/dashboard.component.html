@@ -9,7 +9,7 @@
         </div>
         <div class="links">
             <button class="profile-button" routerLink="profile">Personal Profile</button>
-            <button class="profile-button" routerLink="updateorganization" >{{orgName}} - Profile</button>
+            <button class="profile-button" routerLink="updateorganization" [disabled]="this.role=='Employee' || this.role==undefined" >{{orgName}} - Profile</button>
         </div>
         <button class="logout" (click)="logout($event)">
             <i class="fa-solid fa-right-from-bracket"></i> Log Out

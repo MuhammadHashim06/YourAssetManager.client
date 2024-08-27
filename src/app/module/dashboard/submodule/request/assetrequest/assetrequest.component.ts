@@ -9,7 +9,10 @@ import { AssetactionsService } from '../../../../../core/services/assetactions/a
   styleUrl: './assetrequest.component.scss'
 })
 export class AssetrequestComponent implements OnInit {
+  processed=true
 acceptrequest(id: any) {
+  this.processed=false
+
   const data={
     RequestId: id,
     Action: true
@@ -17,6 +20,8 @@ acceptrequest(id: any) {
   this.assetactionsservice.processAccessRequest(data).pipe().subscribe(res => {
     this.getassetrequests()
     this.togglemodel()
+    this.processed=true
+
   })
 }
 
@@ -41,6 +46,8 @@ acceptrequest(id: any) {
   }
   ismodel = false
   declinerequest(id: any) {
+    this.processed=false
+
    const data={
       RequestId: id,
       Action: false
@@ -48,6 +55,8 @@ acceptrequest(id: any) {
     this.assetactionsservice.processAccessRequest(data).pipe().subscribe(res => {
       this.getassetrequests()
       this.togglemodel()
+      this.processed=true
+
     })
 
   }

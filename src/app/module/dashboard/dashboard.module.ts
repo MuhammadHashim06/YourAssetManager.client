@@ -10,7 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
-import { UpdateorganizationComponent } from './updateorganization/updateorganization.component'; 
+import { UpdateorganizationComponent } from './updateorganization/updateorganization.component';
 
 
 @NgModule({
@@ -20,7 +20,7 @@ import { UpdateorganizationComponent } from './updateorganization/updateorganiza
     DashboardComponent,
     OrganizationComponent,
     ProfileComponent,
-    UpdateorganizationComponent,
+    UpdateorganizationComponent
   ],
   imports: [
     CommonModule,

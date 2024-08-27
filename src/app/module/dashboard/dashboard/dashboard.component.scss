@@ -17,11 +17,21 @@
   display: flex;
   gap: 10px;
 }
-.links button , .logout{
+.links button{
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
-}.logout{
+  color: rgba(72, 128, 255, 1);
+  background-color:  rgba(72, 128, 255, 0.2);
+} .links button:disabled{
+background-color: #efefef;
+color: black;
+cursor: default;
+}
+.logout{
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
   background-color: rgba(72, 128, 255, 1);
   color: white;
 }

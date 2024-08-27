@@ -42,7 +42,7 @@ export class DashboardComponent implements OnInit {
     if (this.userData) {
       this.userData = JSON.parse(this.userData);
     }
-    if(this.role!='Employee' && this.role!=undefined){
+    if(this.role!='Employee' || this.role!=undefined){
       console.log(this.role);
 
     this.fetchOrganizationData();
@@ -69,7 +69,7 @@ export class DashboardComponent implements OnInit {
     if (this.userData) {
       this.userData = JSON.parse(this.userData);
     }
-    if(this.role!='Employee' && this.role!=undefined){
+    if(this.role!='Employee' || this.role!=undefined){
       
     this.fetchOrganizationData();
   }

@@ -1,5 +1,5 @@
 <div class="requestdetail" *ngIf="ismodel" (click)="togglemodel()">
-    <div class="innerbody" (click)="stoppropagation($event)">
+    <div class="innerbody" *ngIf="processed else processing" (click)="stoppropagation($event)">
         <h1>
             Asset detail
         </h1>
@@ -22,11 +22,12 @@
             </tr>
         </table>
         <div class="links" *ngIf="selectedrequest.requestStatus=='PENDING'"><button class="approve"
-               (click)="acceptrequest(selectedrequest.requestId)" >Approve</button>
+                (click)="acceptrequest(selectedrequest.requestId)">Approve</button>
             <button class="decline" (click)="declinerequest(selectedrequest.requestId)">Decline</button>
         </div>
-        
+
     </div>
+    <ng-template #processing ><span class="loader"></span> </ng-template>
 
 </div>
 
@@ -45,7 +46,9 @@
                 <td>{{ r.requestId }}</td>
                 <td>{{ r.requesterUserName }}</td>
                 <td>{{ r.requestDescription }}</td>
-                <td [class]="r.requestStatus">{{ r.requestStatus }}</td>
+                <td>
+                    <div [class]="r.requestStatus"> {{ r.requestStatus }}</div>
+                </td>
             </tr>
         </tbody>
     </table>
