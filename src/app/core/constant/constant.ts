@@ -88,10 +88,13 @@ export const apiEndPoint = {
     UpdateUserProfile:
       'http://localhost:5235/YourAssetManager.Server/UserManagement/UpdateUserProfile'
   },
-  request: {
+  assetactions: {
     sentrequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/RequestAsset',
-    DeclineAssetRequest:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/DeclineAssetRequest',
-  }
+    ProcessAssetRequest:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ProcessAssetRequest',
+    AssignAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/AssignAsset',
+    GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId'
+  },
+
 };
 export const menu = [{
   path: 'home',

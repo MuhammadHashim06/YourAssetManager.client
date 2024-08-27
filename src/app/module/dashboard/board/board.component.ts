@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Color, ScaleType } from '@swimlane/ngx-charts';
 import { BoardService } from '../../../core/services/board/board.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-board',
@@ -85,7 +86,26 @@ export class BoardComponent {
 
   };
 
-  constructor(private boardservice: BoardService) { }
+  currentuser:any
+  role:any
+  constructor(private boardservice: BoardService,private router : Router) {
+    var role: Array<any>
+    const datastring = sessionStorage.getItem('currentuser')
+    if (datastring != undefined || datastring != null) {
+      this.currentuser = JSON.parse(datastring)
+      role  = this.currentuser.roles.$values
+      if (role.includes('OrganizationOwner')) {
+        this.role = 'OrganizationOwner'
+      } else if (role.includes('AssetManager')) {
+        this.role = 'AssetManager'
+      } else {
+        this.role = 'Employee'
+      }
+if(this.role=='Employee'){
+  this.router.navigateByUrl('dashboard/requests/yourrequests')
+}
+    }
+   }
 
   stats: any
 

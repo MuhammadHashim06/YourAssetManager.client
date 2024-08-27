@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { BoardService } from '../../../../../core/services/board/board.service';
-import { RequestService } from '../../../../../core/services/request/request.service';
+import { AssetactionsService } from '../../../../../core/services/assetactions/assetactions.service';
 
 
 @Component({
@@ -9,6 +9,16 @@ import { RequestService } from '../../../../../core/services/request/request.ser
   styleUrl: './assetrequest.component.scss'
 })
 export class AssetrequestComponent implements OnInit {
+acceptrequest(id: any) {
+  const data={
+    RequestId: id,
+    Action: true
+  }
+  this.assetactionsservice.processAccessRequest(data).pipe().subscribe(res => {
+    this.getassetrequests()
+    this.togglemodel()
+  })
+}
 
   stoppropagation($event: MouseEvent) {
     $event.stopPropagation();
@@ -22,8 +32,8 @@ export class AssetrequestComponent implements OnInit {
     this.selectedrequestid = arg0;
     this.selectedrequest = this.allrequest.find(r => r.requestId == this.selectedrequestid)
     console.log(this.selectedrequest);
-
     this.togglemodel()
+
 
   }
   togglemodel() {
@@ -31,13 +41,18 @@ export class AssetrequestComponent implements OnInit {
   }
   ismodel = false
   declinerequest(id: any) {
-    this.requestservice.declinerequest(id).pipe().subscribe(res => {
+   const data={
+      RequestId: id,
+      Action: false
+    }
+    this.assetactionsservice.processAccessRequest(data).pipe().subscribe(res => {
       this.getassetrequests()
+      this.togglemodel()
     })
 
   }
 
-  constructor(private dashboardservice: BoardService, private requestservice: RequestService) { }
+  constructor(private dashboardservice: BoardService, private assetactionsservice: AssetactionsService) { }
   allrequest: Array<any> = []
   ngOnInit(): void {
     this.getassetrequests()

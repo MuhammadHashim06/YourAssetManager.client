@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RequestService } from '../../../../../core/services/request/request.service';
+import { AssetactionsService } from '../../../../../core/services/assetactions/assetactions.service';
 
 @Component({
   selector: 'app-yourrequests',
@@ -12,13 +12,13 @@ export class YourrequestsComponent {
 sendrequest($event: MouseEvent) {
 
   const requestDescription ={ requestDescription:this.requestDescription}
-  this.requestservice.requestasset(requestDescription).pipe().subscribe(res=>{
+  this.assetactionservice.requestasset(requestDescription).pipe().subscribe(res=>{
     console.log(res);
   })
 }
 
 
-constructor(private requestservice : RequestService){}
+constructor(private assetactionservice : AssetactionsService){}
 
   RequestAsset():void 
   {

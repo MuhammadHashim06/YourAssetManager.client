@@ -5,6 +5,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import { catchError, throwError } from 'rxjs';
 import { Alert } from '../../../shared/reusablecomponents/alert/alert.component';
 import { Router } from '@angular/router';
+import { UserService } from '../../../core/services/user/user.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,7 @@ export class LoginComponent {
   email: string = ''; // Stores the email input value
   isforget = false; // Flag to toggle forgot password view
   issuccessfull = false; // Flag for successful login
-  inputerrormessage=constant.inputerrormessage  // Input Error Messages
+  inputerrormessage = constant.inputerrormessage  // Input Error Messages
   // Alert data for displaying messages
   alertData: Alert = {
     type: 'success',
@@ -30,7 +31,7 @@ export class LoginComponent {
   });
 
   // Constructor with dependency injection
-  constructor(private loginservice: AuthService, private router: Router) {}
+  constructor(private loginservice: AuthService, private router: Router, private userservice: UserService) { }
 
   /**
    * Custom validator to ensure password complexity
@@ -63,7 +64,7 @@ export class LoginComponent {
       })
     ).subscribe(
       res => {
-        sessionStorage.setItem('userData',JSON.stringify(res))
+        sessionStorage.setItem('userData', JSON.stringify(res))
         this.load = false;
         alert('Check Your Email');
       },
@@ -90,8 +91,12 @@ export class LoginComponent {
       ).subscribe(
         res => {
           this.load = false;
-          sessionStorage.setItem('userData',JSON.stringify(res.responseData))
-          this.router.navigateByUrl('/dashboard'); 
+          sessionStorage.setItem('userData', JSON.stringify(res.responseData))
+          this.userservice.getmydata().pipe().subscribe(res => {
+            let data = res.responseData
+            sessionStorage.setItem('currentuser', JSON.stringify(data))
+          })
+          this.router.navigateByUrl('/dashboard');
         },
         error => {
           this.load = false;

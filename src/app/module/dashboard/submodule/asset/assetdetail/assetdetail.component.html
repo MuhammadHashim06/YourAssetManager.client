@@ -1,4 +1,40 @@
-
+<div class="assigningdetail" *ngIf="isaction" (click)="toogleaction()">
+    <div class="detail" (click)="stoppropagation($event)">
+      <h1>  Assigning Details</h1>
+        <table>
+            <tr>
+                <td>
+                    User Name
+                </td>
+                <td>
+                    <input list="allusers" id="user" name="user" (change)="onUserChange($event)" 
+                    (input)="onUserInput($event)" placeholder="Type to search User..">
+                    <datalist id="allusers">
+                        <option [value]="a.userName" *ngFor="let a of allusers">
+                    </datalist>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Request ID
+                </td>
+                <textarea name="notes" id="notes" [(ngModel)]="requestId"></textarea>
+            </tr>
+            <tr>
+                <td>
+                    Notes
+                </td>
+                <textarea name="notes" id="notes" [(ngModel)]="notes"></textarea>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button (click)="assignasset($event)">Assign Asset</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
 
 <div class="container">
     <div class="head">
@@ -19,9 +55,9 @@
                         <div class="skeleton skeleton-text"></div>
                     </ng-template>
 
-                    
+
                     <div class="action">
-                      
+
                         <button *ngIf="!isLoading" (click)="updateasset(id)">Update</button>
                         <button *ngIf="!isLoading" (click)="deleteasset(id)">Delete</button>
                     </div>
@@ -42,14 +78,14 @@
                 @if(assetdetail.assetStatusData!=undefined){
                 @switch (assetdetail.assetStatusData) {
                 @case ('Available') {
-                <button *ngIf="!isLoading">Check out</button>
-                <button *ngIf="!isLoading">Retire</button>
-                <button *ngIf="!isLoading">Under Maintenance</button>
+                <button *ngIf="!isLoading" (click)="toogleaction()">Check out</button>
+                <button *ngIf="!isLoading" (click)="toogleaction()">Retire</button>
+                <button *ngIf="!isLoading" (click)="toogleaction()">Under Maintenance</button>
                 }
                 @case ('Assigned') {
-                <button *ngIf="!isLoading">Check in</button>
+                <button *ngIf="!isLoading" (click)="toogleaction()">Check in</button>
                 }@case ('UnderMaintenance') {
-                <button *ngIf="!isLoading">Available</button>
+                <button *ngIf="!isLoading" (click)="toogleaction()">Mark as Available</button>
                 }
                 }
                 }

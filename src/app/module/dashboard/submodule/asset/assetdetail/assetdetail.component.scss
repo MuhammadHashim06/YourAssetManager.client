@@ -1,3 +1,17 @@
+.assigningdetail{
+  background-color: rgba(0, 0, 0, 0.2);
+  display: grid;
+place-items: center;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+.assigningdetail .detail{
+  border-radius: 10px;
+  background-color: white;
+  padding: 5%;
+}
+
 .Assigned{
     text-align: center;
     padding: 5px 10px;

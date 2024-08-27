@@ -19,7 +19,7 @@ table tbody tr:hover {
   color: rgba(239, 56, 38, 1);
   background-color: rgba(239, 56, 38, 0.2);
 }
-.APPROVED {
+.FULFILLED {
   text-align: center;
   padding: 5px 10px;
   border-radius: 5px;
@@ -39,11 +39,12 @@ table tbody tr:hover {
   height: 100%;
   position: fixed;
   display: grid;
-  place-items: center;
-  -webkit-backdrop-filter: blur(2px);
-  backdrop-filter: blur(2px);
+place-items: center;  
+-webkit-backdrop-filter: blur(1px);
+  backdrop-filter: blur(1px);
 }
 .innerbody {
+  display: block;
   background-color: white;
   padding: 5%;
   border-radius: 10px;

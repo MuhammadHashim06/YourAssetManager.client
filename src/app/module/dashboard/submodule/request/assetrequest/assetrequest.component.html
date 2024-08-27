@@ -22,7 +22,7 @@
             </tr>
         </table>
         <div class="links" *ngIf="selectedrequest.requestStatus=='PENDING'"><button class="approve"
-                >Approve</button>
+               (click)="acceptrequest(selectedrequest.requestId)" >Approve</button>
             <button class="decline" (click)="declinerequest(selectedrequest.requestId)">Decline</button>
         </div>
         

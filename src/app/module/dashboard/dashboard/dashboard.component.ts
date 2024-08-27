@@ -17,26 +17,63 @@ export class DashboardComponent implements OnInit {
   orgDomain: string = '';
   ProfileIcon: string = 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png';
   isProfileVisible: boolean = false;
+  role:any
 
   constructor(
     private router: Router,
     private organizationService: OrganizationService,
     private userservice:UserService
-  ) {}
+  ) {
+    this.userservice.getmydata().pipe().subscribe(res=>{
+      this.currentuser=res.responseData;
+      console.log(this.currentuser);
+      sessionStorage.setItem('currentuser', JSON.stringify(this.currentuser))
+      let role: Array<any> = this.currentuser.roles.$values
+
+    if (role.includes('OrganizationOwner')) {
+      this.role = 'OrganizationOwner'
+    } else if (role.includes('AssetManager')) {
+      this.role = 'AssetManager'
+    } else {
+      this.role = 'Employee'
+    }
+    })
+    this.userData = sessionStorage.getItem('userData');
+    if (this.userData) {
+      this.userData = JSON.parse(this.userData);
+    }
+    if(this.role!='Employee' && this.role!=undefined){
+      console.log(this.role);
+
+    this.fetchOrganizationData();
+  }
+  }
+
 
   ngOnInit(): void {
     this.userservice.getmydata().pipe().subscribe(res=>{
       this.currentuser=res.responseData;
       console.log(this.currentuser);
       sessionStorage.setItem('currentuser', JSON.stringify(this.currentuser))
-      
+      let role: Array<any> = this.currentuser.roles.$values
+
+    if (role.includes('OrganizationOwner')) {
+      this.role = 'OrganizationOwner'
+    } else if (role.includes('AssetManager')) {
+      this.role = 'AssetManager'
+    } else {
+      this.role = 'Employee'
+    }
     })
     this.userData = sessionStorage.getItem('userData');
     if (this.userData) {
       this.userData = JSON.parse(this.userData);
     }
+    if(this.role!='Employee' && this.role!=undefined){
+      
     this.fetchOrganizationData();
   }
+}
 
   fetchOrganizationData(): void {
     this.organizationService
