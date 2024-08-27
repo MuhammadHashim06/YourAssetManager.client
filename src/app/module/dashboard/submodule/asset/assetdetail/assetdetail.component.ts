@@ -10,6 +10,20 @@ import { AssetactionsService } from '../../../../../core/services/assetactions/a
   styleUrl: './assetdetail.component.scss',
 })
 export class AssetdetailComponent implements OnInit {
+returncondition: any;
+returnasset($event: MouseEvent) {
+
+ const data={
+    assetId: this.id,
+  returnCondition: this.returncondition,
+  notes: this.notes
+  }
+
+  this.assetactionservice.returnasset(data).pipe().subscribe(res=>{
+    this.toogleaction()
+      this.router.navigateByUrl('dashboard/asset')
+  })
+}
   notes: any;
   requestId: any;
   assignasset($event: MouseEvent) {

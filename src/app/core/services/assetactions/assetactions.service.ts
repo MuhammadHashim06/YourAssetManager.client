@@ -25,5 +25,8 @@ export class AssetactionsService {
   cancelassetrequest(id :any){
     return this.http.post(`${this.apiendpoint.CancelRequestAsset}?reqiestId=${id}`,{})
   }
+  returnasset(data:any){
+    return this.http.post(this.apiendpoint.ReturnAsset,data)
+  }
 
 }

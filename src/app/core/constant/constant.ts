@@ -95,8 +95,8 @@ export const apiEndPoint = {
     AssignAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/AssignAsset',
     GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId',
     ReturnAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnAsset',
-    CancelRequestAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/CancelRequestAsset'
-  },
+    CancelRequestAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/CancelRequestAsset',
+  }
 
 };
 export const menu = [{
