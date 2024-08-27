@@ -95,8 +95,9 @@ td {
   text-align: left;
 }
 .error {
+  display: block;
   color: red;
-  font-size: 0.8em; /* Slightly smaller font size for error messages */
+  font-size: 0.8em;
 }
 .container {
   display: flex;
