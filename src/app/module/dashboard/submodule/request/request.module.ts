@@ -5,7 +5,7 @@ import { RequestRoutingModule } from './request-routing.module';
 import { AssetrequestComponent } from './assetrequest/assetrequest.component';
 import { YourrequestsComponent } from './yourrequests/yourrequests.component';
 import { CreaterequestsComponent } from './createrequests/createrequests.component';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,6 @@ import { FormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     RequestRoutingModule,
-    FormsModule
-  ]
+ReactiveFormsModule  ]
 })
 export class RequestModule { }

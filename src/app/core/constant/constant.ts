@@ -92,7 +92,9 @@ export const apiEndPoint = {
     sentrequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/RequestAsset',
     ProcessAssetRequest:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ProcessAssetRequest',
     AssignAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/AssignAsset',
-    GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId'
+    GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId',
+    ReturnAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnAsset',
+    CancelRequestAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/CancelRequestAsset'
   },
 
 };

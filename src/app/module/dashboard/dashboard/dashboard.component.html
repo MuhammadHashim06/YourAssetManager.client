@@ -24,14 +24,15 @@
     <div class="dashboard">
         <div class="navbar">
             <div class="navlink">
-                <!-- <select name="search" id="search">
-            <option value="All">All</option>
-            <option value="Asset">Asset</option>
-            <option value="User">User</option>
-            <option value="Category">Category</option>
-        </select> -->
+                
                 <img src="menu.svg" alt="horizantal nav">
                 <input type="search" name="search" id="search" placeholder="        Search">
+                <select name="search" id="search">
+                    <option value="All">All</option>
+                    <option value="Asset">Asset</option>
+                    <option value="User">User</option>
+                    <option value="Category">Category</option>
+                </select>
             </div>
             <div class="profile" (click)="toggleProfileCard($event)"><img class="profile-pic" [src]="currentuser.imagePath ||  ProfileIcon"
                     alt="Account Icon">{{currentuser.userName}}</div>

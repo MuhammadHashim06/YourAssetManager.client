@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { AssetactionsService } from '../../../../../core/services/assetactions/assetactions.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { constant } from '../../../../../core/constant/constant';
 
 @Component({
   selector: 'app-yourrequests',
@@ -7,21 +9,37 @@ import { AssetactionsService } from '../../../../../core/services/assetactions/a
   styleUrl: './yourrequests.component.scss'
 })
 export class YourrequestsComponent {
-  requestDescription : string = '';
-
-sendrequest($event: MouseEvent) {
-
-  const requestDescription ={ requestDescription:this.requestDescription}
-  this.assetactionservice.requestasset(requestDescription).pipe().subscribe(res=>{
-    console.log(res);
-  })
+cancelrequest(id:any) {
+this.assetactionservice.cancelassetrequest(id).pipe().subscribe(res=>{
+  this.getallrequest()
+})
 }
+  requestdetail=new FormGroup({
+    requestDescription : new FormControl('',Validators.required)
+  })
+ 
+inputerrormessage=constant.inputerrormessage
+sendrequest($event: MouseEvent) {
+  
+  if(this.requestdetail.invalid){
+    this.requestdetail.markAllAsTouched()
+  }else{
+  this.assetactionservice.requestasset(this.requestdetail.value).pipe().subscribe(res=>{
+    console.log(res);
+    this.getallrequest()
+    this.requestdetail.reset()
+  })}
+}
+allrequest:any
 
+constructor(private assetactionservice : AssetactionsService){this.getallrequest() }
 
-constructor(private assetactionservice : AssetactionsService){}
-
-  RequestAsset():void 
+  getallrequest() 
   {
-    
+    this.assetactionservice.getallrequest().pipe().subscribe(res=>{
+      this.allrequest=res.responseData.$values
+      console.log(this.allrequest);
+      
+    })
   }
 }

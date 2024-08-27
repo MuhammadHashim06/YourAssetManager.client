@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { constant } from '../../../core/constant/constant';
 import { ProfileService } from '../../../core/services/profile/profile.service';
+import { UserService } from '../../../core/services/user/user.service';
 
 @Component({
   selector: 'app-profile',
@@ -21,6 +22,7 @@ export class ProfileComponent implements OnInit {
     email: new FormControl('', Validators.required),
     userName: new FormControl('', Validators.required),
   })
+response = true;
 
   onselect(event: any) {
     if (event.target.files) {
@@ -34,7 +36,7 @@ export class ProfileComponent implements OnInit {
     }
   }
 
-  constructor(private profileservice: ProfileService) { }
+  constructor(private profileservice: ProfileService,private userservice :UserService) { }
   ngOnInit(): void {
     const currentuserstring = sessionStorage.getItem('currentuser')
     if (currentuserstring != null || currentuserstring != undefined) {
@@ -51,11 +53,18 @@ export class ProfileComponent implements OnInit {
   }
   Save($event: MouseEvent) {
     $event.preventDefault()
+    this.response=false
     let userName = '';
     if (this.Userdata.controls.userName.value != this.LogData.userName) {
       userName = this.Userdata.controls.userName.value || ''
     }
     this.profileservice.updateprofile(userName, this.selectedImage).pipe().subscribe(res => {
+      this.userservice.getmydata().pipe().subscribe(res=>{
+        this.LogData = res.responseData;
+        sessionStorage.setItem('currentuser',this.LogData)
+        this.response=true
+        this.router.navigateByUrl('dashboard')
+      })
       console.log(res);
     })
   }

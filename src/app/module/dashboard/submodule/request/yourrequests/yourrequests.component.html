@@ -2,20 +2,21 @@
     <h1>
         Assets Request
     </h1>
-    <button>
+    <!-- <button>
         Create Request
-    </button>
+    </button> -->
 </div>
 <div class="container">
     <h2 style="text-align: center;">Request Detail</h2>
-    <form action="">
+    <form action="" [formGroup]="requestdetail">
         <table>
 
             <tr>
                 <td>
                     <label for="">Description</label>
                     <textarea name="AssetRequestDescription" id="AssetRequestDescription"
-                        placeholder="Input your request details..." [(ngModel)]="requestDescription"></textarea>
+                        placeholder="Input your request details..." formControlName="requestDescription" ></textarea>
+                        <span class="error" *ngIf="this.requestdetail.controls.requestDescription.touched && this.requestdetail.controls.requestDescription.invalid">{{inputerrormessage.required}}</span>
                 </td>
             </tr>
         </table>
@@ -26,4 +27,39 @@
             </button>
         </div>
     </form>
+</div>
+<div class="container">
+    <table>
+        <tr>
+            <th>
+                Request ID
+            </th>
+            <th>
+                Description
+            </th>
+            <th>
+                Staus
+            </th>
+            <th>
+                Action
+            </th>
+        </tr>
+<tr *ngFor="let r of allrequest" >
+    <td>
+        {{r.requestId}}
+
+    </td>
+    <td>
+        {{r.requestDescription}}
+
+    </td>
+    <td >
+        <div [class]="r.requestStatus" > {{r.requestStatus}}</div>
+    </td>
+    <td *ngIf="r.requestStatus=='PENDING'">
+<button class="cancel" (click)="cancelrequest(r.requestId)" >Cancel</button>
+
+    </td>
+</tr>
+    </table>
 </div>

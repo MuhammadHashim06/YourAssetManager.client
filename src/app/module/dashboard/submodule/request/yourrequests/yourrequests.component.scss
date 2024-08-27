@@ -28,4 +28,44 @@
     color: white;
     background-color: rgba(67, 121, 238, 1);
   }
+  .PENDING {
+    width: 45%;
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgba(186, 41, 255, 1);
+    background-color: rgba(186, 41, 255, 0.2);
+  }
+  .DECLINED {
+    width: 45%;
 
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgba(239, 56, 38, 1);
+    background-color: rgba(239, 56, 38, 0.2);
+  }
+  .FULFILLED {
+    width: 45%;
+
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgba(0, 182, 155, 1);
+    background-color: rgba(0, 182, 155, 0.2);
+  }
+  .CANCELED {
+    width: 45%;
+
+    text-align: center;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: rgba(255, 167, 86, 1);
+    background-color: rgba(255, 167, 86, 0.2);
+  }
+  .cancel{
+    color: red;
+    background-color: transparent;
+    border: none;
+
+  }

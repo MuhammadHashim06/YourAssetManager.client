@@ -50,21 +50,21 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    this.userservice.getmydata().pipe().subscribe(res=>{
-      this.currentuser=res.responseData;
-      console.log(this.currentuser);
-      sessionStorage.setItem('currentuser', JSON.stringify(this.currentuser))
-      let role: Array<any> = this.currentuser.roles.$values
+  ngOnInit() {
+    this.userservice.getmydata().pipe().subscribe(res => {
+     this.currentuser = res.responseData;
+     console.log(this.currentuser);
+     sessionStorage.setItem('currentuser', JSON.stringify(this.currentuser));
+     let role: Array<any> = this.currentuser.roles.$values;
 
-    if (role.includes('OrganizationOwner')) {
-      this.role = 'OrganizationOwner'
-    } else if (role.includes('AssetManager')) {
-      this.role = 'AssetManager'
-    } else {
-      this.role = 'Employee'
-    }
-    })
+     if (role.includes('OrganizationOwner')) {
+       this.role = 'OrganizationOwner';
+     } else if (role.includes('AssetManager')) {
+       this.role = 'AssetManager';
+     } else {
+       this.role = 'Employee';
+     }
+   })
     this.userData = sessionStorage.getItem('userData');
     if (this.userData) {
       this.userData = JSON.parse(this.userData);
