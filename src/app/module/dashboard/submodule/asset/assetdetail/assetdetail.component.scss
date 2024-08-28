@@ -1,4 +1,6 @@
 .assigningdetail{
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.2);
   display: grid;
 place-items: center;
@@ -7,11 +9,18 @@ place-items: center;
   height: 100%;
 }
 .assigningdetail .detail{
+  width: 50%;
   border-radius: 10px;
   background-color: white;
-  padding: 5%;
+  padding: 5% 10%;
 }
-
+.assign{
+  border: none;
+  background-color: rgba(72, 128, 255, 1);
+  color: white;
+  border-radius: 5px;
+  padding: 5px 10px;
+}
 .Assigned{
     text-align: center;
     padding: 5px 10px;

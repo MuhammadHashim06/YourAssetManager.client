@@ -16,12 +16,13 @@ export class LoginComponent {
   load = false; // Flag for loading state
   email: string = ''; // Stores the email input value
   isforget = false; // Flag to toggle forgot password view
-  issuccessfull = false; // Flag for successful login
+  isalert = false; // Flag for successful login
   inputerrormessage = constant.inputerrormessage  // Input Error Messages
   // Alert data for displaying messages
   alertData: Alert = {
     type: 'success',
-    message: ''
+    upermessage: 'Successfull',
+    lowermessage:'You have successfully Logiged in'
   };
 
   // Form group for login
@@ -59,7 +60,37 @@ export class LoginComponent {
     const email = { email: this.email };
     this.loginservice.verifyemail(email).pipe(
       catchError(error => {
-        this.handleError(error);
+        // this.handleError(error);
+        this.alertData.type='error'
+        this.isalert=true
+
+        switch (error.status) {
+          case 404: {
+            this.alertData.upermessage = 'Login Failed';
+            this.alertData.lowermessage = 'Please check your email or password';
+            break; 
+          }
+          case 403: {
+            this.alertData.upermessage = 'Account Deactivated';
+            this.alertData.lowermessage = 'Your account has been deactivated by Admin';
+            break; 
+          }
+          case 401: {
+            this.alertData.upermessage = 'Email Not Confirmed';
+            this.alertData.lowermessage = 'We have sent an email. Please confirm your email first';
+            break; 
+          }
+          default: {
+            this.alertData.upermessage = 'Something Went Wrong';
+            this.alertData.lowermessage = 'Please try again';
+            break; // Optional, but good practice to include in the default case
+          }
+          
+        }
+        setTimeout(() => {
+          this.isalert=false
+
+        }, 3000);
         return throwError(error);
       })
     ).subscribe(
@@ -70,6 +101,15 @@ export class LoginComponent {
       },
       error => {
         console.error(error);
+        this.isalert=true
+        this.alertData.type='error'
+        this.alertData.upermessage='Somthing Went wrong'
+        this.alertData.lowermessage='Please try again'
+        setTimeout(() => {
+          this.isalert=false
+
+        }, 3000);
+
         this.load = false;
       }
     );
@@ -83,12 +123,7 @@ export class LoginComponent {
 
     if (this.loginuser.valid) {
       this.load = true;
-      this.loginservice.login(this.loginuser.value).pipe(
-        catchError(error => {
-          this.handleError(error);
-          return throwError(error);
-        })
-      ).subscribe(
+      this.loginservice.login(this.loginuser.value).subscribe(
         res => {
           this.load = false;
           sessionStorage.setItem('userData', JSON.stringify(res.responseData))
@@ -100,6 +135,41 @@ export class LoginComponent {
         },
         error => {
           this.load = false;
+          this.isalert=true
+          this.alertData.type='error'
+          switch (error.status) {
+            case 404: {
+              this.alertData.upermessage = 'Login Failed';
+              this.alertData.lowermessage = 'Please check your email or password';
+              this.isalert=true
+  
+              break; 
+            }
+            case 403: {
+              this.alertData.upermessage = 'Account Deactivated';
+              this.alertData.lowermessage = 'Your account has been deactivated by Admin';
+              this.isalert=true
+              break; 
+            }
+            case 401: {
+              this.alertData.upermessage = 'Email Not Confirmed';
+              this.alertData.lowermessage = 'We have sent an email. Please confirm your email first';
+              this.isalert=true
+              break; 
+            }
+            case 400: {
+              this.alertData.upermessage = 'Something Went Wrong';
+              this.isalert=true
+              this.alertData.lowermessage = 'Please try again';
+              break;
+            }
+            
+          }
+          setTimeout(() => {
+            this.isalert=false
+  
+          }, 5000);
+  
           console.error('An error occurred:', error);
         }
       );

@@ -1,55 +1,90 @@
 <div class="requestdetail" *ngIf="ismodel" (click)="togglemodel()">
-    <div class="innerbody" *ngIf="processed else processing" (click)="stoppropagation($event)">
-        <h1>
-            Asset detail
-        </h1>
-        <table class="assetdetail">
-            <tr>
-                <td>
-                    Request By
-                </td>
-                <td>
-                    {{selectedrequest.requesterUserName}}
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    Description
-                </td>
-                <td>
-                    {{selectedrequest.requestDescription}}
-                </td>
-            </tr>
-        </table>
-        <div class="links" *ngIf="selectedrequest.requestStatus=='PENDING'"><button class="approve"
-                (click)="acceptrequest(selectedrequest.requestId)">Approve</button>
-            <button class="decline" (click)="declinerequest(selectedrequest.requestId)">Decline</button>
-        </div>
-
+  <div class="innerbody" *ngIf="processed; else processing" (click)="stoppropagation($event)">
+    <div class="assetrequestdetail">
+      <h1>Request detail</h1>
+      <table>
+        <tr>
+          <td>Requested By</td>
+          <td>
+            {{ selectedrequest.requesterUserName }}
+          </td>
+        </tr>
+        <tr>
+          <td>Description</td>
+          <td>
+            {{ selectedrequest.requestDescription }}
+          </td>
+        </tr>
+      </table>
+      <div class="links" *ngIf="selectedrequest.requestStatus == 'PENDING'">
+        <button class="approve" (click)="showaccept($event)">Approve</button>
+        <button class="decline" (click)="declinerequest(selectedrequest.requestId)">
+          Decline
+        </button>
+      </div>
     </div>
-    <ng-template #processing ><span class="loader"></span> </ng-template>
-
+    <div class="assetdetail" *ngIf="isaccept">
+      <h2>Asset Detail</h2>
+      <table>
+        <tr>
+          <td>Categories List</td>
+          <td>
+            <select name="categories" id="categories" (change)="getavailableassets($event)">
+              <option value="-1" selected>Select Category</option>
+              <option [value]="c.id" *ngFor="let c of categorylist">
+                {{ c.categoryName }}
+              </option>
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Asset List</td>
+          <td>
+            <select name="asset" id="asset" (change)="selectasset($event)">
+              @if (assetslist.length>0) {
+              <option [value]="a.id" *ngFor="let a of assetslist">
+                {{ a.assetName }}
+              </option>
+              }@else {
+              <option value="-1" selected>No available asset found</option>
+              }
+            </select>
+          </td>
+        </tr>
+        <tr>
+          <td>Note</td>
+          <td>
+            <input type="text" name="notes" id="notes" [(ngModel)]="notes" />
+          </td>
+        </tr>
+      </table>
+      <button class="assignbtn" (click)="acceptrequest(selectedrequest.requestId)">
+        Assign Asset
+      </button>
+    </div>
+  </div>
+  <ng-template #processing><span class="loader"></span> </ng-template>
 </div>
 
 <h1>All Request</h1>
 
 <div class="container">
-    <table>
-        <thead>
-            <th>ID</th>
-            <th>Request by</th>
-            <th>Description</th>
-            <th>Status</th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let r of allrequest" (click)="getbyid(r.requestId)">
-                <td>{{ r.requestId }}</td>
-                <td>{{ r.requesterUserName }}</td>
-                <td>{{ r.requestDescription }}</td>
-                <td>
-                    <div [class]="r.requestStatus"> {{ r.requestStatus }}</div>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+  <table>
+    <thead>
+      <th>ID</th>
+      <th>Request by</th>
+      <th>Description</th>
+      <th>Status</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let r of allrequest" (click)="getbyid(r.requestId)">
+        <td>{{ r.requestId }}</td>
+        <td>{{ r.requesterUserName }}</td>
+        <td>{{ r.requestDescription }}</td>
+        <td>
+          <div [class]="r.requestStatus">{{ r.requestStatus }}</div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </div>

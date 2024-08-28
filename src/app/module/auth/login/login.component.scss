@@ -198,3 +198,9 @@ form .link a:hover {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 100% 100%, 100% 100%); /* Final state */
   }
 }
+.alert{
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  position: absolute; 
+}

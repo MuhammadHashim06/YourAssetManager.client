@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 export interface Alert {
-  type: 'success' | 'error' | 'info';
-  message: string;
+  type: string;
+  upermessage: string;
+  lowermessage:string;
 }
 @Component({
   selector: 'app-alert',

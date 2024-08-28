@@ -29,12 +29,12 @@
                         </th>
                     </tr>
                     @if (users.length>0) {
-                        <tr *ngFor="let u of users">
-                            <td>Users</td>
-                            <td>{{u.id}}</td>
-                            <td>{{u.userName}}</td>
-                        </tr>
-                        }
+                    <tr *ngFor="let u of users">
+                        <td>Users</td>
+                        <td>{{u.id}}</td>
+                        <td>{{u.userName}}</td>
+                    </tr>
+                    }
                     @if (assets.length>0) {
                     <tr *ngFor="let a of assets">
                         <td>Assets</td>
@@ -57,13 +57,13 @@
                     </tr>
                     }
                     @if (vendors.length>0) {
-                        <tr *ngFor="let v of vendors">
-                            <td>Vendors/td>
-                            <td>{{v.id}}</td>
-                            <td>{{v.name}}</td>
-                        </tr>
-                        }
-                  
+                    <tr *ngFor="let v of vendors">
+                        <td>Vendors/td>
+                        <td>{{v.id}}</td>
+                        <td>{{v.name}}</td>
+                    </tr>
+                    }
+
                 </table>
                 }
             </div>

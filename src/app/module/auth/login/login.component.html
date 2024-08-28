@@ -1,7 +1,7 @@
-<ng-container *ngIf="issuccessfull">
+<div class="alert" *ngIf="isalert">
   <!-- Display success alert if the login was successful -->
   <app-alert [alert]="alertData"></app-alert>
-</ng-container>
+</div>
 
 <div *ngIf="load" id="loader">
   <!-- Display loader when loading -->
@@ -51,7 +51,7 @@
       <!-- Password Validation Error Messages -->
       <div *ngIf="loginuser.controls['password'].errors && loginuser.controls['password'].touched">
         <span *ngIf="loginuser.controls['password'].errors['required']" class="error">
-          This field is required
+          {{ inputerrormessage.required }}
         </span>
         <span *ngIf="loginuser.controls['password'].errors['passwordComplexity']" class="error">
           {{ inputerrormessage.password }}

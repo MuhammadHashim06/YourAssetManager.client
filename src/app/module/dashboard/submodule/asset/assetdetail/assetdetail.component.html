@@ -19,18 +19,18 @@
                 <td>
                     Request ID
                 </td>
-                <textarea name="notes" id="notes" [(ngModel)]="requestId"></textarea>
+                <input name="notes" id="notes" [(ngModel)]="requestId"/>
             </tr>
             <tr>
                 <td>
                     Notes
                 </td>
-                <textarea name="notes" id="notes" [(ngModel)]="notes"></textarea>
+                <input type="text" name="notes" id="notes" [(ngModel)]="notes"/>
             </tr>
             <tr>
                 <td></td>
                 <td>
-                    <button (click)="assignasset($event)">Assign Asset</button>
+                    <button class="assign" (click)="assignasset($event)">Assign Asset</button>
                 </td>
             </tr>
         </table>

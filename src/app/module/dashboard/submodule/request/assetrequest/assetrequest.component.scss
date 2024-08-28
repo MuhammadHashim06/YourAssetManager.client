@@ -40,6 +40,8 @@ width: 45%;
   background-color: rgba(255, 167, 86, 0.2);
 }
 .requestdetail {
+  top: 0;
+  left: 0;
   background-color: rgba(0, 0, 0, 0.1);
   width: 100%;
   height: 100%;
@@ -52,7 +54,8 @@ place-items: center;
 .innerbody {
   display: block;
   background-color: white;
-  padding: 5%;
+  padding: 5% 10%;
+  width: 60%;
   border-radius: 10px;
   animation: updown 0.5s ease;
 }
@@ -64,23 +67,35 @@ place-items: center;
     transform: translateY(0%);
   }
 }
+// .assetrequestdetail{
+//   width: 100%;
+// }
+.assignbtn{
+  border: none;
+  font-size: 1em;
+  border-radius: 5px;
+  padding: 5px 10px;
+  background-color: blue;
+  color: white;  
+}
 .links{
     display: flex;
-    justify-content: center;
+    // justify-content: center;
     gap: 5px;
 }
 .links button {
   border: none;
+  font-size: 1em;
   border-radius: 5px;
   padding: 5px 10px;
 }
 .links .approve {
-  background-color: green;
-  color: white;
+  background-color: rgba(15, 255, 15, 0.2);
+  color: green;
 }
 .links .decline {
-  background-color: red;
-  color: white;
+  background-color: rgba(255, 15, 15, 0.2);
+  color: red;
 }
 .loader {
   animation: rotate 1s infinite;

@@ -193,3 +193,9 @@ form .link button.registerorg{
   color:rgba(90, 140, 255, 1);
   background-color:rgba(90, 140, 255, 0.2);
 }
+.alert{
+  position: absolute;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}

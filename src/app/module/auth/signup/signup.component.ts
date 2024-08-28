@@ -4,6 +4,7 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 import { constant } from '../../../core/constant/constant';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Alert } from '../../../shared/reusablecomponents/alert/alert.component';
 
 @Component({
   selector: 'app-signup',
@@ -11,8 +12,13 @@ import { Router } from '@angular/router';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent {
+alert: Alert ={
+  type:'',
+  upermessage:'',
+  lowermessage:''
+};
+isalert = false
 NextStep($event: MouseEvent) {
-
 sessionStorage.setItem('ownerdata',JSON.stringify(this.registeruser.value))
 this.router.navigateByUrl('/auth/createorganization')
 }
@@ -75,24 +81,33 @@ setrole($event: MouseEvent) {
       this.load = true;
       this.registeruser.controls.requiredRole.setValue(this.role)
       // Perform signup using AuthService
-      this.registerservice.signup(this.registeruser.value).pipe(
-        catchError(error => {
-          // Handle specific error responses
-          if (error.status === 403) {
-            this.load = false;
-            console.error('Access denied. You do not have permission to perform this action.');
-            alert('Access denied. You do not have permission to perform this action.');
-          }
-          // Propagate other errors
-          return throwError(error);
-        })
-      ).subscribe(
+      this.registerservice.signup(this.registeruser.value).subscribe(
         (res) => {
           this.load = false;
           this.isemailregister = true;  // Set flag to indicate email registration success
         },
         (error) => {
           this.load = false;
+          this.isalert=true
+          this.alert.type= 'error'
+          switch(error.status){
+            case 403 :{
+              this.alert.upermessage='Email already exists';
+              this.alert.lowermessage='PLeasr try to login'
+              break;
+            }
+            case 404 : {
+              this.alert.upermessage='Invalid Email';
+              this.alert.lowermessage='Please Enter a Valid Organization email'
+              break;
+            }default:{
+               this.alert.upermessage='Something went wrong';
+              this.alert.lowermessage='Please try again'
+            }
+          }
+        setTimeout(() => {
+          this.isalert=false
+        }, 3000);
           console.error('An error occurred:', error);  // Optional error handling
         }
       );

@@ -2,7 +2,9 @@
 <div *ngIf="load" id="loader">
   <span class="loader"></span>
 </div>
-
+<div class="alert" *ngIf="isalert" >
+  <app-alert [alert]="alert" ></app-alert>
+</div>
 
 
 <div class="form">

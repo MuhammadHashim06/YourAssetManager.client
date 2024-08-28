@@ -70,12 +70,14 @@ export const apiEndPoint = {
       "http://localhost:5235/YourAssetManager.Server/AssetManagement/UpdateAsset",
     GetAssetById:
       "http://localhost:5235/YourAssetManager.Server/AssetManagement/GetAssetById",
+    GetAvailableAssetsByCatagory:
+      'http://localhost:5235/YourAssetManager.Server/AssetManagement/GetAvailableAssetsByCatagory'
   },
   dashboard: {
     GetDashBoardStatiticsData: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetDashBoardStatiticsData',
     GetAllPendingAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllPendingAssetRequests',
     GetAllAssetRequests: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/GetAllAssetRequests',
-    search : 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/search'
+    search: 'http://localhost:5235/YourAssetManager.Server/DashboardManagement/search'
   },
   user: {
     AssignAssetManager: 'http://localhost:5235/YourAssetManager.Server/UserManagement/AssignAssetManager',
@@ -91,10 +93,11 @@ export const apiEndPoint = {
   },
   assetactions: {
     sentrequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/RequestAsset',
-    ProcessAssetRequest:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ProcessAssetRequest',
-    AssignAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/AssignAsset',
+    DeclineAssetRequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/DeclineAssetRequest',
+    FulFillAssetRequest: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/FulFillAssetRequest',
+    AssignAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/AssignAsset',
     GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId',
-    ReturnAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnAsset',
+    ReturnAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnAsset',
     CancelRequestAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/CancelRequestAsset',
   }
 

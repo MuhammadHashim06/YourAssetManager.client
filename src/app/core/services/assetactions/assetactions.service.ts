@@ -13,8 +13,8 @@ export class AssetactionsService {
   requestasset(data: any) {
     return this.http.post(this.apiendpoint.sentrequest, data);
   }
-  processAccessRequest(data: any) {
-    return this.http.post(`${this.apiendpoint.ProcessAssetRequest}`, data)
+  fulfilledRequest(data: any) {
+    return this.http.post(`${this.apiendpoint.FulFillAssetRequest}`, data)
   }
   assignasset(data: any): Observable<any> {
     return this.http.post(this.apiendpoint.AssignAsset, data)
@@ -27,6 +27,9 @@ export class AssetactionsService {
   }
   returnasset(data:any){
     return this.http.post(this.apiendpoint.ReturnAsset,data)
+  }
+  declinerequest(data:any){
+return this.http.post(this.apiendpoint.DeclineAssetRequest,data)
   }
 
 }
