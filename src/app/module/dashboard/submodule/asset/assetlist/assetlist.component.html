@@ -1,32 +1,128 @@
-<div class="head" (click)="hidefilter($event)">
-    <h1>Assets list</h1>
+<div class="head" (click)="hideFilter($event)">
+    <h1>Assets List</h1>
     <button routerLink="create">Add New Asset</button>
-</div>
-    <div class="filter"  (click)="hidefilter($event)">
-        <table>
-            <thead>
-                <th>
-                    <img src="filter.svg" />
-                </th>
-                <th>
-                    filter BY
-                </th>
-                <th (click)="setfilter('Category',$event)" style="cursor: pointer;">
-                    Category
-                </th>
-                <th (click)="setfilter('Status',$event)" style="cursor: pointer;">
-                    Asset Status
-                </th>
-                <th (click)="resetfilter($event)" style="cursor: pointer;">
-                    <div class="resetfilter">
-                        <i class="fa-solid fa-rotate-right"></i>
-                        <p>Reset Filter</p>
-                    </div>
-                </th>
-            </thead>
-        </table>
+  </div>
+  
+  <div class="filter">
+    <table>
+      <tr>
+        <td>
+          <img src="filter.svg" alt="Filter Icon"/>
+        </td>
+        <td>
+          <select (change)="selectCategory($event)">
+            <option value="-1">Select Category</option>
+            <option *ngIf="categories.length <= 0" value="-1">No Category</option>
+            <option  *ngFor="let c of categories" [value]="c.categoryName">{{ c.categoryName }}</option>
+          </select>
+        </td>
+        <td>
+          <select (change)="selectStatus($event)">
+            <option value="-1">Select Status</option>
+            <option *ngIf="status.length <= 0" value="-1">No Status</option>
+            <option *ngFor="let s of status" [value]="s">{{ s }}</option>
+          </select>
+        </td>
+        <td>
+          <button class="search" (click)="filterAsset($event)">Apply Filter</button>
+        </td>
+        <td (click)="resetFilter($event)" >
+            <div class="resetfilter">
+                <i class="fa-solid fa-rotate-right"></i>
+                <p>Reset Filter</p>
+            </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+  
+  <!-- Filter Options Modal -->
+  <div class="filter-values" *ngIf="isShowFilter" (click)="stopHide($event)">
+    <div class="values">
+      <ng-container *ngIf="setFilterValue === 'Status'">
+        <button *ngFor="let s of status" 
+                [ngClass]="{ 'selected': filter.includes(s), 'unselected': !filter.includes(s) }"
+                (click)="toggle(s)">
+          {{ s }}
+        </button>
+      </ng-container>
+      <ng-container *ngIf="setFilterValue === 'Category'">
+        <button *ngFor="let c of categories" 
+                [ngClass]="{ 'selected': filter.includes(c.categoryName), 'unselected': !filter.includes(c.categoryName) }"
+                (click)="toggle(c.categoryName)">
+          {{ c.categoryName }}
+        </button>
+      </ng-container>
     </div>
-    <div class="container" (click)="hidefilter($event)">
+  </div>
+  
+  <div class="container" (click)="hideFilter($event)">
+    <table class="list">
+      <thead>
+        <tr>
+          <th>Asset ID</th>
+          <th>Asset Name</th>
+          <th>Category</th>
+          <th style="text-align: center;">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let a of filteredAsset" (click)="assetDetail(a.id)">
+          <td>{{ a.id }}</td>
+          <td>{{ a.assetName }}</td>
+          <td>{{ a.assetCategoryData }}</td>
+          <td style="display: flex; justify-content: center;">
+            <div [ngClass]="{
+              'Assigned': a.assetStatusData === 'Assigned',
+              'Retired': a.assetStatusData === 'Retired',
+              'UnderMaintenance': a.assetStatusData === 'UnderMaintenance',
+              'Returned': a.assetStatusData === 'Returned',
+              'Available': a.assetStatusData === 'Available'
+            }">
+              {{ a.assetStatusData }}
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="filter"  (click)="hidefilter($event)">
+    <table>
+        <thead>
+            <th>
+                <img src="filter.svg" />
+            </th>
+            <th>
+                filter BY
+            </th>
+            <th (click)="setfilter('Category',$event)" style="cursor: pointer;">
+                Category
+            </th>
+            <th (click)="setfilter('Status',$event)" style="cursor: pointer;">
+                Asset Status
+            </th>
+            <th (click)="resetfilter($event)" style="cursor: pointer;">
+                <div class="resetfilter">
+                    <i class="fa-solid fa-rotate-right"></i>
+                    <p>Reset Filter</p>
+                </div>
+            </th>
+        </thead>
+    </table>
+</div> -->
+    <!-- 
     <div class="filtervalues" *ngIf="isshowfilter" (click)="stophide($event)">
 
         <div class="values">
@@ -56,62 +152,16 @@
                 {{c.categoryName}}
             </button>
         }
-        <!-- <button  *ngFor="let c of categories" (click)="toogle(c.categoryName)" appToggleStyle>
-            {{c.categoryName}}
-        </button> -->
+
         }
     }
     </div>
 
-    </div>
+    </div> -->
 
 
 
 
-
-
-
-
-
-
-
-
-    <table class="list">
-        <thead>
-            <th>
-                Asset ID
-            </th>
-            <th>
-                Asset Name
-            </th>
-            <th>
-                Category
-            </th>
-            <th style="text-align: center;">
-                Status
-            </th>
-        </thead>
-        <tbody>
-            <tr *ngFor="let a of filteredasset" (click)="assetdetail(a.id)">
-                <td>
-                    {{a.id}}
-                </td>
-                <td>
-                    {{a.assetName}}
-                </td>
-                <td>
-                    {{a.assetCategoryData}}
-                </td>
-                <td style="display: flex; justify-content: center;">
-                    @switch (a.assetStatusData) {
-                    @case ('Assigned') { <div class="Assigned">{{a.assetStatusData}}</div> }
-                    @case ('Retired') { <div class="Retired">{{a.assetStatusData}}</div> }
-                    @case ('UnderMaintenance') { <div class="UnderMaintenance">{{a.assetStatusData}}</div> }
-                    @case ('Returned') { <div class="Returned">{{a.assetStatusData}}</div> }
-                    @default { <div class="Available">{{a.assetStatusData}}</div> }
-                    }
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+<!-- <button  *ngFor="let c of categories" (click)="toogle(c.categoryName)" appToggleStyle>
+    {{c.categoryName}}
+  </button> -->
