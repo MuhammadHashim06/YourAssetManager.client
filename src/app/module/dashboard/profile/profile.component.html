@@ -3,20 +3,10 @@
   <div class="form">
     <div class="file-upload-wrapper">
       <img [src]="imageUrl" alt="Profile Image" class="preview-image" />
-      <button
-        type="button"
-        class="custom-upload-button"
-        (click)="fileInput.click()"
-      >
+      <button type="button" class="custom-upload-button" (click)="fileInput.click()">
         Upload Image
       </button>
-      <input
-        type="file"
-        name="file"
-        (change)="onselect($event)"
-        #fileInput
-        class="file-input"
-      />
+      <input type="file" name="file" (change)="onselect($event)" #fileInput class="file-input" />
     </div>
     <form [formGroup]="Userdata">
       <div class="fields">
@@ -26,12 +16,7 @@
               <label for="email">Email Address</label>
             </td>
             <td>
-              <input
-              name="email"
-                type="text"
-                [value]="this.Userdata.controls['email'].value"
-                disabled
-              />
+              <input name="email" type="text" [value]="this.Userdata.controls['email'].value" disabled />
             </td>
           </tr>
           <tr>
@@ -39,13 +24,7 @@
               <label for="username">Username</label>
             </td>
             <td>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                value=""
-                formControlName="userName"
-              />
+              <input type="text" name="username" id="username" value="" formControlName="userName" />
             </td>
           </tr>
           <tr>
@@ -53,13 +32,8 @@
               <label for="password">Password</label>
             </td>
             <td>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="  "
-                disabled
-              />
+              <input type="password" name="password" id="password" placeholder="  " disabled />
+              <p (click)="forget()">ResetPassword?</p>
             </td>
           </tr>
         </table>
@@ -69,6 +43,33 @@
       <button type="button" (click)="Save($event)">Save Changes <div class="loader" *ngIf="!response"></div></button>
     </div>
   </div>
+  <form *ngIf="isforget" (ngSubmit)="verifyemail($event)">
+    <div class="resetPasswordFormContainer">
+      <div class="resetPasswordForm">
+      <div class="fields">
+        <!-- Email Input Field for Forgot Password -->
+        <label for="email">Email Address:</label>
+        <input type="text" id="email" name="email" placeholder="Enter your email" [(ngModel)]="email" #vemail="ngModel"
+          required email />
+        <!-- Email Validation Error Messages for Forgot Password -->
+        <div *ngIf="vemail.errors && vemail.touched">
+          <span *ngIf="vemail.errors['required']" class="error">
+            {{ inputerrormessage.required }}
+          </span>
+          <span *ngIf="vemail.errors['email']" class="error">
+            {{ inputerrormessage.email }}
+          </span>
+        </div>
+      </div>
+
+      <div class="link">
+        <!-- Submit Button for Email Verification -->
+        <button type="submit">Verify Email</button>
+        <p>Don't have an account? <a routerLink="/auth/signup">Create Account</a></p>
+      </div>
+    </div>
+  </div>
+  </form>
 </div>
 
 <!-- <div class="row">

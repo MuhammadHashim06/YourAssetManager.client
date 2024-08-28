@@ -91,6 +91,13 @@ place-items: center;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    
+  }
+  .description p{
+    word-wrap:normal;
+    text-wrap:balance;
+    // width: 50%;
+    // overflow:scroll;
   }
   tr td:nth-child(odd){
     font-weight: bold;

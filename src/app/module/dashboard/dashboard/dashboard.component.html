@@ -3,17 +3,42 @@
         <div class="searchdetail">
             <input type="text" placeholder="Enter any keyword to search" (input)="search($event)" /><select
                 name="search" id="search" (change)="settable($event)">
-                <option value="Assets,Categories,Users,AssetTypes" selected>All</option>
+                <option value="-1">Select Category</option>
+                <option [value]="c.id" *ngFor="let c of searchcategorieslist">{{c.categoryName}}</option>
+                <!-- <option value="Assets,Categories,Users,AssetTypes" selected>All</option>
                 <option value="Assets">Assets</option>
                 <option value="Categories">Categories</option>
                 <option value="Users">Users</option>
                 <option value="Vendors">Vendors</option>
-                <option value="AssetTypes">AssetTypes</option>
+                <option value="AssetTypes">AssetTypes</option> -->
             </select>
         </div>
         <div class="searchresult">
             <div>
-                @if(searchresult=={}){ @if (query=='' ) {
+
+
+                @if (searchresult.length<=0) {
+                <h1>No Math Found</h1>
+                }
+                @else {
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>
+                                ID
+                            </th>
+                            <th>
+                                Name
+                            </th>
+                        </tr>
+                        <tr *ngFor="let c of searchresult">
+                            <td>Categories</td>
+                            <td>{{c.id}}</td>
+                            <td>{{c.categoryName}}</td>
+                        </tr>
+                    </table>
+                }
+                <!-- @if(searchresult=={}){ @if (query=='' ) {
                 <h2>Enter Keyword to search</h2>
                 }@else {
                 <h2>Nothing Matched</h2>
@@ -62,10 +87,10 @@
                         <td>{{v.id}}</td>
                         <td>{{v.name}}</td>
                     </tr>
-                    }
+                    } 
 
                 </table>
-                }
+                }-->
             </div>
         </div>
     </div>

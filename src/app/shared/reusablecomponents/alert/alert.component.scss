@@ -1,5 +1,5 @@
 .card {
-  transform: translateY(-100%);
+  // transform: translateY(-100%);
   width: 330px;
   height: 80px;
   border-radius: 8px;
@@ -13,7 +13,7 @@
   align-items: center;
   justify-content: space-around;
   gap: 15px;
-  animation: animate 2s ease-out;
+  animation: animate 3s ease-out;
 
   &.warning {
     .wave {
@@ -175,6 +175,10 @@
   }
 }
 @keyframes animate {
+  0%{
+    transform: translateY(-100%);
+    opacity: 0;
+  }
   20% {
     transform: translateY(0%);
     opacity: 1;
@@ -183,9 +187,11 @@
   40%{
     transform: translateY(10%);
     opacity: 1;
-
+  }
+  90%{
+    opacity: 0;
   }
   100% {
-    opacity: 0;
+    transform: translateY(-100%);  
   }
 }

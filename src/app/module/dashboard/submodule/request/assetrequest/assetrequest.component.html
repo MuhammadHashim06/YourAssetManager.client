@@ -1,3 +1,8 @@
+
+
+<div class="alert" *ngIf="isalert" >
+  <app-alert [alert]="alert" ></app-alert>
+</div>
 <div class="requestdetail" *ngIf="ismodel" (click)="togglemodel()">
   <div class="innerbody" *ngIf="processed; else processing" (click)="stoppropagation($event)">
     <div class="assetrequestdetail">
@@ -42,6 +47,7 @@
           <td>
             <select name="asset" id="asset" (change)="selectasset($event)">
               @if (assetslist.length>0) {
+                <option value="-1" selected>Select Asset</option>  
               <option [value]="a.id" *ngFor="let a of assetslist">
                 {{ a.assetName }}
               </option>
@@ -69,7 +75,8 @@
 <h1>All Request</h1>
 
 <div class="container">
-  <table>
+  <app-dataloading *ngIf="!isdataload else table" ></app-dataloading>
+  <ng-template #table><table >
     <thead>
       <th>ID</th>
       <th>Request by</th>
@@ -86,5 +93,6 @@
         </td>
       </tr>
     </tbody>
-  </table>
+  </table></ng-template>
+  
 </div>

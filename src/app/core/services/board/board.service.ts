@@ -19,8 +19,8 @@ return this.http.get(this.apiendpoint.GetAllAssetRequests)
   getpendingrequests():Observable<any>{
     return this.http.get(this.apiendpoint.GetAllPendingAssetRequests)
   }
-  search(query:any,tables:any):Observable<any>{
-    tables=encodeURIComponent(tables)
-    return this.http.get(`${this.apiendpoint.search}?query=${query}&tables=${tables}`)
+  search(query:any,assetCatagoriId:any):Observable<any>{
+    // tables=encodeURIComponent(tables)
+    return this.http.get(`${this.apiendpoint.search}?assetQuery=${query}&assetCatagoriId=${assetCatagoriId}`)
   }
 }

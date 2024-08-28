@@ -6,6 +6,11 @@
   justify-content: center;
 }
 
+.profilepic{
+  display: grid;
+  place-items: center;
+}
+
 .emaployeecard {
   width: 125px;
   background: white;
@@ -19,35 +24,36 @@
   border-radius: 15px;
   box-shadow: 6px 6px 54px 34px rgba(0, 0, 0, 0.03);
   cursor: pointer;
-  .ptofilepic img {
-    aspect-ratio: 1;
-    border-radius: 50%;
-    max-width: 100px;
-    object-fit: cover;
+  
+}
+.ptofilepic img {
+  object-fit: cover;
+  border-radius: 50%;
+  width: 140px;
+  aspect-ratio: 1/1;
 
-  }
-  .details {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    h2 {
-      margin: 10px 0;
-      padding: 0;
+}
+.details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  h2 {
+    margin: 10px 0;
+    padding: 0;
+    text-align: center;
+    .roles{
       text-align: center;
-      .roles{
-        text-align: center;
-        font-size: 0.5rem;
-        line-height: 1rem;
-        color: rgba(32, 34, 36, 0.5);
-        font-weight: 100;
-      }
-      .email {
-        text-align: center;
-        font-size: 0.5rem;
-        line-height: 1.75rem;
-        color: rgba(32, 34, 36, 0.5);
-        font-weight: 300;
-      }
+      font-size: 0.5rem;
+      line-height: 1rem;
+      color: rgba(32, 34, 36, 0.5);
+      font-weight: 100;
+    }
+    .email {
+      text-align: center;
+      font-size: 0.5rem;
+      line-height: 1.75rem;
+      color: rgba(32, 34, 36, 0.5);
+      font-weight: 300;
     }
   }
 }

@@ -76,3 +76,53 @@
 @keyframes l13{ 
   100%{transform: rotate(1turn)}
 }
+
+/* Link container styling within the form */
+form .link {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Column layout for links */
+  gap: 20px; /* Space between links */
+  text-align: center; /* Center text */
+  justify-content: space-between; /* Space between button and other elements */
+}
+
+/* Button styling within the form */
+form .link button {
+  background-color: rgba(72, 128, 255, 1); /* Background color for the button */
+  color: #ffffff; /* White text color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside button */
+  border: none; /* Remove default border */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor to indicate clickable button */
+  margin-top: 1%;
+}
+
+/* Link styling within the form */
+form .link a {
+  color: rgba(90, 140, 255, 1); /* Color for links */
+  text-decoration: none; /* Remove underline from links */
+}
+
+form .link a:hover {
+  text-decoration: underline; /* Underline links on hover */
+}
+/* Error message styling */
+.error {
+  color: red;
+  font-size: 0.8em; /* Slightly smaller font size for error messages */
+}
+
+.fields {
+  display: flex; /* Flex layout */
+  flex-direction: column; /* Column layout for fields */
+  gap: 10px; /* Space between fields */
+}
+.resetPasswordForm
+{
+  width: 500px;
+}
+.resetPasswordFormContainer{
+  display: grid;
+  justify-content: center;
+}

@@ -65,6 +65,7 @@
     </div>
 </div>
 
+
 <div class="container">
     <div class="head">
         <div class="left">
@@ -77,7 +78,7 @@
 
             <div class="detail">
                 <div class="description">
-                    <p *ngIf="!isLoading; else loading">
+                    <p *ngIf="!isLoading; else loading" >
                         {{ assetdetail.description }}
                     </p>
                     <ng-template #loading>

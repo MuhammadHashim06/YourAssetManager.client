@@ -75,7 +75,7 @@ place-items: center;
   font-size: 1em;
   border-radius: 5px;
   padding: 5px 10px;
-  background-color: blue;
+  background-color: #5380ff;
   color: white;  
 }
 .links{
@@ -114,13 +114,21 @@ place-items: center;
 .loader:before {
   animation: ball1 1s infinite;
   background-color: #fff;
-  box-shadow: 30px 0 0 #ff3d00;
+  box-shadow: 30px 0 0 #5380ff;
   margin-bottom: 10px;
 }
 .loader:after {
   animation: ball2 1s infinite;
-  background-color: #ff3d00;
+  background-color: #5380ff;
   box-shadow: 30px 0 0 #fff;
+}
+.alert{
+  left: 0;
+  position: fixed;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
 }
 
 @keyframes rotate {
@@ -131,15 +139,15 @@ place-items: center;
 
 @keyframes ball1 {
   0% {
-    box-shadow: 30px 0 0 #ff3d00;
+    box-shadow: 30px 0 0 #5380ff;
   }
   50% {
-    box-shadow: 0 0 0 #ff3d00;
+    box-shadow: 0 0 0 #5380ff;
     margin-bottom: 0;
     transform: translate(15px, 15px);
   }
   100% {
-    box-shadow: 30px 0 0 #ff3d00;
+    box-shadow: 30px 0 0 #5380ff;
     margin-bottom: 10px;
   }
 }
