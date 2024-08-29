@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AssetService } from '../../../../../core/services/asset/asset.service';
 import { UserService } from '../../../../../core/services/user/user.service';
 import { AssetactionsService } from '../../../../../core/services/assetactions/assetactions.service';
+import { Alert } from '../../../../../shared/reusablecomponents/alert/alert.component';
 
 @Component({
   selector: 'app-assetdetail',
@@ -11,6 +12,14 @@ import { AssetactionsService } from '../../../../../core/services/assetactions/a
 })
 export class AssetdetailComponent implements OnInit {
 returncondition: any;
+isprocessing=false
+alert: Alert={
+  type: 'success',
+  upermessage: '',
+  lowermessage: ''
+}
+isalert=false
+
 returnasset($event: MouseEvent) {
 
  const data={
@@ -18,22 +27,65 @@ returnasset($event: MouseEvent) {
   returnCondition: this.returncondition,
   notes: this.notes
   }
-
-  this.assetactionservice.returnasset(data).pipe().subscribe(res=>{
+  this.isprocessing=true
+  this.assetactionservice.returnasset(data).subscribe(res=>{
+    this.isalert=true
+    this.alert={
+      type: 'success',
+      upermessage: 'Asset returned successfully',
+      lowermessage: ''
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
     this.toogleaction('')
+    this.isprocessing=false
       this.router.navigateByUrl('dashboard/asset')
-  })
+  },error=>{
+    this.isprocessing=false
+    this.isalert=true
+    this.alert={
+      type: 'error',
+      upermessage: 'Somthing went wrong',
+      lowermessage: 'Asset Action failed'
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
+  }  )
 }
 retireasset(){
   const data={
     assetId: this.assetdetail.id,
     retirementReason: this.notes
-  }
+  }  
+  this.isprocessing=true
+
   this.assetactionservice.retireasset(data).subscribe(res=>{
+    this.isalert=true
+    this.alert={
+      type: 'success',
+      upermessage: 'Asset returned successfully',
+      lowermessage: ''
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
     this.router.navigateByUrl('dashboard/asset')
     this.toogleaction('')
+    this.isprocessing=false
   }, error=>{
     console.log(error);
+    this.isprocessing=false
+    this.isalert=true
+    this.alert={
+      type: 'error',
+      upermessage: 'Somthing went wrong',
+      lowermessage: 'Asset Action failed'
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
   }
 )
 }
@@ -42,12 +94,35 @@ sendforMaintainance(){
     assetId: this.assetdetail.id,
     description: this.notes
   }
+  this.isprocessing=true
+
   this.assetactionservice.sendformaintainance(data).subscribe(res=>{
+    this.isalert=true
+    this.alert={
+      type: 'success',
+      upermessage: 'Asset returned successfully',
+      lowermessage: ''
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
     this.router.navigateByUrl('dashboard/asset')
     this.toogleaction('')
+    this.isprocessing=false
   }, error=>{
     console.log(error);
+    this.isprocessing=false
+    this.isalert=true
+    this.alert={
+      type: 'error',
+      upermessage: 'Somthing went wrong',
+      lowermessage: 'Asset Action failed'
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
   } )
+
 }
 returnfrommaintainance(){
   const data={
@@ -55,12 +130,32 @@ returnfrommaintainance(){
     description: this.notes
   }
   console.log(data);
-  
+  this.isprocessing=true
+
   this.assetactionservice.returnfrommaintainance(data).subscribe(res=>{
+    this.isalert=true
+    this.alert={
+      type: 'success',
+      upermessage: 'Asset returned successfully',
+      lowermessage: ''
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
     this.router.navigateByUrl('dashboard/asset')
     this.toogleaction('')
+    this.isprocessing=false
   }, error=>{
     console.log(error);
+    this.isalert=true
+    this.alert={
+      type: 'error',
+      upermessage: 'Somthing went wrong',
+      lowermessage: 'Asset Action failed'
+    }
+    setTimeout(() => {
+      this.isalert=false
+    }, 2000);
   } )
 }
   notes: any;
@@ -73,10 +168,33 @@ returnfrommaintainance(){
       notes: this.notes,
       requestId: this.requestId
     }
+    this.isprocessing=true
+
     this.assetactionservice.assignasset(data).subscribe(res=>{
+      this.isalert=true
+      this.alert={
+        type: 'success',
+        upermessage: 'Asset returned successfully',
+        lowermessage: ''
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
       console.log(res);
       this.toogleaction('')
+      this.isprocessing=false
       this.router.navigateByUrl('dashboard/asset')
+    }, error=>{
+      this.isprocessing=false
+      this.isalert=true
+      this.alert={
+        type: 'error',
+        upermessage: 'Somthing went wrong',
+        lowermessage: 'Asset Action failed'
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
     })
   }
   selectedUserId = '';
@@ -99,7 +217,6 @@ selectaction=''
     this.selectaction=action
     this.isaction = !this.isaction
   }
-  sanitizer: any;
   updateasset(arg0: any) {
     this.router.navigateByUrl(`dashboard/asset/create/${arg0}`)
   }
@@ -117,16 +234,13 @@ selectaction=''
   updateassetdata() {
     this.assetservice.updategetdata().subscribe(data => {
       console.log(data);
+      this.isprocessing=false
 
-    })
+    }, error=>{
+      this.isprocessing=false
+    } )
   }
 
-  // retireasset()
-  // {
-  //   this.assetservice.retireasset().subscribe(data=>{
-  //     console.log(data);
-  //   })
-  // }
   id: any;
   assetdetail: any;
   constructor(

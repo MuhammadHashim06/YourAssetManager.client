@@ -56,7 +56,9 @@
     </div>
   </div>
   
-  <div class="container" (click)="hideFilter($event)">
+  <div class="container" (click)="hideFilter($event)" >
+    <app-dataloading *ngIf="!isdataload else table" ></app-dataloading>
+  <ng-template #table>
     <table class="list">
       <thead>
         <tr>
@@ -85,6 +87,7 @@
         </tr>
       </tbody>
     </table>
+  </ng-template>
   </div>
   
 

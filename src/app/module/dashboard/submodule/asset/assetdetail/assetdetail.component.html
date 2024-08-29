@@ -1,5 +1,9 @@
+<div class="alert" *ngIf="isalert" >
+    <app-alert [alert]="alert" ></app-alert>
+  </div>
+
 <div class="assigningdetail" *ngIf="isaction" (click)="toogleaction('')">
-    <div class="detail" (click)="stoppropagation($event)">
+    <div class="detail" (click)="stoppropagation($event)" *ngIf="!isprocessing else processing" >
         @if (selectaction=='checkout') {
         <h1> Assigning Details</h1>
         <table>
@@ -117,7 +121,10 @@
                 </tr>
             </table>
         }
+
     </div>
+    <ng-template #processing><span class="loader"></span> </ng-template>
+
 </div>
 
 
@@ -148,6 +155,7 @@
 
                 </div>
 
+                <ng-template #processing><span class="loader"></span> </ng-template>
 
             </div>
         </div>
@@ -164,7 +172,7 @@
                 @case ('Available') {
                 <button *ngIf="!isLoading" (click)="toogleaction('checkout')">Check out</button>
                 <button *ngIf="!isLoading" (click)="toogleaction('retire')">Retire</button>
-                <button *ngIf="!isLoading" (click)="toogleaction('senttoUnderMaintenance')">Under Maintenance</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('senttoUnderMaintenance')">Send Under Maintenance</button>
                 }
                 @case ('Assigned') {
                 <button *ngIf="!isLoading" (click)="toogleaction('checkin')">Check in</button>

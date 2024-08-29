@@ -183,9 +183,9 @@
     </table>
   </form>
   <div class="link">
-    @if (id==undefined) { <button type="submit" (click)="addAsset($event)">Add Asset</button>
+    @if (id==undefined) { <button type="submit" (click)="addAsset($event)">Add Asset <div class="loader" *ngIf="!response"></div></button>
       }@else {
-      <button type="submit" (click)="Saveasset($event)">Save Asset</button>
+      <button type="submit" (click)="Saveasset($event)">Save Asset <div class="loader" *ngIf="!response"></div></button>
       }
   </div>
 </div>

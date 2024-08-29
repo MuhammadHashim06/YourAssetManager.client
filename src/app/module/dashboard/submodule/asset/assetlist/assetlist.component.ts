@@ -19,7 +19,7 @@ export class AssetlistComponent implements OnInit {
   status: Array<string> = ['Assigned', 'Retired', 'UnderMaintenance', 'Returned', 'Available'];
   targetCategory: any;
   targetStatus: any;
-
+  isdataload=false
   constructor(
     private assetService: AssetService,
     private categoryService: CategoryService,
@@ -31,10 +31,12 @@ export class AssetlistComponent implements OnInit {
     this.loadCategories();
   }
   private loadAssets(): void {
+    this.isdataload=false
     this.assetService.getallasset().pipe(
       catchError(error => throwError(error))
     ).subscribe(res => {
       this.assetList = res.responseData.$values;
+      this.isdataload=true
       this.filteredAsset = this.assetList;
     });
   }

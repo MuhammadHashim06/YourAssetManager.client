@@ -15,9 +15,10 @@ export class AssetService {
 
   getallasset(): Observable<any> {
     const cacheKey = 'asset';
-    if (this.cache.has(cacheKey)) {
-      return of(this.cache.get(cacheKey));
-    } else {
+    // if (this.cache.has(cacheKey)) {
+    //   return of(this.cache.get(cacheKey));
+    // } else
+     {
       return this.http.get(this.apiendpoint.GetAllAssets).pipe(
         tap(data => this.cache.set(cacheKey, data)),
         shareReplay(1)

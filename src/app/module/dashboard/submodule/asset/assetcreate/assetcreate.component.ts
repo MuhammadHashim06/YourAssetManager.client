@@ -16,6 +16,7 @@ import { DatePipe } from '@angular/common';
 })
 export class AssetcreateComponent implements OnInit 
 {
+  response=true
   inputerrormessage = constant.inputerrormessage;
   setAssettype($event: any) {
     let index = $event.target.value;
@@ -72,6 +73,7 @@ export class AssetcreateComponent implements OnInit
   Saveasset($event: MouseEvent) {
    
 
+    this.response=false
 
     $event.preventDefault();
     // console.log(this.AssetDTO.value);
@@ -115,7 +117,7 @@ export class AssetcreateComponent implements OnInit
         .subscribe((res) => {
           this.updateassetdata()
           // console.log(res);
-
+          this.response=true
           this.route.navigateByUrl('dashboard/asset');
         });
     } else {
@@ -354,6 +356,7 @@ export class AssetcreateComponent implements OnInit
 }
   }
   addAsset($event :any) {
+    this.response=false
 
     $event.preventDefault();
     // console.log(this.AssetDTO.value);
@@ -394,6 +397,7 @@ export class AssetcreateComponent implements OnInit
           })
         )
         .subscribe((res) => {
+          this.response=true
           // console.log(res);
 this.updateassetdata()
           this.route.navigateByUrl('dashboard/asset');

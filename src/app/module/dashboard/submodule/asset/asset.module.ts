@@ -7,6 +7,8 @@ import { AssetcreateComponent } from './assetcreate/assetcreate.component';
 import { AssetdetailComponent } from './assetdetail/assetdetail.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ToggleStyleDirective } from '../../../../shared/directives/toggle-style.directive';
+import { AlertComponent } from "../../../../shared/reusablecomponents/alert/alert.component";
+import { DataloadingComponent } from "../../../../shared/reusablecomponents/dataloading/dataloading.component";
 
 
 @NgModule({
@@ -22,6 +24,8 @@ import { ToggleStyleDirective } from '../../../../shared/directives/toggle-style
     AssetRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-  ]
+    AlertComponent,
+    DataloadingComponent
+]
 })
 export class AssetModule { }
