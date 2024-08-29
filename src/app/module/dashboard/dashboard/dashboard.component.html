@@ -1,44 +1,47 @@
-<div class="searchmodel" *ngIf="isSearch" (click)="toggleSearch($event)">
-    <div class="search" (click)="stoppropagation($event)">
-        <div class="searchdetail">
-            <input type="text" placeholder="Enter any keyword to search" (input)="search($event)" /><select
-                name="search" id="search" (change)="settable($event)">
-                <option value="-1">Select Category</option>
-                <option [value]="c.id" *ngFor="let c of searchcategorieslist">{{c.categoryName}}</option>
-                <!-- <option value="Assets,Categories,Users,AssetTypes" selected>All</option>
+<div class="searchmodel" *ngIf="isSearch" (click)="toggleSearch()">
+  <div class="search" (click)="stoppropagation($event)">
+    <div class="searchdetail">
+      <input
+        type="text"
+        placeholder="Enter any keyword to search"
+        (input)="inputchange($event)"
+      />
+      <select name="search" id="search" (change)="settable($event)">
+        <option value="-1">Select Category</option>
+        <option [value]="c.id" *ngFor="let c of searchcategorieslist">
+          {{ c.categoryName }}
+        </option>
+        <!-- <option value="Assets,Categories,Users,AssetTypes" selected>All</option>
                 <option value="Assets">Assets</option>
                 <option value="Categories">Categories</option>
                 <option value="Users">Users</option>
                 <option value="Vendors">Vendors</option>
                 <option value="AssetTypes">AssetTypes</option> -->
-            </select>
-        </div>
-        <div class="searchresult">
-            <div>
-
-
-                @if (searchresult.length<=0) {
-                <h1>No Math Found</h1>
-                }
-                @else {
-                    <table>
-                        <tr>
-                            <th>Type</th>
-                            <th>
-                                ID
-                            </th>
-                            <th>
-                                Name
-                            </th>
-                        </tr>
-                        <tr *ngFor="let c of searchresult">
-                            <td>Categories</td>
-                            <td>{{c.id}}</td>
-                            <td>{{c.categoryName}}</td>
-                        </tr>
-                    </table>
-                }
-                <!-- @if(searchresult=={}){ @if (query=='' ) {
+      </select>
+    </div>
+    <div class="searchresult">
+      <div>
+        @if (searchresult.length<=0) {
+        <span style="display:flex;justify-content:center;padding: 5px;height: 20px;" >No Match Found</span>
+        } @else {
+        <table>
+          <tr>
+            <th>ID</th>
+            <th>Asset Name</th>
+            <th>Status</th>
+            <th>Vendors</th>
+            <th>Category</th>
+          </tr>
+          <tr *ngFor="let c of searchresult" (click)="openAsset(c.id)" >
+            <td>{{ c.id }}</td>
+            <td>{{ c.assetName }}</td>
+            <td>{{ c.assetStatusData }}</td>
+            <td>{{ c.vendorData }}</td>
+            <td>{{ c.assetCategoryData }}</td>
+          </tr>
+        </table>
+        }
+        <!-- @if(searchresult=={}){ @if (query=='' ) {
                 <h2>Enter Keyword to search</h2>
                 }@else {
                 <h2>Nothing Matched</h2>
@@ -91,52 +94,63 @@
 
                 </table>
                 }-->
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <div class="orgInfo" *ngIf="isProfileVisible">
-    <div class="profilecard">
-        <div class="profile-header">
-            <img [src]="currentuser.imagePath || ProfileIcon" alt="Organization Icon" class="profile-icon" />
-            <!-- <p class="org-name">{{orgName}}</p> -->
-            <p class="user-name">{{ currentuser.userName }}</p>
+  <div class="profilecard">
+    <div class="profile-header">
+      <img
+        [src]="currentuser.imagePath || ProfileIcon"
+        alt="Organization Icon"
+        class="profile-icon"
+      />
+      <!-- <p class="org-name">{{orgName}}</p> -->
+      <p class="user-name">{{ currentuser.userName }}</p>
 
-            <!-- <p class="org-domain">{{orgDomain}}</p> -->
-        </div>
-        <div class="links">
-            <button class="profile-button" routerLink="profile">
-                Personal Profile
-            </button>
-            <button class="profile-button" routerLink="updateorganization"
-                [disabled]="this.role == 'Employee' || this.role == undefined">
-                {{ orgName }} - Profile
-            </button>
-        </div>
-        <button class="logout" (click)="logout($event)">
-            <i class="fa-solid fa-right-from-bracket"></i> Log Out
-        </button>
+      <!-- <p class="org-domain">{{orgDomain}}</p> -->
     </div>
+    <div class="links">
+      <button class="profile-button" routerLink="profile">
+        Personal Profile
+      </button>
+      <button
+        class="profile-button"
+        routerLink="updateorganization"
+        [disabled]="this.role == 'Employee' || this.role == undefined"
+      >
+        {{ orgName }} - Profile
+      </button>
+    </div>
+    <button class="logout" (click)="logout($event)">
+      <i class="fa-solid fa-right-from-bracket"></i> Log Out
+    </button>
+  </div>
 </div>
 
 <div class="Main" (click)="closeProfile($event)">
-    <!-- <app-sidebar [role]="role" ></app-sidebar> -->
-    <app-sidebar></app-sidebar>
-    <div class="dashboard">
-        <div class="navbar">
-            <div class="navlink">
-                <img src="menu.svg" alt="horizantal nav" />
-                <input type="search" (click)="toggleSearch($event)" name="search" id="search"
-                    placeholder="        Search" />
-            </div>
-            <div class="profile" (click)="toggleProfileCard($event)">
-                <img class="profile-pic" [src]="currentuser.imagePath || ProfileIcon" alt="Account Icon" />{{
-                currentuser.userName }}
-            </div>
-        </div>
-        <div class="outer">
-            <router-outlet />
-        </div>
+  <!-- <app-sidebar [role]="role" ></app-sidebar> -->
+  <app-sidebar></app-sidebar>
+  <div class="dashboard">
+    <div class="navbar">
+      <div class="navlink">
+        <img src="menu.svg" alt="horizantal nav" />
+        <button (click)="toggleSearch()" name="search" id="search">
+          Search
+        </button>
+      </div>
+      <div class="profile" (click)="toggleProfileCard($event)">
+        <img
+          class="profile-pic"
+          [src]="currentuser.imagePath || ProfileIcon"
+          alt="Account Icon"
+        />{{ currentuser.userName }}
+      </div>
     </div>
+    <div class="outer">
+      <router-outlet />
+    </div>
+  </div>
 </div>

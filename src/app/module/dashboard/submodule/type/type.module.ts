@@ -6,6 +6,7 @@ import { TypelistComponent } from './typelist/typelist.component';
 import { AddtypeComponent } from './addtype/addtype.component';
 import { DataloadingComponent } from "../../../../shared/reusablecomponents/dataloading/dataloading.component";
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlertComponent } from "../../../../shared/reusablecomponents/alert/alert.component";
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CommonModule,
     TypeRoutingModule,
     DataloadingComponent,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AlertComponent
 ]
 })
 export class TypeModule { }

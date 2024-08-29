@@ -99,12 +99,15 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  // Search functionality
-  search($event: any) {
+  inputchange($event: any){
     if ($event.target) {
       this.query = $event.target.value;
     }
-    if (this.query != null) {
+    this.search(this.query)
+  }
+  // Search functionality
+  search($event: any) {
+    if (this.query != null || this.query!='') {
       this.boardservice.search(this.query, this.tables).pipe().subscribe(res => {
         this.searchresult = res.responseData.$values;
         console.log(this.searchresult);
@@ -119,14 +122,21 @@ export class DashboardComponent implements OnInit {
     }
   }
 
+  openAsset(id:any){
+    this.toggleSearch()
+this.router.navigateByUrl(`dashboard/asset/${id}`)
+  }
   // Toggle search visibility
-  toggleSearch($event: MouseEvent) {
+  toggleSearch() {
+    this.getallcategory()
     this.isSearch = !this.isSearch;
+    this.searchresult=[]
   }
 
   // Handle table selection
   settable($event: any) {
     this.tables = $event.target.value;
+    this.search(this.query);
     console.log(this.tables);
   }
 

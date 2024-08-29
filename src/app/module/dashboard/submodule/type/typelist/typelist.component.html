@@ -1,9 +1,14 @@
-<div class="head">
+<div class="alert" *ngIf="isalert" >
+    <app-alert [alert]="alert" ></app-alert>
+</div><div class="head">
     <h1>Asset Type list</h1>
     <button (click)="addnewfield()">Add New Asset Type</button>
 </div>
 <div class="container">
+    
     <form [formGroup]="assettype">
+        @if (!dataload) {<app-dataloading></app-dataloading>}
+        @else{
     <table>
         <thead>
             <th>
@@ -17,6 +22,9 @@
             </th>
         </thead>
         <tbody>
+          
+@if (type.length>0) {
+            
             <tr *ngFor="let t of type">
                 <td>{{t.assetTypeName|| '--'}} </td>
                 <td>{{t.description || '--'}}</td>
@@ -26,10 +34,15 @@
                             style="cursor: pointer;"></div>
                 </td>
             </tr>
+        }@else{
+            <div class="notfound" style="">
+                <span>No asset found</span>
+            </div>
+        }
             <tr *ngIf="isadd">
                 <td>
                     <input type="text" placeholder="Enter Asset Type Name" formControlName="assetTypeName">
-                    <span class="error" *ngIf="assettype.controls.assetTypeName.touched && assettype.controls.assetTypeName.invalid ">{{inputerrormessages.required}}</span>
+                    <span class="error" *ngIf="assettype.controls['assetTypeName'].touched && assettype.controls['assetTypeName'].invalid ">{{inputerrormessages.required}}</span>
                 </td>
                 <td>
                     <input type="text" placeholder="Enter Description" formControlName="description">
@@ -39,14 +52,17 @@
                         @if (id<=0) {
                             <button (click)="savetype()" >Save Type</button>
                         }@else {
-                            <button (click)="updatetype()" >Update Type</button>
+                            <button (click)="updateType()" >Update Type</button>
                         }
                         
                         <p style="color: red;cursor: pointer;" (click)="cancel()">Cancel</p>
                     </div>
                 </td>
             </tr>
+        
         </tbody>
+    
     </table>
+        }
 </form>
 </div>

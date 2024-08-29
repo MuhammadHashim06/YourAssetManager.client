@@ -66,4 +66,6 @@ updategetdata(){
 getavailabelassetbycategory(id:any):Observable<any>{
 return this.http.get(`${this.apiendpoint.GetAvailableAssetsByCatagory}?catagoryId=${id}`)
 }
+
+
 }

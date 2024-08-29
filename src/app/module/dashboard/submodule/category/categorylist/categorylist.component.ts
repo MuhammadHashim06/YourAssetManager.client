@@ -2,6 +2,7 @@ import { Component, inject, OnInit } from '@angular/core';
 import { CategoryService } from '../../../../../core/services/category/category.service';
 import { catchError, throwError } from 'rxjs';
 import { Router } from '@angular/router';
+import { Alert } from '../../../../../shared/reusablecomponents/alert/alert.component';
 
 export interface Icategories {
   id: number
@@ -20,16 +21,16 @@ export class CategorylistComponent implements OnInit {
 
   private router = inject(Router)
   dataload = false
+  isalert=false
+  alert: Alert = {
+    type: '',
+    upermessage:'',
+    lowermessage:''
+  };
   getcategories() {
     this.dataload = false
-    this.service.getcategory().pipe(
-      catchError(error => {
-        this.dataload = true
-        return throwError(error)
-      })
-    ).subscribe(res => {
+    this.service.getcategory().subscribe(res => {
       this.dataload = true
-      
       if (res.status == 404) {
         this.categories = []
       }
@@ -41,6 +42,8 @@ export class CategorylistComponent implements OnInit {
         }
       }
 
+    }, error=>{
+      this.dataload = true
     })
   }
   edit(arg0: number) {
@@ -48,14 +51,33 @@ export class CategorylistComponent implements OnInit {
   }
   delete(id: number) {
     this.dataload = false
-    this.service.deletecategory(id).pipe(
-      catchError(error => {
-        this.dataload = true
-        return throwError(error)
-      })
-    ).subscribe(res => {
+    this.service.deletecategory(id).subscribe(res => {
+      this.isalert = true;
+      this.alert.type='success'
+        this.alert.upermessage = 'Deleted Success',
+        this.alert.lowermessage = 'Catrgory Deleted Successfully'
+      
+   setTimeout(() => {
+    this.isalert=false
+   }, 3000);
       this.getcategories()
 
+    }, error =>{
+      this.dataload = true
+      this.isalert=true
+    this.alert.type='error'
+      if(error.status==405){
+        this.alert.type='warning'
+        this.alert.upermessage = 'Delete Failed',
+        this.alert.lowermessage = 'Category is already in use'
+      }else{
+        this.alert.type='error'
+        this.alert.upermessage = 'Something went wrong',
+        this.alert.lowermessage = 'Please try again Later'
+      }
+   setTimeout(() => {
+    this.isalert=false
+   }, 3000);
     })
   }
   constructor(private service: CategoryService) { }

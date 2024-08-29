@@ -1,5 +1,6 @@
-<h1>Add Category</h1>
-
+<div class="alert" *ngIf="isalert" >
+    <app-alert [alert]="alert" ></app-alert>
+  </div><h1>Add Category</h1>
 <div class="form">
     <form class="category-form" [formGroup]="categoryvalue">
         <table>

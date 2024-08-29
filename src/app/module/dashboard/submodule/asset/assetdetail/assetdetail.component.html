@@ -1,15 +1,15 @@
-<div class="assigningdetail" *ngIf="isaction" (click)="toogleaction()">
+<div class="assigningdetail" *ngIf="isaction" (click)="toogleaction('')">
     <div class="detail" (click)="stoppropagation($event)">
-        @if (assetdetail.assetStatusData=='Available') {
-      <h1>  Assigning Details</h1>
+        @if (selectaction=='checkout') {
+        <h1> Assigning Details</h1>
         <table>
             <tr>
                 <td>
                     User Name
                 </td>
                 <td>
-                    <input list="allusers" id="user" name="user" (change)="onUserChange($event)" 
-                    (input)="onUserInput($event)" placeholder="Type to search User..">
+                    <input list="allusers" id="user" name="user" (change)="onUserChange($event)"
+                        (input)="onUserInput($event)" placeholder="Type to search User..">
                     <datalist id="allusers">
                         <option [value]="a.userName" *ngFor="let a of allusers">
                     </datalist>
@@ -19,13 +19,13 @@
                 <td>
                     Request ID
                 </td>
-                <input name="notes" id="notes" [(ngModel)]="requestId"/>
+                <input name="notes" id="notes" [(ngModel)]="requestId" />
             </tr>
             <tr>
                 <td>
                     Notes
                 </td>
-                <input type="text" name="notes" id="notes" [(ngModel)]="notes"/>
+                <input type="text" name="notes" id="notes" [(ngModel)]="notes" />
             </tr>
             <tr>
                 <td></td>
@@ -34,34 +34,89 @@
                 </td>
             </tr>
         </table>
-    }@else if (assetdetail.assetStatusData=='Assigned') {
-        <h1>  Return Details</h1>
+        }@else if (selectaction=='checkin') {
+        <h1> Return Details</h1>
         <table>
-        <tr>
-            <td>
-                Return Condition
-            </td>
-            <td>
-                <textarea name="returncondition" id="returncondition" [(ngModel)]="returncondition"></textarea>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                Notes
-            </td>
-            <td>
-                <textarea name="notes" id="notes" [(ngModel)]="notes"></textarea>
+            <tr>
+                <td>
+                    Return Condition
+                </td>
+                <td>
+                    <input name="returncondition" id="returncondition" [(ngModel)]="returncondition"/>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    Notes
+                </td>
+                <td>
+                    <textarea name="notes" id="notes" [(ngModel)]="notes"></textarea>
 
-            </td>
-        </tr>
-        <tr>
-            <td></td>
-            <td>
-                <button (click)="returnasset($event)">Check in</button>
-            </td>
-        </tr>
-    </table>
-    }
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td>
+                    <button (click)="returnasset($event)">Check in</button>
+                </td>
+            </tr>
+        </table>
+        }@else if (selectaction=='retire') {
+            <h1>Retire Asset Detail</h1>
+            <table>
+                <tr>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        <input type="text" name="" id="" [(ngModel)]="notes" >
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button (click)="retireasset()">Retire asset</button>
+                    </td>
+                </tr>
+            </table>
+        }@else if (selectaction=='senttoUnderMaintenance') {
+            <h1>Sent for maintainance</h1>
+            <table>
+                <tr>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        <input type="text" name="" id="" [(ngModel)]="notes" >
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button (click)='sendforMaintainance()'>Send for maintainance</button>
+                    </td>
+                </tr>
+            </table>
+        }
+        @else if (selectaction=='returfromundermaintainance') {
+            <h1>return from maintainance</h1>
+            <table>
+                <tr>
+                    <td>
+                        Description
+                    </td>
+                    <td>
+                        <input type="text" name="" id="" [(ngModel)]="notes" >
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>
+                        <button (click)="returnfrommaintainance()">Reurn From maintainance</button>
+                    </td>
+                </tr>
+            </table>
+        }
     </div>
 </div>
 
@@ -78,7 +133,7 @@
 
             <div class="detail">
                 <div class="description">
-                    <p *ngIf="!isLoading; else loading" >
+                    <p *ngIf="!isLoading; else loading">
                         {{ assetdetail.description }}
                     </p>
                     <ng-template #loading>
@@ -87,7 +142,6 @@
 
 
                     <div class="action">
-
                         <button *ngIf="!isLoading" (click)="updateasset(id)">Update</button>
                         <button *ngIf="!isLoading" (click)="deleteasset(id)">Delete</button>
                     </div>
@@ -108,14 +162,14 @@
                 @if(assetdetail.assetStatusData!=undefined){
                 @switch (assetdetail.assetStatusData) {
                 @case ('Available') {
-                <button *ngIf="!isLoading" (click)="toogleaction()">Check out</button>
-                <button *ngIf="!isLoading" (click)="toogleaction()">Retire</button>
-                <button *ngIf="!isLoading" (click)="toogleaction()">Under Maintenance</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('checkout')">Check out</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('retire')">Retire</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('senttoUnderMaintenance')">Under Maintenance</button>
                 }
                 @case ('Assigned') {
-                <button *ngIf="!isLoading" (click)="toogleaction()">Check in</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('checkin')">Check in</button>
                 }@case ('UnderMaintenance') {
-                <button *ngIf="!isLoading" (click)="toogleaction()">Mark as Available</button>
+                <button *ngIf="!isLoading" (click)="toogleaction('returfromundermaintainance')">Mark as Available</button>
                 }
                 }
                 }

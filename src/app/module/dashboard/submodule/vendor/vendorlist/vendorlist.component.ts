@@ -19,6 +19,7 @@ alert: Alert = {
 };
   delete(arg0: any) {
     this.service.deletevender(arg0).subscribe(res => {
+      this.isalert = true;
       this.alert.type='success'
         this.alert.upermessage = 'Deleted Success',
         this.alert.lowermessage = 'Vendor Deleted Successfully'

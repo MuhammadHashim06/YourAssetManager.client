@@ -112,3 +112,10 @@ td {
 button {
   cursor: pointer;
 }
+.alert{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  justify-content: center;
+}

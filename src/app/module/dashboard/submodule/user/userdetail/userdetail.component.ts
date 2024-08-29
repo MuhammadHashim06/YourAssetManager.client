@@ -15,11 +15,16 @@ export class UserdetailComponent implements OnInit {
 
     if (this.Activestatus) {
       this.userservice.deactiveuser(id).subscribe((response) => {
-        this.route.navigateByUrl('dashboard/user')
+        if (this.usercurrentrole == this.assignedrole) {
+          this.route.navigateByUrl('auth')
+        } else {
+          this.route.navigateByUrl('dashboard/user')
+        }
       })
     } else {
       this.userservice.activeuser(id).pipe().subscribe(res => {
         this.route.navigateByUrl('dashboard/user')
+
       })
     }
   }
@@ -45,15 +50,28 @@ export class UserdetailComponent implements OnInit {
   constructor(private activedrouter: ActivatedRoute, private userservice: UserService, private route: Router) {
     this.id = this.activedrouter.snapshot.params['id']
     console.log(typeof (this.id));
-
   }
+  usercurrentrole: any;
+
   ngOnInit(): void {
+
+    const datastring = sessionStorage.getItem('currentuser')
+    if (datastring != undefined) {
+      const data = JSON.parse(datastring)
+      const userrole = data.roles.$values
+      if (userrole.includes('OrganizationOwner')) {
+        this.usercurrentrole = 'OrganizationOwner'
+      } else { this.usercurrentrole = userrole.includes('AssetManager') ? 'AssetManager' : 'Employee' }
+
+    }
     if (this.id != '' && this.id != undefined) {
       this.userservice.getuserbyID(this.id).pipe().subscribe(res => {
         this.userdetail = res.responseData
         console.log(this.userdetail);
         this.roles = this.userdetail.roles.$values
-        this.assignedrole = this.userdetail.roles.$values.includes('AssetManager') ? 'AssetManager' : 'Employee'
+        if (this.roles.includes('OrganizationOwner')) {
+          this.assignedrole = 'OrganizationOwner'
+        } else { this.assignedrole = this.userdetail.roles.$values.includes('AssetManager') ? 'AssetManager' : 'Employee' }
         this.Activestatus = this.userdetail.activeUser
         if (
           this.userdetail.imagePath != null

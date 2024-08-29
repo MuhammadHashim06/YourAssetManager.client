@@ -32,4 +32,14 @@ export class AssetactionsService {
 return this.http.post(this.apiendpoint.DeclineAssetRequest,data)
   }
 
+  retireasset(data: any): Observable<any> {
+    return this.http.post(this.apiendpoint.RetireAsset, data)
+  }
+  returnfrommaintainance(data: any): Observable<any> {
+    return this.http.post(this.apiendpoint.ReturnFromMaintenance, data)
+  }
+  sendformaintainance(data: any): Observable<any> {
+    return this.http.post(this.apiendpoint.SendForMaintenance, data)
+  }
+
 }

@@ -99,6 +99,10 @@ export const apiEndPoint = {
     GetAssetRequestsByUserId: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/GetAssetRequestsByUserId',
     ReturnAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnAsset',
     CancelRequestAsset: 'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/CancelRequestAsset',
+    RetireAsset:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/RetireAsset',
+    SendForMaintenance:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/SendForMaintenance',
+    ReturnFromMaintenance:'http://localhost:5235/YourAssetManager.Server/AssetActionsManagement/ReturnFromMaintenance'
+
   }
 
 };

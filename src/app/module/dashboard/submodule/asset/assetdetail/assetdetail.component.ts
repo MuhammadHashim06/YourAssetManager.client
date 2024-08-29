@@ -20,9 +20,48 @@ returnasset($event: MouseEvent) {
   }
 
   this.assetactionservice.returnasset(data).pipe().subscribe(res=>{
-    this.toogleaction()
+    this.toogleaction('')
       this.router.navigateByUrl('dashboard/asset')
   })
+}
+retireasset(){
+  const data={
+    assetId: this.assetdetail.id,
+    retirementReason: this.notes
+  }
+  this.assetactionservice.retireasset(data).subscribe(res=>{
+    this.router.navigateByUrl('dashboard/asset')
+    this.toogleaction('')
+  }, error=>{
+    console.log(error);
+  }
+)
+}
+sendforMaintainance(){
+  const data={
+    assetId: this.assetdetail.id,
+    description: this.notes
+  }
+  this.assetactionservice.sendformaintainance(data).subscribe(res=>{
+    this.router.navigateByUrl('dashboard/asset')
+    this.toogleaction('')
+  }, error=>{
+    console.log(error);
+  } )
+}
+returnfrommaintainance(){
+  const data={
+    assetId: this.assetdetail.id,
+    description: this.notes
+  }
+  console.log(data);
+  
+  this.assetactionservice.returnfrommaintainance(data).subscribe(res=>{
+    this.router.navigateByUrl('dashboard/asset')
+    this.toogleaction('')
+  }, error=>{
+    console.log(error);
+  } )
 }
   notes: any;
   requestId: any;
@@ -34,9 +73,9 @@ returnasset($event: MouseEvent) {
       notes: this.notes,
       requestId: this.requestId
     }
-    this.assetactionservice.assignasset(data).pipe().subscribe(res=>{
+    this.assetactionservice.assignasset(data).subscribe(res=>{
       console.log(res);
-      this.toogleaction()
+      this.toogleaction('')
       this.router.navigateByUrl('dashboard/asset')
     })
   }
@@ -54,9 +93,10 @@ returnasset($event: MouseEvent) {
   stoppropagation($event: MouseEvent) {
     $event.stopPropagation();
   }
-
+selectaction=''
   isaction = false
-  toogleaction() {
+  toogleaction(action:any) {
+    this.selectaction=action
     this.isaction = !this.isaction
   }
   sanitizer: any;
@@ -80,6 +120,13 @@ returnasset($event: MouseEvent) {
 
     })
   }
+
+  // retireasset()
+  // {
+  //   this.assetservice.retireasset().subscribe(data=>{
+  //     console.log(data);
+  //   })
+  // }
   id: any;
   assetdetail: any;
   constructor(

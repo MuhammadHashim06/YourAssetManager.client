@@ -70,7 +70,7 @@ cursor: default;
   // background-color:rgba(245, 246, 250, 1);
   // border: 1px solid rgba(213, 213, 213, 1) ;
 }
-.navbar input[type="search"]{
+button#search {
   background-color: rgba(245, 246, 250, 1);
   border: none;
   border: 1px solid rgba(213, 213, 213, 1);
@@ -79,6 +79,10 @@ cursor: default;
   transition: all 0.3s ease;
   border-radius: 150px;
   font-size: 15px;
+  padding-left: 40%;
+  background-image: url("../../../../../public/search.svg");
+  background-repeat: no-repeat;
+  background-size: contain;
 }
 .navbar input[type="search"]:focus,
 select:focus {
@@ -120,6 +124,9 @@ select:focus {
   background-color: white;
   width:70%;
   max-height: 80%;
+}.search table tr:hover{
+  background-color: rgb(250, 250, 250);
+    cursor: pointer;
 }
 select{
   width: 100%;
