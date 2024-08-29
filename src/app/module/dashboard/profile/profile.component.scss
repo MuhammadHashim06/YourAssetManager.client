@@ -38,7 +38,15 @@
   align-items: center;
   gap: 30px;
 }
-.form form {
+.resetpassword{
+  color: rgba(72, 128, 255, 1);
+  border: none;
+  padding: 10px 0px;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-bottom: 10px;
+}
+form {
   width: 70%;
 }
 .fields input[type="password"]::placeholder {
@@ -97,6 +105,18 @@ form .link button {
   cursor: pointer; /* Pointer cursor to indicate clickable button */
   margin-top: 1%;
 }
+.links .verify {
+  background-color: rgba(72, 128, 255, 1); /* Background color for the button */
+  color: #ffffff; /* White text color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside button */
+  border: none; /* Remove default border */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor to indicate clickable button */
+  margin-top: 1%;
+  display: flex;
+  gap: 2px;
+}
 
 /* Link styling within the form */
 form .link a {
@@ -118,11 +138,31 @@ form .link a:hover {
   flex-direction: column; /* Column layout for fields */
   gap: 10px; /* Space between fields */
 }
-.resetPasswordForm
-{
-  width: 500px;
-}
-.resetPasswordFormContainer{
-  display: grid;
+.links{
+  display: flex;
   justify-content: center;
+  gap : 10px
+}
+.links .cancel{
+  color: rgba(72, 128, 255, 1); /* Background color for the button */
+  background-color:rgba(72, 128, 255, 0.2); /* White text color */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Padding inside button */
+  border: none; /* Remove default border */
+  font-size: 1rem; /* Font size for button text */
+  cursor: pointer; /* Pointer cursor to indicate clickable button */
+  margin-top: 1%;
+}
+.forgettemp{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.alert{
+left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  position: fixed;
 }

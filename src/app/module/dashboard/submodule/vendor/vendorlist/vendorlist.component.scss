@@ -26,3 +26,10 @@ thead{
   border-radius: 7.5px;
   gap: 0px;
 }
+.alert{
+  display: flex;
+  position: fixed;
+  width: 100%;
+  left: 0;
+  justify-content: center;
+}

@@ -1,3 +1,7 @@
+<div class="alert" *ngIf="isalert" >
+    <app-alert [alert]="alert" ></app-alert>
+</div>
+
 <div class="head">
     <h1>Vendor List</h1>
     <button routerLink="add" >Add Vendor</button>

@@ -4,6 +4,7 @@ import { constant } from '../../../../../core/constant/constant';
 import { VendorService } from '../../../../../core/services/vendor/vendor.service';
 import { catchError, throwError } from 'rxjs';
 import { ActivatedRoute, Router } from '@angular/router';
+import { Alert } from '../../../../../shared/reusablecomponents/alert/alert.component';
 
 @Component({
   selector: 'app-addvendor',
@@ -11,27 +12,28 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrl: './addvendor.component.scss'
 })
 export class AddvendorComponent implements OnInit {
+  alert: Alert | undefined;
   id = 0
   editvender: any
-  response=true
-
+  response = true
+  isalert = false
   constructor(private service: VendorService, private router: Router, private active: ActivatedRoute) {
-    if(this.active.snapshot.queryParams['id']){
-    this.id = this.active.snapshot.queryParams['id']
+    if (this.active.snapshot.queryParams['id']) {
+      this.id = this.active.snapshot.queryParams['id']
     }
   }
   ngOnInit(): void {
     if (this.id !== 0) {
-      this.response=false
+      this.response = false
       this.service.getvendorbyId(this.id).pipe(
         catchError(error => {
-          this.response=true
-         
+          this.response = true
+
           return throwError(error)
         })
       ).subscribe({
         next: (res) => {
-          this.response=true
+          this.response = true
           this.editvender = res.responseData
           this.vendorinfo.setValue({
             name: this.editvender.name,
@@ -46,12 +48,12 @@ export class AddvendorComponent implements OnInit {
 
 
   Savevendor($event: MouseEvent) {
-    
+
     if (this.vendorinfo.invalid) {
       this.vendorinfo.markAllAsTouched();
     } else {
-      this.response=false
-      const updateddata={
+      this.response = false
+      const updateddata = {
         id: this.id,
         name: this.vendorinfo.controls['name'].value,
         email: this.vendorinfo.controls['email'].value,
@@ -60,36 +62,35 @@ export class AddvendorComponent implements OnInit {
       }
       this.service.updatevendor(updateddata).pipe(
         catchError(error => {
-          this.response=true
-          if(error.status==400)
-            {
-              alert('No Changes Found')
-              this.router.navigateByUrl('dashboard/vendor')
-            }
+          this.response = true
+          if (error.status == 400) {
+            alert('No Changes Found')
+            this.router.navigateByUrl('dashboard/vendor')
+          }
           return throwError(error)
         })
       ).subscribe(res => {
-        this.response=true
+        this.response = true
         this.router.navigateByUrl('dashboard/vendor')
       })
     }
 
   }
 
-  
+
   Addvendor($event: MouseEvent) {
     if (this.vendorinfo.invalid) {
-     
+
       this.vendorinfo.markAllAsTouched();
     } else {
-      this.response=false
+      this.response = false
       this.service.addvendor(this.vendorinfo.value).pipe(
         catchError(error => {
-          this.response=true
+          this.response = true
           return throwError(error)
         })
       ).subscribe(res => {
-        this.response=true
+        this.response = true
         this.router.navigateByUrl('dashboard/vendor')
       })
     }

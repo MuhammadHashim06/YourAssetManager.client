@@ -59,3 +59,10 @@
 @keyframes l13{ 
   100%{transform: rotate(1turn)}
 }
+.alert{
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  left:0;
+}

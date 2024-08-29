@@ -97,7 +97,13 @@ export class LoginComponent {
       res => {
         sessionStorage.setItem('userData', JSON.stringify(res))
         this.load = false;
-        alert('Check Your Email');
+        this.isalert=true
+        this.alertData.type='success'
+        this.alertData.upermessage='Reset Email Sent'
+        this.alertData.lowermessage='Please check your email for reset link'
+        setTimeout(() => {
+          this.isalert = false
+        },3000)
       },
       error => {
         console.error(error);
@@ -131,7 +137,13 @@ export class LoginComponent {
             let data = res.responseData
             sessionStorage.setItem('currentuser', JSON.stringify(data))
           })
-          this.router.navigateByUrl('/dashboard');
+          this.isalert=true
+          this.alertData.type='success'
+           this.alertData.upermessage = 'Login Success';
+              this.alertData.lowermessage = 'You have Logged In Succfully';
+              setTimeout(() => {  this.isalert=false       
+                 this.router.navigateByUrl('/dashboard');
+              },2000)
         },
         error => {
           this.load = false;
@@ -157,7 +169,7 @@ export class LoginComponent {
               this.isalert=true
               break; 
             }
-            case 400: {
+             default : {
               this.alertData.upermessage = 'Something Went Wrong';
               this.isalert=true
               this.alertData.lowermessage = 'Please try again';

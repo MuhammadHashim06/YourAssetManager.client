@@ -11,6 +11,7 @@ import { DashboardRoutingModule } from './dashboard-routing.module';
 import { ProfileComponent } from './profile/profile.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { UpdateorganizationComponent } from './updateorganization/updateorganization.component';
+import { AlertComponent } from "../../shared/reusablecomponents/alert/alert.component";
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { UpdateorganizationComponent } from './updateorganization/updateorganiza
     RouterOutlet,
     ReactiveFormsModule,
     NgxChartsModule,
-  ]
+    AlertComponent
+]
 })
 export class DashboardModule { }

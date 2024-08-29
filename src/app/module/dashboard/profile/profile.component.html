@@ -1,6 +1,11 @@
+<div class="alert" *ngIf="isalert">
+
+
+<app-alert [alert]="alertData"  ></app-alert>
+</div>
 <h1>Personal Imformation</h1>
 <div class="container">
-  <div class="form">
+  <div class="form" *ngIf="!isforget else forgettemp">
     <div class="file-upload-wrapper">
       <img [src]="imageUrl" alt="Profile Image" class="preview-image" />
       <button type="button" class="custom-upload-button" (click)="fileInput.click()">
@@ -8,9 +13,9 @@
       </button>
       <input type="file" name="file" (change)="onselect($event)" #fileInput class="file-input" />
     </div>
-    <form [formGroup]="Userdata">
+    <form [formGroup]="Userdata"  >
       <div class="fields">
-        <table>
+        <table *ngIf="!isforget" >
           <tr>
             <td>
               <label for="email">Email Address</label>
@@ -33,7 +38,7 @@
             </td>
             <td>
               <input type="password" name="password" id="password" placeholder="  " disabled />
-              <p (click)="forget()">ResetPassword?</p>
+              <p class="resetpassword" (click)="forget() ">Reset Password</p>
             </td>
           </tr>
         </table>
@@ -43,44 +48,37 @@
       <button type="button" (click)="Save($event)">Save Changes <div class="loader" *ngIf="!response"></div></button>
     </div>
   </div>
-  <form *ngIf="isforget" (ngSubmit)="verifyemail($event)">
-    <div class="resetPasswordFormContainer">
-      <div class="resetPasswordForm">
-      <div class="fields">
+  <ng-template #forgettemp>
+    <div class="forgettemp">
+  <form  (ngSubmit)="verifyemail($event)">
+      <!-- <div class="fields"> -->
         <!-- Email Input Field for Forgot Password -->
-        <label for="email">Email Address:</label>
-        <input type="text" id="email" name="email" placeholder="Enter your email" [(ngModel)]="email" #vemail="ngModel"
-          required email />
-        <!-- Email Validation Error Messages for Forgot Password -->
-        <div *ngIf="vemail.errors && vemail.touched">
-          <span *ngIf="vemail.errors['required']" class="error">
-            {{ inputerrormessage.required }}
-          </span>
-          <span *ngIf="vemail.errors['email']" class="error">
-            {{ inputerrormessage.email }}
-          </span>
+          <table>
+            <tr>
+              <td>
+                <label for="email">Email Address:</label>
+                <input type="text" id="email" name="email" placeholder="Enter your email" [(ngModel)]="email" #vemail="ngModel"
+                  required email />
+                <!-- Email Validation Error Messages for Forgot Password -->
+                <div *ngIf="vemail.errors && vemail.touched">
+                  <span *ngIf="vemail.errors['required']" class="error">
+                    {{ inputerrormessage.required }}
+                  </span>
+                  <span *ngIf="vemail.errors['email']" class="error">
+                    {{ inputerrormessage.email }}
+                  </span>
+                </div>
+              </td>
+            </tr>
+           </table>
+          
+        <!-- </div> -->
+  
+        <div class="links">
+          <button class="cancel" (click)="forget()">Cancel</button>
+          <button type="submit" class="verify">Verify Email <div class="loader" *ngIf="!response"></div> </button>
         </div>
-      </div>
-
-      <div class="link">
-        <!-- Submit Button for Email Verification -->
-        <button type="submit">Verify Email</button>
-        <p>Don't have an account? <a routerLink="/auth/signup">Create Account</a></p>
-      </div>
-    </div>
-  </div>
-  </form>
+            </form>
+          </div>
+          </ng-template>
 </div>
-
-<!-- <div class="row">
-    <div class="small-12 medium-2 large-2 columns">
-      <div class="circle">
-        <img class="profile-pic" src="https://t3.ftcdn.net/jpg/03/46/83/96/360_F_346839683_6nAPzbhpSkIpb8pmAwufkC7c5eD7wYws.jpg">
- 
-      </div>
-      <div class="p-image">
-        <i class="fa fa-camera upload-button"></i>
-         <input class="file-upload" type="file" accept="image/*"/>
-      </div>
-   </div>
- </div> -->

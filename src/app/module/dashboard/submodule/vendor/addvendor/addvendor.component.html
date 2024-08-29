@@ -1,13 +1,16 @@
 <!-- @if (!response) {
   <app-responseloading  ></app-responseloading>
 } -->
+  <div class="alert" *ngIf="isalert" >
+  <app-alert [alert]="alert" ></app-alert>
+</div>
 <h1>Add New Vendor</h1>
 <div class="container">
-  <div class="file-upload-wrapper">
+  <!-- <div class="file-upload-wrapper">
     <img [src]="imageUrl" alt="Profile Image" class="preview-image">
     <button type="button" class="custom-upload-button" (click)="fileInput.click()">Upload Image</button>
     <input type="file" (change)="onselect($event)" #fileInput class="file-input">
-  </div>
+  </div> -->
 <form [formGroup]="vendorinfo">
   <table>
     <tr>

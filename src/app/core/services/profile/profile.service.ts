@@ -10,12 +10,12 @@ export class ProfileService {
   private apiendpoint = apiEndPoint.profile
   constructor(private http:HttpClient) { }
 
-  updateprofile(userName :string , image:File){
-    const formData = new FormData();
+  updateprofile(UserName :string , image:File){
+    const ProfilePicture = new FormData();
     if(image!=undefined){
-      formData.append('ProfilePicture', image, image.name);
+      ProfilePicture.append('ProfilePicture', image, image.name);
     }
     
-    return this.http.put(`${this.apiendpoint.UpdateUserProfile}?UserName=${userName}`,formData)
+    return this.http.put(`${this.apiendpoint.UpdateUserProfile}?UserName=${UserName}`,ProfilePicture)
   }
 }

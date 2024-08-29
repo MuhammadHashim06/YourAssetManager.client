@@ -41,11 +41,13 @@ export class ProfileComponent implements OnInit {
   verifyemail($event: MouseEvent): void {
     $event.preventDefault();
     this.load = true;
+    this.response=false
 
     const email = { email: this.email };
     this.loginservice.verifyemail(email).pipe(
       catchError(error => {
         // this.handleError(error);
+        this.response=true
         this.alertData.type = 'error'
         this.isalert = true
 
@@ -82,7 +84,15 @@ export class ProfileComponent implements OnInit {
       (res: any) => {
         sessionStorage.setItem('userData', JSON.stringify(res))
         this.load = false;
-        alert('Check Your Email');
+        this.response=true
+        this.isalert=true
+        this.alertData.type='success'
+        this.alertData.upermessage='Reset Email Sent'
+        this.alertData.lowermessage='Please check your email for reset link'
+        setTimeout(() => {
+          this.router.navigateByUrl('auth')
+          this.isalert = false
+        },3000)
       },
       (error: any) => {
         console.error(error);
@@ -92,10 +102,13 @@ export class ProfileComponent implements OnInit {
         this.alertData.lowermessage = 'Please try again'
         setTimeout(() => {
           this.isalert = false
+        this.router.navigateByUrl('auth')
 
         }, 3000);
 
         this.load = false;
+        this.response=true
+
       }
     );
   }
@@ -137,13 +150,40 @@ export class ProfileComponent implements OnInit {
       this.userservice.getmydata().pipe().subscribe(res => {
         this.LogData = res.responseData;
         sessionStorage.setItem('currentuser', JSON.stringify(this.LogData))
-        this.response = true
-        this.router.navigateByUrl('dashboard')
+        const currentuserstring = sessionStorage.getItem('currentuser')
+    if (currentuserstring != null || currentuserstring != undefined) {
+      this.LogData = JSON.parse(currentuserstring)
+      console.log('Current User', this.LogData);
+      this.Userdata.setValue({
+        email: this.LogData.email,
+        userName: this.LogData.userName,
       })
+      if (this.LogData.imagePath != null) {
+        this.imageUrl = this.LogData.imagePath
+      }
+    }
+      })
+      this.response = true
+      this.isalert=true
+      this.alertData.type='success'
+      this.alertData.upermessage='Updated Successfully'
+      this.alertData.lowermessage='Your Account is Update'
+      setTimeout(() => {
+        this.isalert = false
+      },3000)
       console.log(res);
+    },error=>{
+      this.response = true
+      this.isalert=true
+      this.alertData.type='warning'
+      this.alertData.upermessage='Update Failed'
+      this.alertData.lowermessage='Somthing went Wrong'
+      setTimeout(() => {
+        this.isalert = false
+      },3000)
     })
   }
   forget(): void {
-    this.isforget = true;
+    this.isforget =!this.isforget;
   }
 }
