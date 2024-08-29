@@ -14,12 +14,13 @@ place-items: center;
   background-color: white;
   padding: 5% 10%;
 }
-.assign{
+.assign ,table button {
   border: none;
   background-color: rgba(72, 128, 255, 1);
   color: white;
   border-radius: 5px;
   padding: 5px 10px;
+  font-size: 1em;
 }
 .Assigned{
     text-align: center;

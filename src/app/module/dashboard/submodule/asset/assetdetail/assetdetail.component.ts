@@ -54,6 +54,11 @@ returnasset($event: MouseEvent) {
     }, 2000);
   }  )
 }
+
+setreturncondition(event:any){
+  this.returncondition = event.target.value
+}
+
 retireasset(){
   const data={
     assetId: this.assetdetail.id,

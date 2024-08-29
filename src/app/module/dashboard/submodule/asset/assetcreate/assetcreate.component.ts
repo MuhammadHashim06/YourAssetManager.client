@@ -8,16 +8,22 @@ import { AssettypeService } from '../../../../../core/services/assettype/assetty
 import { ActivatedRoute, Router } from '@angular/router';
 import { constant } from '../../../../../core/constant/constant';
 import { DatePipe } from '@angular/common';
+import { Alert } from '../../../../../shared/reusablecomponents/alert/alert.component';
 
 @Component({
   selector: 'app-assetcreate',
   templateUrl: './assetcreate.component.html',
   styleUrl: './assetcreate.component.scss',
 })
-export class AssetcreateComponent implements OnInit 
-{
-  response=true
+export class AssetcreateComponent implements OnInit {
+  isalert = false
+  response = true
   inputerrormessage = constant.inputerrormessage;
+  alert: Alert = {
+    type: '',
+    upermessage: '',
+    lowermessage: ''
+  };
   setAssettype($event: any) {
     let index = $event.target.value;
     if (index > 0) {
@@ -44,22 +50,22 @@ export class AssetcreateComponent implements OnInit
     vendorData: new FormControl('', Validators.required),
   });
 
-  AssetDTO2 ={
-    assetName:'',
-    description:'',
+  AssetDTO2 = {
+    assetName: '',
+    description: '',
     purchaseDate: '',
     purchasePrice: '',
     serialNumber: '',
     assetIdentificationNumber: '',
     manufacturer: '',
-    model:'',
-    catagoryReleventFeildsData:'',
-    organizationData:'',
-    assetStatusData:'',
+    model: '',
+    catagoryReleventFeildsData: '',
+    organizationData: '',
+    assetStatusData: '',
     assetCategoryData: '',
-    assetTypeData:'',
+    assetTypeData: '',
     vendorData: '',
-    };
+  };
 
   setvendor($event: any) {
     const index = $event.target.value;
@@ -71,9 +77,9 @@ export class AssetcreateComponent implements OnInit
   }
   route = inject(Router);
   Saveasset($event: MouseEvent) {
-   
 
-    this.response=false
+
+    this.response = false
 
     $event.preventDefault();
     // console.log(this.AssetDTO.value);
@@ -117,8 +123,26 @@ export class AssetcreateComponent implements OnInit
         .subscribe((res) => {
           this.updateassetdata()
           // console.log(res);
-          this.response=true
-          this.route.navigateByUrl('dashboard/asset');
+          this.isalert = true
+          this.alert.type = 'success';
+          this.alert.upermessage = 'Asset Save Succeccfully'
+          this.response = true
+          setTimeout(() => {
+            this.isalert = false
+            this.route.navigateByUrl('dashboard/asset');
+
+          }, 2000);
+        }, error => {
+          this.isalert = true
+          this.alert.type = 'error';
+          this.alert.lowermessage='Save Asset Failed'
+          this.alert.upermessage = 'Something went wrong'
+          this.response = true
+          setTimeout(() => {
+            this.isalert = false
+            this.route.navigateByUrl('dashboard/asset');
+
+          }, 2000);
         });
     } else {
       this.AssetDTO.markAllAsTouched();
@@ -156,7 +180,7 @@ export class AssetcreateComponent implements OnInit
   categories: Array<any> = [];
   vendors: Array<any> = [];
   assettype: Array<any> = [];
-  async getdata(){
+  async getdata() {
 
     this.categoryservice
       .getcategory()
@@ -193,7 +217,7 @@ export class AssetcreateComponent implements OnInit
         }
       });
     console.log(this.vendors);
-  
+
     this.assettypeservice
       .getallassettype()
       .pipe(
@@ -213,7 +237,7 @@ export class AssetcreateComponent implements OnInit
     console.log(this.assettype);
 
   }
-   constructor(
+  constructor(
     private categoryservice: CategoryService,
     private vendorservice: VendorService,
     private assetservice: AssetService,
@@ -221,14 +245,12 @@ export class AssetcreateComponent implements OnInit
     private activeroute: ActivatedRoute
   ) {
     this.id = this.activeroute.snapshot.params['id'];
-   
+
   }
-  async setdata()
-  {
-    if (this.id != undefined && this.id > 0)
-    {
+  async setdata() {
+    if (this.id != undefined && this.id > 0) {
       const datePipe = new DatePipe('en-US');
-      let updateasset:any;
+      let updateasset: any;
       this.assetservice.getassetbyid(this.id).subscribe((res: any) => {
         updateasset = res.responseData;
         this.AssetDTO.setValue({
@@ -259,7 +281,7 @@ export class AssetcreateComponent implements OnInit
         this.catagoryReleventFeildsData = JSON.parse(
           updateasset.catagoryReleventFeildsData
         );
-        
+
         console.log(updateasset);
         this.AssetDTO.controls['assetIdentificationNumber'].setValue(
           this.AssetDTO.controls['assetIdentificationNumber'].value === 'N/A'
@@ -283,80 +305,79 @@ export class AssetcreateComponent implements OnInit
         );
         console.log(this.AssetDTO.value);
       });
-      console.log('from init',this.vendors);
-      console.log('from init',this.categories);
-      console.log('from init',this.assettype);
-      
-    }
-  }
-  async ngOnInit(): Promise<void> {
-  await this.getdata()
-  // await this.setdata()
-  if (this.id != undefined && this.id > 0)
-    {
-      const datePipe = new DatePipe('en-US');
-      let updateasset:any;
-    this.assetservice.getassetbyid(this.id).subscribe((res: any) => {
-      updateasset = res.responseData;
-      this.AssetDTO.setValue({
-        assetName: updateasset.assetName,
-        description: updateasset.description,
-        purchaseDate: datePipe.transform(
-          updateasset.purchaseDate,
-          'yyyy-MM-dd'
-        ),
-        purchasePrice: updateasset.purchasePrice,
-        serialNumber: updateasset.serialNumber,
-        assetIdentificationNumber: updateasset.assetIdentificationNumber,
-        manufacturer: updateasset.manufacturer,
-        model: updateasset.model,
-        catagoryReleventFeildsData: updateasset.catagoryReleventFeildsData,
-        organizationData:"0",
-        assetStatusData: "0",
-        assetCategoryData: this.categories.find(
-          (c) => c.categoryName === updateasset.assetCategoryData
-        )?.id.toString() || null,
-        assetTypeData: this.assettype.find(
-          (c) => c.assetTypeName === updateasset.assetTypeData
-        )?.id.toString() || null,
-        vendorData: this.vendors.find(
-          (c) => c.name === updateasset.vendorData
-        )?.id.toString() || null,
-      });
-      this.catagoryReleventFeildsData = JSON.parse(
-        updateasset.catagoryReleventFeildsData
-      );
-      console.log(updateasset);
       console.log('from init', this.vendors);
       console.log('from init', this.categories);
       console.log('from init', this.assettype);
-      this.AssetDTO.controls['assetIdentificationNumber'].setValue(
-        this.AssetDTO.controls['assetIdentificationNumber'].value === 'N/A'
-          ? ''
-          : this.AssetDTO.controls['assetIdentificationNumber'].value
-      );
-      this.AssetDTO.controls['manufacturer'].setValue(
-        this.AssetDTO.controls['manufacturer'].value === 'N/A'
-          ? ''
-          : this.AssetDTO.controls['manufacturer'].value
-      );
-      this.AssetDTO.controls['model'].setValue(
-        this.AssetDTO.controls['model'].value === 'N/A'
-          ? ''
-          : this.AssetDTO.controls['model'].value
-      );
-      this.AssetDTO.controls['description'].setValue(
-        this.AssetDTO.controls['description'].value === 'N/A'
-          ? ''
-          : this.AssetDTO.controls['description'].value
-      );
-      console.log(this.AssetDTO.value);
-    });
- 
-}
+
+    }
   }
-  addAsset($event :any) {
-    this.response=false
+  async ngOnInit(): Promise<void> {
+    await this.getdata()
+    // await this.setdata()
+    if (this.id != undefined && this.id > 0) {
+      const datePipe = new DatePipe('en-US');
+      let updateasset: any;
+      this.assetservice.getassetbyid(this.id).subscribe((res: any) => {
+        updateasset = res.responseData;
+        this.AssetDTO.setValue({
+          assetName: updateasset.assetName,
+          description: updateasset.description,
+          purchaseDate: datePipe.transform(
+            updateasset.purchaseDate,
+            'yyyy-MM-dd'
+          ),
+          purchasePrice: updateasset.purchasePrice,
+          serialNumber: updateasset.serialNumber,
+          assetIdentificationNumber: updateasset.assetIdentificationNumber,
+          manufacturer: updateasset.manufacturer,
+          model: updateasset.model,
+          catagoryReleventFeildsData: updateasset.catagoryReleventFeildsData,
+          organizationData: "0",
+          assetStatusData: "0",
+          assetCategoryData: this.categories.find(
+            (c) => c.categoryName === updateasset.assetCategoryData
+          )?.id.toString() || null,
+          assetTypeData: this.assettype.find(
+            (c) => c.assetTypeName === updateasset.assetTypeData
+          )?.id.toString() || null,
+          vendorData: this.vendors.find(
+            (c) => c.name === updateasset.vendorData
+          )?.id.toString() || null,
+        });
+        this.catagoryReleventFeildsData = JSON.parse(
+          updateasset.catagoryReleventFeildsData
+        );
+        console.log(updateasset);
+        console.log('from init', this.vendors);
+        console.log('from init', this.categories);
+        console.log('from init', this.assettype);
+        this.AssetDTO.controls['assetIdentificationNumber'].setValue(
+          this.AssetDTO.controls['assetIdentificationNumber'].value === 'N/A'
+            ? ''
+            : this.AssetDTO.controls['assetIdentificationNumber'].value
+        );
+        this.AssetDTO.controls['manufacturer'].setValue(
+          this.AssetDTO.controls['manufacturer'].value === 'N/A'
+            ? ''
+            : this.AssetDTO.controls['manufacturer'].value
+        );
+        this.AssetDTO.controls['model'].setValue(
+          this.AssetDTO.controls['model'].value === 'N/A'
+            ? ''
+            : this.AssetDTO.controls['model'].value
+        );
+        this.AssetDTO.controls['description'].setValue(
+          this.AssetDTO.controls['description'].value === 'N/A'
+            ? ''
+            : this.AssetDTO.controls['description'].value
+        );
+        console.log(this.AssetDTO.value);
+      });
+
+    }
+  }
+  addAsset($event: any) {
+    this.response = false
 
     $event.preventDefault();
     // console.log(this.AssetDTO.value);
@@ -397,22 +418,41 @@ export class AssetcreateComponent implements OnInit
           })
         )
         .subscribe((res) => {
-          this.response=true
+          this.response = true
           // console.log(res);
-this.updateassetdata()
-          this.route.navigateByUrl('dashboard/asset');
+          this.updateassetdata()
+          this.isalert = true
+          this.alert.type = 'success';
+          this.alert.upermessage = 'Asset Added Succeccfully'
+          this.response = true
+          setTimeout(() => {
+            this.isalert = false
+            this.route.navigateByUrl('dashboard/asset');
+
+          }, 2000);
+        }, error => {
+          this.isalert = true
+          this.alert.type = 'error';
+          this.alert.upermessage = 'Something Went Wrong'
+          this.alert.lowermessage = 'Asset Added Failed'
+          this.response = true
+          setTimeout(() => {
+            this.isalert = false
+            this.route.navigateByUrl('dashboard/asset');
+
+          }, 2000);
         });
     } else {
       this.AssetDTO.markAllAsTouched();
     }
 
-   }
-   updateassetdata(){
-    this.assetservice.updategetdata().subscribe(data=>{
+  }
+  updateassetdata() {
+    this.assetservice.updategetdata().subscribe(data => {
       console.log(data);
-      
-      })
-   }
+
+    })
+  }
 }
 
 

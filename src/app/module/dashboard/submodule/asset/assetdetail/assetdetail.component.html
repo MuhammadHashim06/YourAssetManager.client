@@ -46,7 +46,12 @@
                     Return Condition
                 </td>
                 <td>
-                    <input name="returncondition" id="returncondition" [(ngModel)]="returncondition"/>
+                    <!-- <input name="returncondition" id="returncondition" [(ngModel)]="returncondition"/> -->
+                <select name="" id="" (change)="setreturncondition($event)" >
+                    <option value="" selected >Select Condition</option>
+                    <option value="All Set">All set</option>
+                    <option value="Damaged">Damaged</option>
+                </select>
                 </td>
             </tr>
             <tr>
@@ -54,7 +59,7 @@
                     Notes
                 </td>
                 <td>
-                    <textarea name="notes" id="notes" [(ngModel)]="notes"></textarea>
+                    <input name="notes" id="notes" [(ngModel)]="notes"/>
 
                 </td>
             </tr>

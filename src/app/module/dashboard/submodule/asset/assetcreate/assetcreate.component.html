@@ -1,3 +1,6 @@
+<div class="alert" *ngIf="isalert" >
+  <app-alert [alert]="alert" ></app-alert>
+</div>
 <h1>Add Asset Details</h1>
 <div class="container">
   <form [formGroup]="AssetDTO">
