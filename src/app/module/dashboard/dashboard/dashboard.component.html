@@ -136,10 +136,13 @@
   <div class="dashboard">
     <div class="navbar">
       <div class="navlink">
-        <img src="menu.svg" alt="horizantal nav" />
+         <div class="searchlink">
+                  <img src="search.svg" alt="horizantal nav" />
+
         <button (click)="toggleSearch()" name="search" id="search">
           Search
         </button>
+      </div>
       </div>
       <div class="profile" (click)="toggleProfileCard($event)">
         <img

@@ -57,15 +57,16 @@ export class AssetlistComponent implements OnInit {
     // this.filterAssets();
   }
 
-  filterAsset(event: MouseEvent): void {
+async  filterAsset(event: MouseEvent) {
+
     if (this.targetCategory !== '-1') {
-      this.filteredAsset = this.assetList.filter(x => x.assetCategoryData === this.targetCategory);
+      this.filteredAsset = this.assetList.filter(x => x.assetCategoryData == this.targetCategory);
     }
     else {
       this.filteredAsset = this.assetList;
     }
     if (this.targetStatus !== '-1') {
-      this.filteredAsset = this.filteredAsset.filter(x => x.assetStatusData === this.targetStatus);
+      this.filteredAsset = this.filteredAsset.filter(x => x.assetStatusData == this.targetStatus);
     }
     else {
       this.filteredAsset = this.filteredAsset;
