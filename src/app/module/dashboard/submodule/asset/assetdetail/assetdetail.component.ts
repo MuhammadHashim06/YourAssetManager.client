@@ -15,9 +15,9 @@ onUserInput($event: Event) {
 throw new Error('Method not implemented.');
 }
   id: any;
-  assetdetail: any;
-  notes: any;
-  requestId: any;
+  assetdetail: any='-1';
+  notes: any='';
+  requestId: any="";
   selectedUserId = '';
   returncondition: any;
   isprocessing = false;
@@ -110,11 +110,24 @@ throw new Error('Method not implemented.');
       returnCondition: this.returncondition,
       notes: this.notes,
     };
-    this.isprocessing = true;
-    this.assetactionservice.returnasset(data).subscribe(
-      () => this.handleActionSuccess('Asset returned successfully'),
-      (error) => this.handleActionError('Asset Action failed')
-    );
+    if(data.returnCondition!=undefined && data.returnCondition!='' && data.notes!=''){
+      this.isprocessing = true;
+      this.assetactionservice.returnasset(data).subscribe(
+        () => this.handleActionSuccess('Asset returned successfully'),
+        (error) => this.handleActionError('Asset Action failed')
+      );
+    }else{
+      this.isalert=true
+      this.alert={
+        type:'warning',
+        upermessage:'Warning',
+        lowermessage:'Please fill all the fields'
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
+    }
+    
   }
 
   retireasset() {
@@ -122,11 +135,24 @@ throw new Error('Method not implemented.');
       assetId: this.assetdetail.id,
       retirementReason: this.notes,
     };
-    this.isprocessing = true;
-    this.assetactionservice.retireasset(data).subscribe(
-      () => this.handleActionSuccess('Asset retired successfully'),
-      (error) => this.handleActionError('Asset retirement failed')
-    );
+    if(data.retirementReason!=''){
+      this.isprocessing = true;
+      this.assetactionservice.retireasset(data).subscribe(
+        () => this.handleActionSuccess('Asset retired successfully'),
+        (error) => this.handleActionError('Asset retirement failed')
+      );
+    }else{
+      this.isalert=true;
+      this.alert = {
+        type: 'warning',
+        upermessage: 'Warning',
+        lowermessage: 'Please enter retirement reason',
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
+    }
+    
   }
 
   sendforMaintainance() {
@@ -134,11 +160,26 @@ throw new Error('Method not implemented.');
       assetId: this.assetdetail.id,
       description: this.notes,
     };
-    this.isprocessing = true;
+    
+
+
+    if(data.description!=''){
+      this.isprocessing = true;
     this.assetactionservice.sendformaintainance(data).subscribe(
       () => this.handleActionSuccess('Asset sent for maintenance'),
       (error) => this.handleActionError('Asset maintenance failed')
     );
+    }else{
+      this.isalert=true;
+      this.alert = {
+        type: 'warning',
+        upermessage: 'Warning',
+        lowermessage: 'Please fill all the fields',
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
+    }
   }
 
   returnfrommaintainance() {
@@ -146,11 +187,24 @@ throw new Error('Method not implemented.');
       assetId: this.assetdetail.id,
       description: this.notes,
     };
-    this.isprocessing = true;
-    this.assetactionservice.returnfrommaintainance(data).subscribe(
-      () => this.handleActionSuccess('Asset returned from maintenance'),
-      (error) => this.handleActionError('Asset return failed')
-    );
+    if(data.description!=''){
+      this.isprocessing = true;
+      this.assetactionservice.returnfrommaintainance(data).subscribe(
+        () => this.handleActionSuccess('Asset returned from maintenance'),
+        (error) => this.handleActionError('Asset return failed')
+      );
+    }else{
+      this.isalert=true;
+      this.alert = {
+        type: 'warning',
+        upermessage: 'Warning',
+        lowermessage: 'Please fill all the fields',
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
+    }
+    
   }
 
   assignasset($event: MouseEvent) {
@@ -160,11 +214,26 @@ throw new Error('Method not implemented.');
       notes: this.notes,
       requestId: this.requestId,
     };
-    this.isprocessing = true;
+
+    if(data.notes!='' && data.assignedToId=='' && data.requestId!=''){
+      this.isprocessing = true;
     this.assetactionservice.assignasset(data).subscribe(
       () => this.handleActionSuccess('Asset assigned successfully'),
       (error) => this.handleActionError('Asset assignment failed')
     );
+    }else{
+      this.isalert=true;
+      this.alert = {
+        type: 'warning',
+        upermessage: 'Warning',
+        lowermessage: 'Please fill all the fields',
+      }
+      setTimeout(() => {
+        this.isalert=false
+      }, 2000);
+    }
+
+    
   }
 
   updateasset(assetId: any) {

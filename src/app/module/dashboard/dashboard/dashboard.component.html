@@ -144,12 +144,14 @@
   <div class="dashboard">
     <div class="navbar">
       <div class="navlink">
+        @if (role!='Employee') {
         <div class="searchlink">
           <img src="search.svg" alt="horizantal nav" />
           <button (click)="toggleSearch()" name="search" id="search">
             Search
           </button>
         </div>
+      }
       </div>
       <div class="profile" (click)="toggleProfileCard($event)">
         <img
