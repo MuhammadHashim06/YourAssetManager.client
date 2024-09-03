@@ -161,11 +161,15 @@ export class AssetcreateComponent implements OnInit {
     if (index > 0) {
       // console.log("Categories",this.categories)
       this.AssetDTO.controls['assetCategoryData'].setValue(index);
-      let category;
-      category = this.categories.find((c) => c.id == index);
-      this.catagoryReleventFeildsData = JSON.parse(
-        category.relaventInputFields
-      );
+      let category=this.categories.find((c) => c.id == index);
+      console.log("Selected Category:",category);
+      console.log("Its type: ",typeof(category.relaventInputFields))
+if(typeof(category.relaventInputFields)=='string'){
+  this.catagoryReleventFeildsData = JSON.parse(category.relaventInputFields);
+}else{
+  this.catagoryReleventFeildsData = category.relaventInputFields;
+}
+      
       this.AssetDTO.controls['catagoryReleventFeildsData'].setValue(
         this.catagoryReleventFeildsData
       );
