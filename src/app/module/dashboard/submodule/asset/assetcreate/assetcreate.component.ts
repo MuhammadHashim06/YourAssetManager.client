@@ -466,25 +466,3 @@ export class AssetcreateComponent implements OnInit {
 // // vendorData: this.vendors.find(
 // //   (c) => c.name === updateasset.vendorData
 // // )?.id || null,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

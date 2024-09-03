@@ -11,179 +11,196 @@ import { AuthService } from '../../../core/services/auth/auth.service';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
-  styleUrl: './profile.component.scss'
+  styleUrls: ['./profile.component.scss'] // Corrected to `styleUrls`
 })
 export class ProfileComponent implements OnInit {
-  LogData: any
-  imageUrl: string = 'Image.svg'
+  // Component properties
+  LogData: any;
+  imageUrl: string = 'Image.svg';
   selectedImage: any;
-  router = inject(Router);
-  inputerrormessage = constant.inputerrormessage
-
-  Userdata = new FormGroup({
-    email: new FormControl('', Validators.required),
-    userName: new FormControl('', Validators.required),
-  })
-  response = true;
+  inputErrorMessage = constant.inputerrormessage;
+  response = true; // Flag for response state
   load = false; // Flag for loading state
   email: string = ''; // Stores the email input value
-  isforget = false; // Flag to toggle forgot password view
-  isalert = false; // Flag for successful login
+  isForget = false; // Flag to toggle forgot password view
+  isAlert = false; // Flag for displaying alert
+
   // Alert data for displaying messages
   alertData: Alert = {
     type: 'success',
-    upermessage: 'Successfull',
-    lowermessage: 'You have successfully Logiged in'
+    upermessage: 'Successful',
+    lowermessage: 'You have successfully logged in'
   };
 
+  // Form group for user data
+  Userdata = new FormGroup({
+    email: new FormControl('', Validators.required),
+    userName: new FormControl('', Validators.required)
+  });
 
+  constructor(
+    private loginService: AuthService,
+    private profileService: ProfileService,
+    private userService: UserService,
+    private router: Router
+  ) {}
 
-  verifyemail($event: MouseEvent): void {
+  ngOnInit(): void {
+    this.initializeUserData();
+  }
+
+  private initializeUserData(): void {
+    const currentUserString = sessionStorage.getItem('currentuser');
+    if (currentUserString) {
+      this.LogData = JSON.parse(currentUserString);
+      console.log('Current User', this.LogData);
+      this.Userdata.setValue({
+        email: this.LogData.email,
+        userName: this.LogData.userName
+      });
+      if (this.LogData.imagePath) {
+        this.imageUrl = this.LogData.imagePath;
+      }
+    }
+  }
+
+  verifyEmail($event: MouseEvent): void {
     $event.preventDefault();
     this.load = true;
-    this.response=false
+    this.response = false;
 
     const email = { email: this.email };
-    this.loginservice.verifyemail(email).pipe(
+    this.loginService.verifyemail(email).pipe(
       catchError(error => {
-        // this.handleError(error);
-        this.response=true
-        this.alertData.type = 'error'
-        this.isalert = true
+        this.response = true;
+        this.alertData.type = 'error';
+        this.isAlert = true;
 
         switch (error.status) {
-          case 404: {
+          case 404:
             this.alertData.upermessage = 'Login Failed';
             this.alertData.lowermessage = 'Please check your email or password';
             break;
-          }
-          case 403: {
+          case 403:
             this.alertData.upermessage = 'Account Deactivated';
             this.alertData.lowermessage = 'Your account has been deactivated by Admin';
             break;
-          }
-          case 401: {
+          case 401:
             this.alertData.upermessage = 'Email Not Confirmed';
             this.alertData.lowermessage = 'We have sent an email. Please confirm your email first';
             break;
-          }
-          default: {
+          default:
             this.alertData.upermessage = 'Something Went Wrong';
             this.alertData.lowermessage = 'Please try again';
-            break; // Optional, but good practice to include in the default case
-          }
-
+            break;
         }
-        setTimeout(() => {
-          this.isalert = false
 
+        setTimeout(() => {
+          this.isAlert = false;
         }, 3000);
+
         return throwError(error);
       })
     ).subscribe(
       (res: any) => {
-        sessionStorage.setItem('userData', JSON.stringify(res))
+        sessionStorage.setItem('userData', JSON.stringify(res));
         this.load = false;
-        this.response=true
-        this.isalert=true
-        this.alertData.type='success'
-        this.alertData.upermessage='Reset Email Sent'
-        this.alertData.lowermessage='Please check your email for reset link'
+        this.response = true;
+        this.isAlert = true;
+        this.alertData.type = 'success';
+        this.alertData.upermessage = 'Reset Email Sent';
+        this.alertData.lowermessage = 'Please check your email for reset link';
+
         setTimeout(() => {
-          this.router.navigateByUrl('auth')
-          this.isalert = false
-        },3000)
+          this.router.navigateByUrl('auth');
+          this.isAlert = false;
+        }, 3000);
       },
       (error: any) => {
         console.error(error);
-        this.isalert = true
-        this.alertData.type = 'error'
-        this.alertData.upermessage = 'Somthing Went wrong'
-        this.alertData.lowermessage = 'Please try again'
-        setTimeout(() => {
-          this.isalert = false
-        this.router.navigateByUrl('auth')
+        this.isAlert = true;
+        this.alertData.type = 'error';
+        this.alertData.upermessage = 'Something Went Wrong';
+        this.alertData.lowermessage = 'Please try again';
 
+        setTimeout(() => {
+          this.isAlert = false;
+          this.router.navigateByUrl('auth');
         }, 3000);
 
         this.load = false;
-        this.response=true
-
+        this.response = true;
       }
     );
   }
-  onselect(event: any) {
+
+  onSelect(event: any): void {
     if (event.target.files) {
       console.log(event.target.files);
-      this.selectedImage = event.target.files[0]
-      var reader = new FileReader()
+      this.selectedImage = event.target.files[0];
+      const reader = new FileReader();
       reader.readAsDataURL(event.target.files[0]);
       reader.onload = (e: any) => {
-        this.imageUrl = e.target.result
-      }
+        this.imageUrl = e.target.result;
+      };
     }
   }
 
-  constructor(private loginservice: AuthService, private profileservice: ProfileService, private userservice: UserService) { }
-  ngOnInit(): void {
-    const currentuserstring = sessionStorage.getItem('currentuser')
-    if (currentuserstring != null || currentuserstring != undefined) {
-      this.LogData = JSON.parse(currentuserstring)
-      console.log('Current User', this.LogData);
-      this.Userdata.setValue({
-        email: this.LogData.email,
-        userName: this.LogData.userName,
-      })
-      if (this.LogData.imagePath != null) {
-        this.imageUrl = this.LogData.imagePath
+  save($event: MouseEvent): void {
+    $event.preventDefault();
+    this.response = false;
+
+    const userName = this.Userdata.controls.userName.value !== this.LogData.userName
+      ? this.Userdata.controls.userName.value || ''
+      : '';
+
+    this.profileService.updateprofile(userName, this.selectedImage).pipe().subscribe(
+      res => {
+        this.userService.getmydata().pipe().subscribe(res => {
+          this.LogData = res.responseData;
+          sessionStorage.setItem('currentuser', JSON.stringify(this.LogData));
+
+          const currentUserString = sessionStorage.getItem('currentuser');
+          if (currentUserString) {
+            this.LogData = JSON.parse(currentUserString);
+            console.log('Current User', this.LogData);
+            this.Userdata.setValue({
+              email: this.LogData.email,
+              userName: this.LogData.userName
+            });
+            if (this.LogData.imagePath) {
+              this.imageUrl = this.LogData.imagePath;
+            }
+          }
+        });
+
+        this.response = true;
+        this.isAlert = true;
+        this.alertData.type = 'success';
+        this.alertData.upermessage = 'Updated Successfully';
+        this.alertData.lowermessage = 'Your Account is Updated';
+
+        setTimeout(() => {
+          this.isAlert = false;
+        }, 3000);
+
+        console.log(res);
+      },
+      error => {
+        this.response = true;
+        this.isAlert = true;
+        this.alertData.type = 'warning';
+        this.alertData.upermessage = 'Update Failed';
+        this.alertData.lowermessage = 'Something went wrong';
+
+        setTimeout(() => {
+          this.isAlert = false;
+        }, 3000);
       }
-    }
+    );
   }
-  Save($event: MouseEvent) {
-    $event.preventDefault()
-    this.response = false
-    let userName = '';
-    if (this.Userdata.controls.userName.value != this.LogData.userName) {
-      userName = this.Userdata.controls.userName.value || ''
-    }
-    this.profileservice.updateprofile(userName, this.selectedImage).pipe().subscribe(res => {
-      this.userservice.getmydata().pipe().subscribe(res => {
-        this.LogData = res.responseData;
-        sessionStorage.setItem('currentuser', JSON.stringify(this.LogData))
-        const currentuserstring = sessionStorage.getItem('currentuser')
-    if (currentuserstring != null || currentuserstring != undefined) {
-      this.LogData = JSON.parse(currentuserstring)
-      console.log('Current User', this.LogData);
-      this.Userdata.setValue({
-        email: this.LogData.email,
-        userName: this.LogData.userName,
-      })
-      if (this.LogData.imagePath != null) {
-        this.imageUrl = this.LogData.imagePath
-      }
-    }
-      })
-      this.response = true
-      this.isalert=true
-      this.alertData.type='success'
-      this.alertData.upermessage='Updated Successfully'
-      this.alertData.lowermessage='Your Account is Update'
-      setTimeout(() => {
-        this.isalert = false
-      },3000)
-      console.log(res);
-    },error=>{
-      this.response = true
-      this.isalert=true
-      this.alertData.type='warning'
-      this.alertData.upermessage='Update Failed'
-      this.alertData.lowermessage='Somthing went Wrong'
-      setTimeout(() => {
-        this.isalert = false
-      },3000)
-    })
-  }
+
   forget(): void {
-    this.isforget =!this.isforget;
+    this.isForget = !this.isForget;
   }
 }

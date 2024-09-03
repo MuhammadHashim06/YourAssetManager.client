@@ -22,7 +22,15 @@
     <div class="searchresult">
       <div>
         @if (searchresult.length<=0) {
-        <span style="display:flex;justify-content:center;padding: 5px;height: 20px;" >No Match Found</span>
+        <span
+          style="
+            display: flex;
+            justify-content: center;
+            padding: 5px;
+            height: 20px;
+          "
+          >No Match Found</span
+        >
         } @else {
         <table>
           <tr>
@@ -32,7 +40,7 @@
             <th>Vendors</th>
             <th>Category</th>
           </tr>
-          <tr *ngFor="let c of searchresult" (click)="openAsset(c.id)" >
+          <tr *ngFor="let c of searchresult" (click)="openAsset(c.id)">
             <td>{{ c.id }}</td>
             <td>{{ c.assetName }}</td>
             <td>{{ c.assetStatusData }}</td>
@@ -136,13 +144,12 @@
   <div class="dashboard">
     <div class="navbar">
       <div class="navlink">
-         <div class="searchlink">
-                  <img src="search.svg" alt="horizantal nav" />
-
-        <button (click)="toggleSearch()" name="search" id="search">
-          Search
-        </button>
-      </div>
+        <div class="searchlink">
+          <img src="search.svg" alt="horizantal nav" />
+          <button (click)="toggleSearch()" name="search" id="search">
+            Search
+          </button>
+        </div>
       </div>
       <div class="profile" (click)="toggleProfileCard($event)">
         <img

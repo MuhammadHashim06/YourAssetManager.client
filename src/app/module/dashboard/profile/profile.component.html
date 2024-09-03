@@ -1,21 +1,21 @@
-<div class="alert" *ngIf="isalert">
+<div class="alert" *ngIf="isAlert">
 
 
 <app-alert [alert]="alertData"  ></app-alert>
 </div>
 <h1>Personal Information</h1>
 <div class="container">
-  <div class="form" *ngIf="!isforget else forgettemp">
+  <div class="form" *ngIf="!isForget else forgettemp">
     <div class="file-upload-wrapper">
       <img [src]="imageUrl" alt="Profile Image" class="preview-image" />
       <button type="button" class="custom-upload-button" (click)="fileInput.click()">
         Upload Image
       </button>
-      <input type="file" name="file" (change)="onselect($event)" #fileInput class="file-input" />
+      <input type="file" name="file" (change)="onSelect($event)" #fileInput class="file-input" />
     </div>
     <form [formGroup]="Userdata"  >
       <div class="fields">
-        <table *ngIf="!isforget" >
+        <table *ngIf="!isForget" >
           <tr>
             <td>
               <label for="email">Email Address</label>
@@ -45,12 +45,12 @@
       </div>
     </form>
     <div class="link">
-      <button type="button" (click)="Save($event)">Save Changes <div class="loader" *ngIf="!response"></div></button>
+      <button type="button" (click)="save($event)">Save Changes <div class="loader" *ngIf="!response"></div></button>
     </div>
   </div>
   <ng-template #forgettemp>
     <div class="forgettemp">
-  <form  (ngSubmit)="verifyemail($event)">
+  <form  (ngSubmit)="verifyEmail($event)">
       <!-- <div class="fields"> -->
         <!-- Email Input Field for Forgot Password -->
           <table>
@@ -62,10 +62,10 @@
                 <!-- Email Validation Error Messages for Forgot Password -->
                 <div *ngIf="vemail.errors && vemail.touched">
                   <span *ngIf="vemail.errors['required']" class="error">
-                    {{ inputerrormessage.required }}
+                    {{ inputErrorMessage.required }}
                   </span>
                   <span *ngIf="vemail.errors['email']" class="error">
-                    {{ inputerrormessage.email }}
+                    {{ inputErrorMessage.email }}
                   </span>
                 </div>
               </td>

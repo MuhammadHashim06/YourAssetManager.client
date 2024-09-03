@@ -5,59 +5,44 @@ import { UserService } from '../../../core/services/user/user.service';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrl: './sidebar.component.scss'
+  styleUrls: ['./sidebar.component.scss']
 })
 export class SidebarComponent implements OnInit {
 
-  // @Input() 
-  role: any
+  @Input() role: any; // Input property for role
+  currentUser: any;
+  filteredMenu: Array<any> = []; // Filtered menu based on user role
 
-  currentuser: any
-  menu = menu
-  filteredmenu: Array<any> = []
-  // role: any
-  constructor(private userservice: UserService) {
-    console.log(this.role)
-    var roles: Array<any>
-    // const datastring = sessionStorage.getItem('currentuser')
-    // if (datastring != undefined || datastring != null) {
-    //   this.currentuser = JSON.parse(datastring)
-    //   roles  = this.currentuser.roles.$values
-    //   console.log(roles);
-
-    // if (roles.includes('OrganizationOwner')) {
-    //   this.role = 'OrganizationOwner'
-    // } else if (roles.includes('AssetManager')) {
-    //   this.role = 'AssetManager'
-    // } else {
-
-    //   this.role = 'Employee'
-    // }
-    // }
-    this.userservice.getmydata().pipe().subscribe(res => {
-      this.currentuser = res.responseData
-      roles = this.currentuser.roles.$values
-      console.log(roles);
-      if (roles.includes('OrganizationOwner')) {
-        this.role = 'OrganizationOwner'
-      } else if (roles.includes('AssetManager')) {
-        this.role = 'AssetManager'
-      } else {
-        this.role = 'Employee'
-      }
-      console.log(this.currentuser)
-      console.log("Curent user rolw", this.role);
-      menu.forEach(m => {
-        if (m.role.includes(this.role)) {
-          this.filteredmenu.push(m)
-        }
-      })
-    })
-
-
+  constructor(private userService: UserService) {
+    // Initialize the component by fetching user data and filtering menu
+    this.initializeUserData();
   }
+
   ngOnInit(): void {
+    // Lifecycle hook for additional initialization if needed
+  }
 
+  private initializeUserData(): void {
+    // Fetch the current user data from the service
+    this.userService.getmydata().subscribe(res => {
+      this.currentUser = res.responseData;
+      const roles: Array<any> = this.currentUser.roles.$values;
+      console.log('User roles:', roles);
 
+      // Determine the user's role
+      if (roles.includes('OrganizationOwner')) {
+        this.role = 'OrganizationOwner';
+      } else if (roles.includes('AssetManager')) {
+        this.role = 'AssetManager';
+      } else {
+        this.role = 'Employee';
+      }
+
+      console.log('Current user role:', this.role);
+
+      // Filter the menu based on the user's role
+      this.filteredMenu = menu.filter(m => m.role.includes(this.role));
+      console.log('Filtered menu:', this.filteredMenu);
+    });
   }
 }

@@ -200,7 +200,8 @@
         <label [for]="f.name">{{ f.label }}</label>
       </td>
       <td>
-        <input [type]="f.type" [name]="f.name" [id]="f.name" [(ngModel)]="f.value" />
+        <!-- <input [type]="f.type" [name]="f.name" [id]="f.name" [(ngModel)]="f.value" /> -->
+        <input type="text" [name]="f.name" [id]="f.name" [(ngModel)]="f.value">
       </td>
     </tr>
   </table>

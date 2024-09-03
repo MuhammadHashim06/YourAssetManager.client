@@ -107,7 +107,7 @@ export class AddcategoryComponent implements OnInit {
   });
 
   columnvalue = new FormGroup({
-    inputType: new FormControl('', Validators.required),
+    inputType: new FormControl(''),
     column: new FormControl('', Validators.required),
   });
 
@@ -125,7 +125,6 @@ export class AddcategoryComponent implements OnInit {
       }
       this.features.push({
         label: this.columnvalue.controls['column'].value,
-        type: type,
         name: name,
         value: '',
       });

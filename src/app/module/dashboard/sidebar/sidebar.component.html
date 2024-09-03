@@ -6,7 +6,7 @@
   </div>
   <div class="navigation">
     <ul>
-      @for (m of filteredmenu; track $index) {
+      @for (m of filteredMenu; track $index) {
       <li routerLinkActive="active-li"><a [routerLink]="m.path" routerLinkActive="active-link"><i
         [class]="m.icon"></i> {{m.label}}</a></li>
       }

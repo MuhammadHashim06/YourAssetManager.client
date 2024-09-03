@@ -27,18 +27,18 @@
                     <label for="column">Catagory Relevent Fields:</label>
                 </td>
                 <td>
-                    <input type="text" name="column" id="column" placeholder="Enter Column name" formControlName="column">
+                    <input type="text" name="column" id="column" placeholder="Enter name" formControlName="column">
                     <span class="error" *ngIf="columnvalue.controls['column'].touched && columnvalue.controls['column'].invalid">{{inputerrormessages.required}}</span>
                 </td>
-                <td>
+                <!-- <td>
                     <label for="type">Select Type:</label>
-                </td>
-                <td>
+                </td> -->
+                <!-- <td>
                     <select name="inputType" id="inputType" formControlName="inputType">
                         <option *ngFor="let type of inputTypes" [value]="type">{{ type }}</option>
                     </select>
                     <span class="error" *ngIf="columnvalue.controls['inputType'].touched && columnvalue.controls['inputType'].invalid">{{inputerrormessages.required}}</span>
-                </td>
+                </td> -->
                 <td>
                     <img src="add.svg" (click)="addcolumn()" style="cursor: pointer;" />
                 </td>
@@ -51,10 +51,10 @@
         </div>
     </form>
 
-    <h1 style="margin-top: 10px;">New Columns</h1>
+    <h1 style="margin-top: 10px;">Category Relevant Fields</h1>
     <form class="category-form" >
     <div *ngIf="features.length <= 0; else columnTable" class="empty">
-        <h1>No Column Found</h1>
+        <h1>No Relevent Field Found</h1>
     </div>
     <ng-template #columnTable>
         <table>
@@ -71,12 +71,12 @@
                 <td>
                     <input [type]="f.type" [name]="f.name" [id]="f.name" >
                 </td>
-                <td>
+                <!-- <td>
                     <label for="type">Selected Type:</label>
                 </td>
                 <td>
                     <input type="text" [value]="f.type" disabled>
-                </td>
+                </td> -->
                 <td>
                     <img src="remove.svg" (click)="removecolumn(i)" style="cursor: pointer;">
                 </td>

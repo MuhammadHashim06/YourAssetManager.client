@@ -11,14 +11,98 @@ import { Alert } from '../../../../../shared/reusablecomponents/alert/alert.comp
   styleUrl: './assetdetail.component.scss',
 })
 export class AssetdetailComponent implements OnInit {
+onUserInput($event: Event) {
+throw new Error('Method not implemented.');
+}
+  id: any;
+  assetdetail: any;
+  notes: any;
+  requestId: any;
+  selectedUserId = '';
   returncondition: any;
   isprocessing = false;
+  isLoading = true;
+  isalert = false;
   alert: Alert = {
     type: 'success',
     upermessage: '',
     lowermessage: '',
   };
-  isalert = false;
+  allusers: Array<any> = [];
+  relevatcategoriesinput: Array<any> = [];
+  selectaction = '';
+  isaction = false;
+  router = inject(Router);
+
+  constructor(
+    private activedroute: ActivatedRoute,
+    private assetservice: AssetService,
+    private userservice: UserService,
+    private assetactionservice: AssetactionsService
+  ) {
+    this.id = this.activedroute.snapshot.params['id'];
+    this.loadAssetDetails();
+  }
+
+  ngOnInit(): void {
+    this.getAllUsers();
+  }
+
+  private loadAssetDetails() {
+    this.assetservice.getassetbyid(this.id).subscribe(
+      (res) => {
+        this.isLoading = false;
+        this.assetdetail = res.responseData;
+        this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData);
+        if (typeof this.relevatcategoriesinput === 'string') {
+          this.relevatcategoriesinput = JSON.parse(this.assetdetail.catagoryReleventFeildsData);
+        }
+      },
+      (error) => {
+        this.isLoading = false;
+        console.error('Error loading asset details:', error);
+      }
+    );
+  }
+
+  private getAllUsers() {
+    this.userservice.getalluserS().subscribe(
+      (res) => {
+        this.allusers = res.responseData.$values;
+      },
+      (error) => {
+        console.error('Error loading users:', error);
+      }
+    );
+  }
+
+  private handleActionSuccess(message: string) {
+    this.isalert = true;
+    this.alert = {
+      type: 'success',
+      upermessage: message,
+      lowermessage: '',
+    };
+    setTimeout(() => {
+      this.isalert = false;
+    }, 2000);
+    this.router.navigateByUrl('dashboard/asset');
+    this.toogleaction('');
+    this.isprocessing = false;
+  }
+
+  private handleActionError(message: string) {
+    this.isalert = true;
+    this.alert = {
+      type: 'error',
+      upermessage: 'Something went wrong',
+      lowermessage: message,
+    };
+    setTimeout(() => {
+      this.isalert = false;
+    }, 2000);
+    this.isprocessing = false;
+  }
 
   returnasset($event: MouseEvent) {
     const data = {
@@ -28,37 +112,9 @@ export class AssetdetailComponent implements OnInit {
     };
     this.isprocessing = true;
     this.assetactionservice.returnasset(data).subscribe(
-      (res) => {
-        this.isalert = true;
-        this.alert = {
-          type: 'success',
-          upermessage: 'Asset returned successfully',
-          lowermessage: '',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-        this.toogleaction('');
-        this.isprocessing = false;
-        this.router.navigateByUrl('dashboard/asset');
-      },
-      (error) => {
-        this.isprocessing = false;
-        this.isalert = true;
-        this.alert = {
-          type: 'error',
-          upermessage: 'Somthing went wrong',
-          lowermessage: 'Asset Action failed',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-      }
+      () => this.handleActionSuccess('Asset returned successfully'),
+      (error) => this.handleActionError('Asset Action failed')
     );
-  }
-
-  setreturncondition(event: any) {
-    this.returncondition = event.target.value;
   }
 
   retireasset() {
@@ -67,113 +123,36 @@ export class AssetdetailComponent implements OnInit {
       retirementReason: this.notes,
     };
     this.isprocessing = true;
-
     this.assetactionservice.retireasset(data).subscribe(
-      (res) => {
-        this.isalert = true;
-        this.alert = {
-          type: 'success',
-          upermessage: 'Asset returned successfully',
-          lowermessage: '',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-        this.router.navigateByUrl('dashboard/asset');
-        this.toogleaction('');
-        this.isprocessing = false;
-      },
-      (error) => {
-        console.log(error);
-        this.isprocessing = false;
-        this.isalert = true;
-        this.alert = {
-          type: 'error',
-          upermessage: 'Somthing went wrong',
-          lowermessage: 'Asset Action failed',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-      }
+      () => this.handleActionSuccess('Asset retired successfully'),
+      (error) => this.handleActionError('Asset retirement failed')
     );
   }
+
   sendforMaintainance() {
     const data = {
       assetId: this.assetdetail.id,
       description: this.notes,
     };
     this.isprocessing = true;
-
     this.assetactionservice.sendformaintainance(data).subscribe(
-      (res) => {
-        this.isalert = true;
-        this.alert = {
-          type: 'success',
-          upermessage: 'Asset returned successfully',
-          lowermessage: '',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-        this.router.navigateByUrl('dashboard/asset');
-        this.toogleaction('');
-        this.isprocessing = false;
-      },
-      (error) => {
-        console.log(error);
-        this.isprocessing = false;
-        this.isalert = true;
-        this.alert = {
-          type: 'error',
-          upermessage: 'Somthing went wrong',
-          lowermessage: 'Asset Action failed',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-      }
+      () => this.handleActionSuccess('Asset sent for maintenance'),
+      (error) => this.handleActionError('Asset maintenance failed')
     );
   }
+
   returnfrommaintainance() {
     const data = {
       assetId: this.assetdetail.id,
       description: this.notes,
     };
-    console.log(data);
     this.isprocessing = true;
-
     this.assetactionservice.returnfrommaintainance(data).subscribe(
-      (res) => {
-        this.isalert = true;
-        this.alert = {
-          type: 'success',
-          upermessage: 'Asset returned successfully',
-          lowermessage: '',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-        this.router.navigateByUrl('dashboard/asset');
-        this.toogleaction('');
-        this.isprocessing = false;
-      },
-      (error) => {
-        console.log(error);
-        this.isalert = true;
-        this.alert = {
-          type: 'error',
-          upermessage: 'Somthing went wrong',
-          lowermessage: 'Asset Action failed',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-      }
+      () => this.handleActionSuccess('Asset returned from maintenance'),
+      (error) => this.handleActionError('Asset return failed')
     );
   }
-  notes: any;
-  requestId: any;
+
   assignasset($event: MouseEvent) {
     const data = {
       assignedToId: this.selectedUserId,
@@ -182,123 +161,55 @@ export class AssetdetailComponent implements OnInit {
       requestId: this.requestId,
     };
     this.isprocessing = true;
-
     this.assetactionservice.assignasset(data).subscribe(
-      (res) => {
-        this.isalert = true;
-        this.alert = {
-          type: 'success',
-          upermessage: 'Asset returned successfully',
-          lowermessage: '',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
-        console.log(res);
-        this.toogleaction('');
-        this.isprocessing = false;
+      () => this.handleActionSuccess('Asset assigned successfully'),
+      (error) => this.handleActionError('Asset assignment failed')
+    );
+  }
+
+  updateasset(assetId: any) {
+    this.router.navigateByUrl(`dashboard/asset/create/${assetId}`);
+  }
+
+  deleteasset(assetId: any) {
+    this.assetservice.deleteasset(assetId).subscribe(
+      () => {
+        this.updateassetdata();
         this.router.navigateByUrl('dashboard/asset');
+      },
+      (error) => console.error('Error deleting asset:', error)
+    );
+  }
+
+  updateassetdata() {
+    this.assetservice.updategetdata().subscribe(
+      (data) => {
+        this.isprocessing = false;
       },
       (error) => {
         this.isprocessing = false;
-        this.isalert = true;
-        this.alert = {
-          type: 'error',
-          upermessage: 'Somthing went wrong',
-          lowermessage: 'Asset Action failed',
-        };
-        setTimeout(() => {
-          this.isalert = false;
-        }, 2000);
+        console.error('Error updating asset data:', error);
       }
     );
   }
-  selectedUserId = '';
+
   onUserChange($event: Event) {
     const input = $event.target as HTMLInputElement;
     const selectedUserName = input.value;
     const user = this.allusers.find((u) => u.userName === selectedUserName);
     this.selectedUserId = user ? user.id : null;
-    console.log('Selected User ID:', this.selectedUserId);
   }
-  onUserInput($event: Event) {
-    throw new Error('Method not implemented.');
-  }
+
   stoppropagation($event: MouseEvent) {
     $event.stopPropagation();
   }
-  selectaction = '';
-  isaction = false;
+
   toogleaction(action: any) {
     this.selectaction = action;
     this.isaction = !this.isaction;
   }
-  updateasset(arg0: any) {
-    this.router.navigateByUrl(`dashboard/asset/create/${arg0}`);
-  }
-  isLoading = true;
-  relevatcategoriesinput: Array<any> = [];
-  router = inject(Router);
-  deleteasset(arg0: any) {
-    this.assetservice
-      .deleteasset(arg0)
-      .pipe()
-      .subscribe((res) => {
-        console.log(res);
-        this.updateassetdata();
-        this.router.navigateByUrl('dashboard/asset');
-      });
-  }
-  updateassetdata() {
-    this.assetservice.updategetdata().subscribe(
-      (data) => {
-        console.log(data);
-        this.isprocessing = false;
-      },
-      (error) => {
-        this.isprocessing = false;
-      }
-    );
-  }
 
-  id: any;
-  assetdetail: any;
-  constructor(
-    private activedroute: ActivatedRoute,
-    private assetservice: AssetService,
-    private userservice: UserService,
-    private assetactionservice: AssetactionsService
-  ) {
-    this.id = this.activedroute.snapshot.params['id'];
-    console.log(this.id);
-    this.assetservice
-      .getassetbyid(this.id)
-      .pipe()
-      .subscribe((res) => {
-        this.isLoading = false;
-        this.assetdetail = res.responseData;
-        this.relevatcategoriesinput = JSON.parse(
-          this.assetdetail.catagoryReleventFeildsData
-        );
-        if (typeof this.relevatcategoriesinput == 'string') {
-          this.relevatcategoriesinput = JSON.parse(
-            this.assetdetail.catagoryReleventFeildsData
-          );
-          console.log(this.relevatcategoriesinput);
-        }
-      });
-  }
-
-  ngOnInit(): void {
-    this.getalluser();
-  }
-  allusers: Array<any> = [];
-  getalluser() {
-    this.userservice
-      .getalluserS()
-      .pipe()
-      .subscribe((res) => {
-        this.allusers = res.responseData.$values;
-      });
+  setreturncondition(event: any) {
+    this.returncondition = event.target.value;
   }
 }
